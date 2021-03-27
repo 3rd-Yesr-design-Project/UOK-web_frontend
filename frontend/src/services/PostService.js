@@ -1,29 +1,15 @@
-import httpService from './HttpService';
+import HttpService from './HttpService';
+import { API } from '../utils/config';
 
-class PostService{
+class PostService extends HttpService {
   createPost = async (payload) => {
-    httpService.post('/post');
+    return await this.sendRequest({
+      method: 'POST',
+      url: API.post,
+      responseType: 'json',
+      data: payload,
+    });
   };
-
-  deletePost = (postId) => {
-    httpService.delete(`/post/${postId}`)
-  }
-
-  getPost = () => {
-    httpService.get('/posts');
-  }
-
-  addComment = () => {
-    httpService.post('/comment');
-  }
-
-  deleteComment = (commentId) => {
-    httpService.delete(`comment/${commentId}`)
-  }
-
-  likePost = (postId) => {
-    return httpService.put(`/like/${postId}`)
-  }
 }
 
 export default new PostService();

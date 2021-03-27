@@ -90,9 +90,6 @@ const CreatePost = () => {
           <span>Upload Image</span>
           <input type='file' onChange={(e) => SetImage(e.target.files[0])} />
         </div>
-        <div className='file-path-wrapper'>
-          <input className='file-path validate' type='text' />
-        </div>
       </div>
 
       <button
