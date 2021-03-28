@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Results = () => {
+const ResultsView = () => {
   const classes = useStyles();
   return (
     <Container>
@@ -99,4 +99,4 @@ const Results = () => {
   );
 };
 
-export default Results;
+export default ResultsView;

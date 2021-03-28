@@ -8,7 +8,7 @@ const NavigationBar = () => {
         <Link to='/'>Home</Link>
       </span>
       <span style={{ padding: '5px' }}>
-        <Link to='/results'>Result</Link>
+        <Link to='/results/Login'>Result</Link>
       </span>
       <span style={{ padding: '5px' }}>
         <Link to='/login'>Login</Link>
