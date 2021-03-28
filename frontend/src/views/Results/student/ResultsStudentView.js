@@ -9,31 +9,21 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-import ellon from '../../assets/ellon.jpg';
-import ResultTable from '../../componet/ResultTable';
+import ellon from '../../../assets/ellon.jpg';
+import ResultTable from '../../../componet/ResultTable';
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
+
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
+  }
 });
 
-const ResultsView = () => {
+const ResultsStudentView = () => {
   const classes = useStyles();
   return (
     <Container>
@@ -99,4 +89,4 @@ const ResultsView = () => {
   );
 };
 
-export default ResultsView;
+export default ResultsStudentView;

@@ -8,24 +8,27 @@ import EditProfile from './views/EditProfile/EditProfile';
 import AddResults from './views/AddResults/AddResults';
 import CreatePost from './views/CreatePost/CreatePost';
 import ResultLogin from './views/Results/ResultLogin';
-import ResultsView from './views/Results/Results';
+import ResultsView from './views/Results/student/ResultsStudentView';
+import SocialLogin from './views/SocialMedia/Login/SocialLogin';
+import Result from './views/Results/Result';
 function App() {
   return (
-    <>
+    <div>
       <BrowserRouter>
         <NavigationBar />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/results/login' component={ResultLogin} />
-          <Route exact path='/results/view' component={ResultsView}/>
+          <Route exact path='/results/view' component={Result}/>
           <Route exact path='/login' component={Login} />
+          <Route exact path='/social/login' component={SocialLogin}/>
           <Route exact path='/profile' component={UserProfile} />
           <Route exact path='/Edit-profile' component={EditProfile} />
           <Route exact path='/Add-Results' component={AddResults} />
           <Route exact path='/create-post' component={CreatePost} />
         </Switch>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

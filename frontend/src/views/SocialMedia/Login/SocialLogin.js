@@ -2,7 +2,7 @@ import React from 'react';
 import {Avatar,Button,TextField,FormControlLabel,Checkbox,Link,Grid,Typography,Container,Card,CardActionArea,CardContent} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import UokLogo from '../../assets/Kelaniya.png';
+import ChatPic from '../../../assets/chat.jpg';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-const ResultLogin = () => {
+const SocialLogin = () => {
     const classes = useStyles();
     return (
         <div  className="container-fluid">
@@ -38,13 +38,13 @@ const ResultLogin = () => {
                 <div className="col-md-6">
                 <Card className={classes.root}>
       <CardActionArea>
-        <img src={UokLogo} width={200}/>
+        <img src={ChatPic} width={200}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            University Of Kelaniya
+            U Chat
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Please login to see your Result
+            Please login to Chat world
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -87,6 +87,10 @@ const ResultLogin = () => {
                         id='password'
                         // onChange={handleChange}
                     />
+                    <FormControlLabel
+                        control={<Checkbox value='remember' color='primary' />}
+                        label='Remember me'
+                    />
                     <Button
                         type='submit'
                         fullWidth
@@ -117,4 +121,4 @@ const ResultLogin = () => {
     )
 }
 
-export default ResultLogin;
+export default SocialLogin;

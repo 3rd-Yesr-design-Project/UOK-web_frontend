@@ -3,7 +3,7 @@ import uok from '../../assets/uok.jpg';
 
 const Home = () => {
   return (
-    <div>
+    <div className="container-fluid">
       {/* <div className='home-container'>
         <img src={uok} alt='uok logo' width={500} />
       </div>
@@ -13,10 +13,10 @@ const Home = () => {
         <div className='home-mission'></div>
       </div> */}
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 nopadding">
           <img src={uok} alt='uok logo' width={700} />
         </div>
-        <div className="col-md-6">
+         <div className="col-md-6 nopadding ">
           <div className="container mt-5 p-5">
             <h2>About Kelaniya</h2>
             <p>The University of Kelaniya is committed to provide high quality education and to conduct high 

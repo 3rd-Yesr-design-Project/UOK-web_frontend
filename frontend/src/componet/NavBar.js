@@ -11,16 +11,8 @@ const NavigationBar = () => {
         <Link to='/results/Login'>Result</Link>
       </span>
       <span style={{ padding: '5px' }}>
-        <Link to='/login'>Login</Link>
+        <Link to='/social/login'>Chat</Link>
       </span>
-
-      <NavDropdown title='More' id='basic-nav-dropdown'>
-        <NavDropdown.Item>About</NavDropdown.Item>
-        <NavDropdown.Item>Details</NavDropdown.Item>
-        <NavDropdown.Item>Contact</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item>Separated link</NavDropdown.Item>
-      </NavDropdown>
     </Navbar>
   );
 };
