@@ -1,5 +1,5 @@
 import React from 'react';
-import im from '../../assets/ellon.jpg';
+import im from '../../../assets/ellon.jpg';
 const ChatBar = (props) => {
   const [state, setState] = React.useState([
     { id: 1, image: '/images/ellon.jpg', name: 'Fawad Khan' },

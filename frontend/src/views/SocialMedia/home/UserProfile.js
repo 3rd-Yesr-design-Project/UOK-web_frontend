@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
-import SideBar from '../views/userprofile/Sidebar';
-import ChatBar from '../views/userprofile/ChatBar';
-import Posts from '../views/userprofile/Posts';
-import ChatBox from '../views/userprofile/ChatBox';
-const UserProfile = () => {
+// import SideBar from '../views/userprofile/Sidebar';
+// import ChatBar from '../views/userprofile/ChatBar';
+// import Posts from '../views/userprofile/Posts';
+// import ChatBox from '../views/userprofile/ChatBox';
+import SideBar from './Sidebar';
+import ChatBar from './ChatBar';
+import Posts from './Posts';
+import ChatBox from './ChatBox';
+
+
+const SocialHome = () => {
   const [state, setState] = useState(false);
   const [current, setCurrent] = useState({});
 
@@ -26,4 +32,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default SocialHome;
