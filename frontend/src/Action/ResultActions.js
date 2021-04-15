@@ -3,6 +3,7 @@ import {
   UPDATE_RESULT_FAILED,
   ADD_RESULT_SUCCESS,
   ADD_RESULT_FAILED,
+  STUDENT_RESULT,
 } from './types';
 
 export const addResult = ({ data }) => async (dispatch) => {
@@ -41,3 +42,11 @@ export const updateResults = ({ id, data }) => async (dispatch) => {
     });
   }
 };
+
+export const fetchResultByUserIdAndYear = (payload) =>{
+  console.log('xxxxxxxxxxxx',payload)
+  return({
+    type: STUDENT_RESULT,
+    payload: payload
+  })
+}

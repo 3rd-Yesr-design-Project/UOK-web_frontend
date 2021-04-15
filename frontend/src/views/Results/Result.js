@@ -5,8 +5,8 @@ import ResultLecturerView from './lecturer/ResultLecturerView';
 const Result = () => {
     return (
         <div>
-            {/* <ResultsStudentView/> */}
-            <ResultLecturerView/>
+            <ResultsStudentView/>
+            {/* <ResultLecturerView/> */}
         </div>
     )
 }

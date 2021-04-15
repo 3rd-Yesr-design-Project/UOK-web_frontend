@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import {
   Card,
@@ -7,10 +7,16 @@ import {
   CardActions,
   CardMedia,
   makeStyles,
+  Button
 } from '@material-ui/core';
 
 import ellon from '../../../assets/ellon.jpg';
-import ResultTable from '../../../componet/ResultTable';
+import ResultTable from '../ResultTable';
+import { getAllByPlaceholderText } from '@testing-library/dom';
+import ResultServices from '../../../services/ResultServices';
+import { getDefaultLocale } from 'react-datepicker';
+import { fetchResultByUserIdAndYear } from '../../../Action/ResultActions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
 
@@ -23,8 +29,22 @@ const useStyles = makeStyles({
   }
 });
 
-const ResultsStudentView = () => {
+const ResultsStudentView = ({fetchResultByUserIdAndYear}) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    getData(1,1)
+  }, [])
+
+  const getData = async (userId,year) => {
+    try {
+      const result = await ResultServices.fethcStudentResultByUserIdAndYear(userId,year);
+      fetchResultByUserIdAndYear(result.data.data.subjects)
+    } catch (error) {
+      console.log(error)
+    }
+    }
+
   return (
     <Container>
       <Row className='main-container'>
@@ -48,36 +68,40 @@ const ResultsStudentView = () => {
                 color='textSecondary'
                 gutterBottom
               >
-                Student No:
+                Student No
               </Typography>
               <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
               >
-                Current GPA:
+                Current GPA
               </Typography>
-              <Typography
+              {/* <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
               >
-                1st Year:
-              </Typography>
-              <Typography
+                1st Year
+              </Typography> */}
+              {/* <Typography
+                className={classes.title}
+                color='textSecondary'
+                gutterBottom
+                onClick={() => getData(1,2)}
+              >
+                2nd Year
+              </Typography> */}
+              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,1)}>1st Year</Button>
+              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,2)}>2nd Year</Button>
+              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,3)}>3rd Year</Button>
+              {/* <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
               >
-                2nd Year:
-              </Typography>
-              <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                3st Year:
-              </Typography>
+                3st Year
+              </Typography> */}
             </CardContent>
           </Card>
         </Col>
@@ -89,4 +113,4 @@ const ResultsStudentView = () => {
   );
 };
 
-export default ResultsStudentView;
+export default connect(null,{fetchResultByUserIdAndYear})(ResultsStudentView);

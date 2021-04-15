@@ -3,11 +3,13 @@ import {
   UPDATE_RESULT_SUCCESS,
   ADD_RESULT_FAILED,
   UPDATE_RESULT_FAILED,
+  STUDENT_RESULT,
 } from '../Action/types';
 
 const initialState = {
-  result: {},
-  results: [{}],
+  // result: {},
+  // results: [{}],
+  results: []
 };
 
 export default function (state = initialState, action) {
@@ -19,6 +21,8 @@ export default function (state = initialState, action) {
         ...state,
         result: payload,
       };
+    case STUDENT_RESULT:
+      return {...state, results: payload}
     default:
       return state;
   }
