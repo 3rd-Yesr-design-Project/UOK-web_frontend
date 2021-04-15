@@ -5,22 +5,27 @@ import {
   LOGIN_FAILED,
   UPDATE_PROFILE,
   UPDATE_PROFILE_ERROR,
+  RESULT_LOGIN_SUCCESS,
 } from '../Action/types';
 
 const initialState = {
-  profile: null,
-  profiles: [],
-  posts: [{}],
-  isAdmin: false,
-  results: [{}],
-  loading: true,
-  error: { msg: '', status: '' },
+  resultUser: null,
+  resultToken: null,
+  // profile: null,
+  // profiles: [],
+  // posts: [{}],
+  // isAdmin: false,
+  // results: [{}],
+  // loading: true,
+  // error: { msg: '', status: '' },
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case RESULT_LOGIN_SUCCESS: 
+      return {...state,resultToken: payload.token,resultUser: payload.loginUser}
     case GET_PROFILE:
       return {
         ...state,

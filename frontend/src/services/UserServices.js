@@ -18,6 +18,8 @@
 //     });
 //   };
 
+import httpService from "./HttpService";
+
 //   getUserById = async (id) => {
 //     return await this.sendRequest({
 //       method: 'GET',
@@ -47,3 +49,11 @@
 
 // const userServices = new UserServices();
 // export default userServices;
+class UserService{
+
+ resultLogin(payload){
+   return httpService.post('/result/login',payload)
+ }
+}
+
+export default new UserService;

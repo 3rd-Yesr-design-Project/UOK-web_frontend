@@ -1,8 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {connect} from 'react-redux';
 import {Avatar,Button,TextField,FormControlLabel,Checkbox,Link,Grid,Typography,Container,Card,CardActionArea,CardContent} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import UokLogo from '../../assets/Kelaniya.png';
+import userServices from '../../services/UserServices';
+import {resultLoginUser} from '../../Action/userActions';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,8 +33,28 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-const ResultLogin = () => {
+const ResultLogin = ({resultLoginUser}) => {
     const classes = useStyles();
+
+    const [state, setState] = useState({email: null,password: null});
+    const handleChange = (e) => {
+      setState({
+        ...state,[e.target.name]: e.target.value,
+      });
+    };
+  
+    const submitForm = async (e) => {
+      e.preventDefault()
+      try {
+        const user =await userServices.resultLogin(state);
+        resultLoginUser(user.data.data)
+        console.log('cccccccccc',user)
+      } catch (error) {
+        console.log(error)
+      }
+      
+    };
+
     return (
         <div  className="container-fluid">
             <div className="row">
@@ -62,7 +85,7 @@ const ResultLogin = () => {
                     Sign in
                     </Typography>
 
-                    <form className={classes.form}>
+                    <form className={classes.form} onSubmit={submitForm}>
                     <TextField
                         variant='outlined'
                         margin='normal'
@@ -72,7 +95,7 @@ const ResultLogin = () => {
                         label='Email Address'
                         name='email'
                         // value={state.email}
-                        // onChange={handleChange}
+                        onChange={handleChange}
                         //autoFocus
                     />
                     <TextField
@@ -85,7 +108,7 @@ const ResultLogin = () => {
                         label='Password'
                         type='password'
                         id='password'
-                        // onChange={handleChange}
+                        onChange={handleChange}
                     />
                     <Button
                         type='submit'
@@ -117,4 +140,4 @@ const ResultLogin = () => {
     )
 }
 
-export default ResultLogin;
+export default connect(null,{resultLoginUser})(ResultLogin);

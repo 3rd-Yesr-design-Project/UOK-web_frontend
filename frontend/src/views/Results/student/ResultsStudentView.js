@@ -13,7 +13,7 @@ import {
 import ellon from '../../../assets/ellon.jpg';
 import ResultTable from '../ResultTable';
 import { getAllByPlaceholderText } from '@testing-library/dom';
-import ResultServices from '../../../services/ResultServices';
+import resultServices from '../../../services/ResultServices';
 import { getDefaultLocale } from 'react-datepicker';
 import { fetchResultByUserIdAndYear } from '../../../Action/ResultActions';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ const ResultsStudentView = ({fetchResultByUserIdAndYear}) => {
 
   const getData = async (userId,year) => {
     try {
-      const result = await ResultServices.fethcStudentResultByUserIdAndYear(userId,year);
+      const result = await resultServices.fethcStudentResultByUserIdAndYear(userId,year);
       fetchResultByUserIdAndYear(result.data.data.subjects)
     } catch (error) {
       console.log(error)

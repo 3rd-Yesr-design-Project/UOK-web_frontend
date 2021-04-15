@@ -5,6 +5,7 @@ import {
   LOGIN_FAILED,
   UPDATE_PROFILE,
   UPDATE_PROFILE_ERROR,
+  RESULT_LOGIN_SUCCESS,
 } from './types';
 
 import userServices from '../services/UserServices';
@@ -64,3 +65,10 @@ export const loginUser = (data) => async (dispatch) => {
     });
   }
 };
+
+export const resultLoginUser = (payload) => {
+  return({
+    type: RESULT_LOGIN_SUCCESS,
+    payload: payload
+  })
+}
