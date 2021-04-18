@@ -44,9 +44,11 @@
 import httpService from './HttpService';
 
 class ResultService{
+  
   fethcStudentResultByUserIdAndYear(userId,year){
     return httpService.get(`/subject/${userId}/${year}`)
   }
+  
 }
 
 export default new ResultService();

@@ -54,6 +54,10 @@ class UserService{
  resultLogin(payload){
    return httpService.post('/result/login',payload)
  }
+
+ socialLogin(payload){
+   return httpService.post('/social/login',payload)
+ }
 }
 
 export default new UserService;

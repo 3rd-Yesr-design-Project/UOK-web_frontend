@@ -6,11 +6,13 @@ import {
   UPDATE_PROFILE,
   UPDATE_PROFILE_ERROR,
   RESULT_LOGIN_SUCCESS,
+  SOCIAL_LOGIN_SUCCESS
 } from '../Action/types';
 
 const initialState = {
-  resultUser: null,
+  User: null,
   resultToken: null,
+  socialToken: null,
   // profile: null,
   // profiles: [],
   // posts: [{}],
@@ -25,7 +27,9 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case RESULT_LOGIN_SUCCESS: 
-      return {...state,resultToken: payload.token,resultUser: payload.loginUser}
+      return {...state,resultToken: payload.token,User: payload.loginUser}
+    case SOCIAL_LOGIN_SUCCESS:
+      return {...state,socialToken: payload.token,user: payload.loginUser}
     case GET_PROFILE:
       return {
         ...state,

@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import UokLogo from '../../assets/Kelaniya.png';
 import userServices from '../../services/UserServices';
 import {resultLoginUser} from '../../Action/userActions';
+import { Redirect, useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultLogin = ({resultLoginUser}) => {
     const classes = useStyles();
+    const history = useHistory();
 
     const [state, setState] = useState({email: null,password: null});
     const handleChange = (e) => {
@@ -47,8 +49,9 @@ const ResultLogin = ({resultLoginUser}) => {
       e.preventDefault()
       try {
         const user =await userServices.resultLogin(state);
-        resultLoginUser(user.data.data)
-        console.log('cccccccccc',user)
+        console.log(user);
+        resultLoginUser(user.data.data);
+        history.push("/results/view")
       } catch (error) {
         console.log(error)
       }
