@@ -1,14 +1,24 @@
 import React from 'react'
 import ResultsStudentView from './student/ResultsStudentView';
 import ResultLecturerView from './lecturer/ResultLecturerView';
+import {connect} from 'react-redux';
 
-const Result = () => {
+const Result = ({user}) => {
     return (
         <div>
-            <ResultsStudentView/>
+            {user.usertype == 'student'? 
+                <ResultsStudentView/> : <ResultLecturerView/>
+            }
+            
             {/* <ResultLecturerView/> */}
         </div>
     )
 }
 
-export default Result;
+const mapStateToProps = (state) => {
+    return({
+        user: state.user.user
+    })
+}
+
+export default connect(mapStateToProps)(Result);

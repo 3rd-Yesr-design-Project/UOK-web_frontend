@@ -44,7 +44,6 @@ export const updateResults = ({ id, data }) => async (dispatch) => {
 };
 
 export const fetchResultByUserIdAndYear = (payload) =>{
-  console.log('xxxxxxxxxxxx',payload)
   return({
     type: STUDENT_RESULT,
     payload: payload

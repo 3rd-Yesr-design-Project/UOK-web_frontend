@@ -49,7 +49,6 @@ const SocialLogin = ({socialLoginUser}) => {
       e.preventDefault()
       try {
         const user =await UserServices.socialLogin(state);
-        console.log('mmmmmmmmmmm',user);
         socialLoginUser(user.data.data);
         history.push("/social/home")
       } catch (error) {

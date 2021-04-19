@@ -10,7 +10,7 @@ import {
 } from '../Action/types';
 
 const initialState = {
-  User: null,
+  user: null,
   resultToken: null,
   socialToken: null,
   // profile: null,
@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case RESULT_LOGIN_SUCCESS: 
-      return {...state,resultToken: payload.token,User: payload.loginUser}
+      return {...state,resultToken: payload.token,user: payload.loginUser}
     case SOCIAL_LOGIN_SUCCESS:
       return {...state,socialToken: payload.token,user: payload.loginUser}
     case GET_PROFILE:
