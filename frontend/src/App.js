@@ -15,7 +15,7 @@ import Result from './views/Results/Result';
 import SocialHome from './views/SocialMedia/home/UserProfile';
 function App() {
   return (
-    <div>
+    <div className='App'>
       <BrowserRouter>
         <NavigationBar />
         <Switch>
