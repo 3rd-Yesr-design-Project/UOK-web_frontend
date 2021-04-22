@@ -21,9 +21,9 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/results/login' component={ResultLogin} />
-          <Route exact path='/results/view' component={Result}/>
+          <Route exact path='/results/view' component={Result} />
           {/* <Route exact path='/login' component={Login} /> */}
-          <Route exact path='/social/login' component={SocialLogin}/>
+          <Route exact path='/social/login' component={SocialLogin} />
           <Route exact path='/social/home' component={SocialHome} />
           <Route exact path='/social/edit-profile' component={EditProfile} />
           {/* <Route exact path='/Add-Results' component={AddResults} /> */}

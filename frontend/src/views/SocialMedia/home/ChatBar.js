@@ -18,7 +18,7 @@ const ChatBar = (props) => {
     props.openChat(user);
   };
   return (
-    <div className='chatBar'>
+    <div className='chatBar' style={{ marginTop: '75px' }}>
       {state.map((user) => (
         <div
           className='chatBar__list'

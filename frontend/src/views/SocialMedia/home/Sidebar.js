@@ -10,7 +10,7 @@ const SideBar = () => {
     { id: 6, image: '/images/ellon.jpg', name: 'React Development' },
   ]);
   return (
-    <div className='sidebar'>
+    <div className='sidebar' style={{ marginTop: '75px' }}>
       {state.map((info) => (
         <div className='sidebar__list' key={info.id}>
           <div className='sidebar__list-img'>
