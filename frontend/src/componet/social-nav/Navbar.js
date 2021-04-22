@@ -14,7 +14,7 @@ import {
 } from 'react-icons/fa';
 const Navbar = () => {
   return (
-    <div className='navbar'>
+    <div className='navbar' style={{ marginTop: '70px' }}>
       <div className='navbar__first'>
         <div className='navbar__first-logo'>
           <FaFacebook className='navbar__logo' />

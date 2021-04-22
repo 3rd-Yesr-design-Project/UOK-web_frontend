@@ -23,9 +23,9 @@ const SocialHome = () => {
   };
 
   return (
-    <div className='App'>
+    <div>
       <Navbar />
-      <div className='facebook' style={{ marginTop: '75px' }}>
+      <div className='facebook'>
         <SideBar />
         <Posts />
         <ChatBar openChat={openChat} />

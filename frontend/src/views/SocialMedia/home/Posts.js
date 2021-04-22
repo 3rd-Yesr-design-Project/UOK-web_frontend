@@ -5,7 +5,7 @@ import ShowPost from './ShowPost';
 
 const Posts = () => {
   return (
-    <div className='posts'>
+    <div className='posts' style={{ marginTop: '80px' }}>
       <Stories />
       <Create />
       <ShowPost />

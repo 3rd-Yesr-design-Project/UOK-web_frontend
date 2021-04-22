@@ -3,7 +3,7 @@ import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const NavigationBar = () => {
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar bg='light' expand='lg' style={{ zIndex: '120' }}>
       <span style={{ padding: '5px' }}>
         <Link to='/'>Home</Link>
       </span>
