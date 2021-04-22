@@ -8,7 +8,7 @@ import SideBar from './Sidebar';
 import ChatBar from './ChatBar';
 import Posts from './Posts';
 import ChatBox from './ChatBox';
-
+import Navbar from '../../../componet/social-nav/Navbar';
 
 const SocialHome = () => {
   const [state, setState] = useState(false);
@@ -23,11 +23,14 @@ const SocialHome = () => {
   };
 
   return (
-    <div className='facebook'>
-      <SideBar />
-      <Posts />
-      <ChatBar openChat={openChat} />
-      <ChatBox state={state} current={current} closeChat={closeChat} />
+    <div className='App'>
+      <Navbar />
+      <div className='facebook' style={{ marginTop: '75px' }}>
+        <SideBar />
+        <Posts />
+        <ChatBar openChat={openChat} />
+        <ChatBox state={state} current={current} closeChat={closeChat} />
+      </div>
     </div>
   );
 };
