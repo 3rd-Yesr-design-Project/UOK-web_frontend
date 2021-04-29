@@ -14,21 +14,20 @@ import ResultTable from '../../../componet/ResultTable';
 import LecturerResultTable from './LecturerResultTable';
 
 const useStyles = makeStyles({
-
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
   title: {
     fontSize: 14,
-  }
+  },
 });
 
 const ResultsView = () => {
   const classes = useStyles();
   return (
     <Container>
-      <Row >
+      <Row>
         <Col sm={4}>
           <Card>
             <CardContent>
@@ -56,11 +55,9 @@ const ResultsView = () => {
             </CardContent>
           </Card>
         </Col>
-        <Col sm={8}>
-          set the Drop down
-        </Col>
+        <Col sm={8}>set the Drop down</Col>
       </Row>
-        <LecturerResultTable/>
+      <LecturerResultTable />
     </Container>
   );
 };

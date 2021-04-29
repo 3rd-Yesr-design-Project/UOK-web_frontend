@@ -18,7 +18,7 @@
 //     });
 //   };
 
-import httpService from "./HttpService";
+import httpService from './HttpService';
 
 //   getUserById = async (id) => {
 //     return await this.sendRequest({
@@ -49,15 +49,14 @@ import httpService from "./HttpService";
 
 // const userServices = new UserServices();
 // export default userServices;
-class UserService{
+class UserService {
+  resultLogin(payload) {
+    return httpService.post('/user/login', payload);
+  }
 
- resultLogin(payload){
-   return httpService.post('/result/login',payload)
- }
-
- socialLogin(payload){
-   return httpService.post('/social/login',payload)
- }
+  socialLogin(payload) {
+    return httpService.post('/social/login', payload);
+  }
 }
 
-export default new UserService;
+export default new UserService();
