@@ -10,7 +10,6 @@ import {
   Paper,
   IconButton,
 } from '@material-ui/core';
-import DatePicker from 'react-datepicker';
 import { Delete, BorderColor } from '@material-ui/icons';
 const useStyles = makeStyles({
   table: {
@@ -62,9 +61,8 @@ const LecturerResultTable = () => {
   const classes = useStyles();
   return (
     <>
-      <input value={startDate} onChange={dateChange}>
-        Year
-      </input>
+      <input value={startDate} onChange={dateChange} />
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
           <TableHead>
