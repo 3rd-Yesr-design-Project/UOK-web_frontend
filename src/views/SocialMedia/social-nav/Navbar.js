@@ -12,6 +12,7 @@ import {
   FaBell,
   FaCaretDown,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div className='navbar' style={{ marginTop: '70px' }}>
@@ -30,7 +31,9 @@ const Navbar = () => {
       </div>
       <div className='navbar__middle'>
         <span className='middleIcon'>
-          <FaHome className='navbar__middle-icons' />
+          <Link to='/social/home'>
+            <FaHome className='navbar__middle-icons' />
+          </Link>
         </span>
         <span className='middleIcon'>
           <FaFontAwesomeFlag className='navbar__middle-icons' />

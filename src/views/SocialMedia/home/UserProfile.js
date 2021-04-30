@@ -8,7 +8,7 @@ import SideBar from './Sidebar';
 import ChatBar from './ChatBar';
 import Posts from './Posts';
 import ChatBox from './ChatBox';
-import Navbar from '../../../componet/social-nav/Navbar';
+import Navbar from '../social-nav/Navbar';
 
 const SocialHome = () => {
   const [state, setState] = useState(false);
