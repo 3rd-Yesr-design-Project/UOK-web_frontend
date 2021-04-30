@@ -11,6 +11,7 @@ const UserProfile = () => {
         <img src={ellon} alt='profile photo' />
       </div>
       <p>sdfffffffffffffffffffffffffffffffff</p>
+      <p>sdffffffff sdfsjdfs</p>
     </div>
   );
 };
