@@ -3,7 +3,7 @@ import uok from '../../assets/uok.jpg';
 
 const Home = () => {
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid mt-10 bg-gray'>
       {/* <div className='home-container'>
         <img src={uok} alt='uok logo' width={500} />
       </div>

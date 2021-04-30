@@ -10,7 +10,7 @@ const UserProfile = () => {
       <div className='profile-photo'>
         <img src={ellon} alt='profile photo' />
       </div>
-      <p>sdfffffffffffffffffffffffffffffffff</p>
+      <p className='bg-gray-900'>sdfffffffffffffffffffffffffffffffff</p>
       <p>sdffffffff sdfsjdfs</p>
     </div>
   );
