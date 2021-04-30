@@ -51,7 +51,7 @@ import httpService from './HttpService';
 // export default userServices;
 class UserService {
   resultLogin(payload) {
-    return httpService.post('/user/login', payload);
+    return httpService.post('/result/login', payload);
   }
 
   socialLogin(payload) {
