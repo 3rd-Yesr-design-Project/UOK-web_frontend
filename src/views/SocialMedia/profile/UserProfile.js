@@ -7,7 +7,6 @@ import MainPost from '../profile/userProfile/MainPost';
 import Photos from '../profile/userProfile/Photos';
 import './styles.css';
 const UserProfile = () => {
-  console.log('prrrrrifle');
   return (
     <div className='antialiased'>
       <TimelineHeader />
