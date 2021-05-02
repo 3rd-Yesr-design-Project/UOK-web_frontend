@@ -55,6 +55,12 @@ class ResultService {
       headers: { authorization },
     });
   }
+
+  getStudentByAcadomicYearAndSubject(academicYear, subjectId, authorization) {
+    return httpService.get(`/subject/${academicYear}/${subjectId}`, {
+      headers: { authorization },
+    });
+  }
 }
 
 export default new ResultService();
