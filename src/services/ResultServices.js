@@ -42,13 +42,19 @@
 // export default resultServices;
 
 import httpService from './HttpService';
+import { useSelector, useDispatch } from 'react-redux';
 
-class ResultService{
-  
-  fethcStudentResultByUserIdAndYear(userId,year){
-    return httpService.get(`/subject/${userId}/${year}`)
+class ResultService {
+  fethcStudentResultByUserIdAndYear(userId, year) {
+    return httpService.get(`/subject/${userId}/${year}`);
   }
-  
+
+  getSubjectsByYear(year, authorization) {
+    console.log(authorization);
+    return httpService.get(`/year/subject/${year}`, {
+      headers: { authorization },
+    });
+  }
 }
 
 export default new ResultService();
