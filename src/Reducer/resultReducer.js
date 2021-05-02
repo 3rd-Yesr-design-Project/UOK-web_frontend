@@ -12,6 +12,7 @@ const initialState = {
   // result: {},
   // results: [{}],
   results: [],
+  subjects: [],
 };
 
 export default function (state = initialState, action) {
@@ -26,7 +27,7 @@ export default function (state = initialState, action) {
     case STUDENT_RESULT:
       return { ...state, results: payload };
     case GET_SUBJECTS_SUCCESS:
-      return { ...state, result: payload };
+      return { ...state, subjects: payload };
     case GET_SUBJECTS_FAILED:
       return {};
     default:
