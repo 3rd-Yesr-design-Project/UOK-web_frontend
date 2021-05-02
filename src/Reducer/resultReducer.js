@@ -4,12 +4,14 @@ import {
   ADD_RESULT_FAILED,
   UPDATE_RESULT_FAILED,
   STUDENT_RESULT,
+  GET_SUBJECTS_SUCCESS,
+  GET_SUBJECTS_FAILED,
 } from '../Action/types';
 
 const initialState = {
   // result: {},
   // results: [{}],
-  results: []
+  results: [],
 };
 
 export default function (state = initialState, action) {
@@ -22,7 +24,11 @@ export default function (state = initialState, action) {
         result: payload,
       };
     case STUDENT_RESULT:
-      return {...state, results: payload}
+      return { ...state, results: payload };
+    case GET_SUBJECTS_SUCCESS:
+      return { ...state, result: payload };
+    case GET_SUBJECTS_FAILED:
+      return {};
     default:
       return state;
   }
