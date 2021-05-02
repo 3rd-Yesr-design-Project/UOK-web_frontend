@@ -32,9 +32,13 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
   ]);
   const [startDate, setStartDate] = useState();
   const [acadomicYear, setAcadomicYear] = useState(1);
-  const users = useSelector((state) => state.user);
-  console.log('tookn', users);
+  const [isDate, setIsDate] = useState(false);
+  const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
+  const [subject, setSubject] = useState();
+  const users = useSelector((state) => state.user);
+  const subjects = useSelector((state) => state.result);
+  console.log(subjects);
   const togellClick = (id) => {
     console.log();
     setRows([
@@ -63,19 +67,34 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
 
   const handleSelect = async (e) => {
     setAcadomicYear(e);
+    setIsAcadomicYear(true);
     try {
       const result = await ResultService.getSubjectsByYear(
         e,
         users.resultToken
       );
+
       getSubjectByAcadamicYear(result.data.data);
-      console.log(result);
     } catch (error) {
       console.log(error);
     }
   };
   const dateChange = (e) => {
-    console.log(e.target.value);
+    setIsDate(true);
+    setStartDate(e.target.value);
+  };
+  const handleSubject = async (e) => {
+    try {
+      if (startDate && acadomicYear) {
+        const students = await ResultService.getStudentByAcadomicYearAndSubject(
+          startDate,
+          e,
+          users.resultToken
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const classes = useStyles();
@@ -89,17 +108,34 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
             placeholder='Add year'
           />
         </label>
-        <label>
-          <Dropdown>
-            <label>Select Acadomic year</label>
-            <DropdownButton onSelect={handleSelect}>
-              <Dropdown.Item eventKey={1}>First Year</Dropdown.Item>
-              <Dropdown.Item eventKey={2}>Second Year</Dropdown.Item>
-              <Dropdown.Item eventKey={3}>Third Year</Dropdown.Item>
-              <Dropdown.Item eventKey={4}>Fourth Year</Dropdown.Item>
-            </DropdownButton>
-          </Dropdown>
-        </label>
+        {isDate ? (
+          <label>
+            <Dropdown>
+              <label>Select Acadomic year</label>
+              <DropdownButton onSelect={handleSelect}>
+                <Dropdown.Item eventKey={1}>First Year</Dropdown.Item>
+                <Dropdown.Item eventKey={2}>Second Year</Dropdown.Item>
+                <Dropdown.Item eventKey={3}>Third Year</Dropdown.Item>
+                <Dropdown.Item eventKey={4}>Fourth Year</Dropdown.Item>
+              </DropdownButton>
+            </Dropdown>
+          </label>
+        ) : null}
+
+        {isAcadomicYear && isDate ? (
+          <label>
+            <Dropdown>
+              <label>Select Subjects</label>
+              <DropdownButton onSelect={handleSubject}>
+                {subjects?.subjects?.map((sub) => (
+                  <Dropdown.Item eventKey={sub.id} key={sub.id}>
+                    {sub.subject_code}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </Dropdown>
+          </label>
+        ) : null}
       </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
