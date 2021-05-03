@@ -2,7 +2,7 @@ import React from 'react';
 import Filter from '../icons/filter';
 const Post = () => {
   return (
-    <div>
+    <div className='card'>
       <div className='p-4 bg-white shadow-fb rounded w-full'>
         <div className='flex justify-between items-center'>
           <div className='text-xl font-bold text-fBlack'>Posts</div>

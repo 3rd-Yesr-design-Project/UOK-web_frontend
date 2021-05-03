@@ -19,7 +19,7 @@ const UserProfile = () => {
             <Photos />
           </div>
           <div className='flex-row row-start-1 col-span-7 col-start-6 space-y-4'>
-            <CreatePost />
+            {/* <CreatePost /> */}
             <Posts />
             <MainPost />
           </div>

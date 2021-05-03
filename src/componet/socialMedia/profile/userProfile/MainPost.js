@@ -4,7 +4,7 @@ import SLike from '../icons/likesmall';
 import CommentButton from '../icons/lovesmall';
 const MainPost = () => {
   return (
-    <div>
+    <div className='card'>
       <div className='w-full shadow-fb rounded bg-white p-4'>
         <div className='flex justify-between items-center'>
           <div className='flex items-center'>
