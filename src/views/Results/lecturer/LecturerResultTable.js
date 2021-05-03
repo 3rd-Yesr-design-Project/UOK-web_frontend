@@ -13,7 +13,10 @@ import {
 } from '@material-ui/core';
 import { Delete, BorderColor } from '@material-ui/icons';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { getSubjectByAcadamicYear } from '../../../Action/ResultActions';
+import {
+  getSubjectByAcadamicYear,
+  getStudentByStudentIdndAcadomicYear,
+} from '../../../Action/ResultActions';
 import ResultService from '../../../services/ResultServices';
 const useStyles = makeStyles({
   table: {
@@ -25,7 +28,10 @@ function createData(id, Subject, Subjectcode, Grade) {
   return { id, Subject, Subjectcode, Grade, isEdit: false };
 }
 
-const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
+const LecturerResultTable = ({
+  getSubjectByAcadamicYear,
+  getStudentByStudentIdndAcadomicYear,
+}) => {
   const [rows, setRows] = useState([
     createData(1, 'Fundementals of computing', 'SENG12222', 'A'),
     createData(2, 'DataStructured', 'SENG22222', 'A'),
@@ -36,9 +42,10 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
   const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   const [subject, setSubject] = useState();
+  const [students, setStudents] = useState([]);
   const users = useSelector((state) => state.user);
   const subjects = useSelector((state) => state.result);
-  console.log(subjects);
+
   const togellClick = (id) => {
     console.log();
     setRows([
@@ -91,6 +98,9 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
           e,
           users.resultToken
         );
+        setStudents(students?.data?.data);
+
+        getStudentByStudentIdndAcadomicYear(students.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -181,4 +191,7 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
   );
 };
 
-export default connect(null, { getSubjectByAcadamicYear })(LecturerResultTable);
+export default connect(null, {
+  getSubjectByAcadamicYear,
+  getStudentByStudentIdndAcadomicYear,
+})(LecturerResultTable);
