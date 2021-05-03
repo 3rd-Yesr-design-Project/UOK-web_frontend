@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 // import ChatBar from '../views/userprofile/ChatBar';
 // import Posts from '../views/userprofile/Posts';
 // import ChatBox from '../views/userprofile/ChatBox';
-import SideBar from './Sidebar';
-import ChatBar from './ChatBar';
-import Posts from './Posts';
-import ChatBox from './ChatBox';
-import Navbar from '../social-nav/Navbar';
+import SideBar from '../../../componet/socialMedia/home/Sidebar';
+import ChatBar from '../../../componet/socialMedia/home/ChatBar';
+import Posts from '../../../componet/socialMedia/home/Posts';
+import ChatBox from '../../../componet/socialMedia/home/ChatBox';
+import SocialLayout from '../../../componet/layout/SocialLayout';
 
 const SocialHome = () => {
   const [state, setState] = useState(false);
@@ -24,13 +24,14 @@ const SocialHome = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className='facebook'>
-        <SideBar />
-        <Posts />
-        <ChatBar openChat={openChat} />
-        <ChatBox state={state} current={current} closeChat={closeChat} />
-      </div>
+      <SocialLayout>
+        <div className='facebook'>
+          <SideBar />
+          <Posts />
+          <ChatBar openChat={openChat} />
+          <ChatBox state={state} current={current} closeChat={closeChat} />
+        </div>
+      </SocialLayout>
     </div>
   );
 };

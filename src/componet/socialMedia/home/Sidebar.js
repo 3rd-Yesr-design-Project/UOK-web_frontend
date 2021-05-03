@@ -11,6 +11,7 @@ const SideBar = () => {
   ]);
   return (
     <div className='sidebar' style={{ marginTop: '70px' }}>
+      {console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx')}
       {state.map((info) => (
         <div className='sidebar__list' key={info.id}>
           <div className='sidebar__list-img'>

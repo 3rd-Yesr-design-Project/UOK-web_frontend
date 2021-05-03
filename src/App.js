@@ -12,7 +12,7 @@ import ResultLogin from './views/Results/ResultLogin';
 import ResultsView from './views/Results/student/ResultsStudentView';
 import SocialLogin from './views/SocialMedia/Login/SocialLogin';
 import Result from './views/Results/Result';
-import SocialHome from './views/SocialMedia/home/UserProfile';
+import SocialHome from './views/SocialMedia/home/SocialHome';
 import UserProfile from './views/SocialMedia/profile/UserProfile';
 
 function App() {
