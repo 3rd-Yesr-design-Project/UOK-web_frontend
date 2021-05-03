@@ -3,6 +3,7 @@ import DownArrow from '../icons/downArrow';
 import Phone from '../icons/phone';
 import Friend from '../icons/friend';
 import More from '../icons/more';
+import { Button } from '@material-ui/core';
 
 const TimeLineHeader = () => {
   return (
@@ -44,15 +45,23 @@ const TimeLineHeader = () => {
           </div>
         </div>
         <div className='flex items-center space-x-2'>
-          <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
-            <Phone />
+          <Button
+            variant='contained'
+            color='contained'
+            // className={classes.button}
+            // startIcon={<DeleteIcon />}
+          >
+            Edit Profile
+          </Button>
+          {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
+            edit Profile
           </button>
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             <Friend />
           </button>
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             <More />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

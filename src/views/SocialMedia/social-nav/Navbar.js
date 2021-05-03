@@ -1,4 +1,5 @@
 import React from 'react';
+import { Chip, Avatar } from '@material-ui/core';
 import {
   FaFacebook,
   FaSistrix,
@@ -35,21 +36,27 @@ const Navbar = () => {
             <FaHome className='navbar__middle-icons' />
           </Link>
         </span>
-        <span className='middleIcon'>
+        {/* <span className='middleIcon'>
           <FaFontAwesomeFlag className='navbar__middle-icons' />
           <span className='navbar__notify'>3</span>
-        </span>
-        <span className='middleIcon'>
+        </span> */}
+        {/* <span className='middleIcon'>
           <FaVideo className='navbar__middle-icons' />
           <span className='navbar__notify'>10</span>
-        </span>
-        <span className='middleIcon'>
+        </span> */}
+        {/* <span className='middleIcon'>
           <FaUsers className='navbar__middle-icons' />
           <span className='navbar__notify'>22</span>
-        </span>
+        </span> */}
         <span className='middleIcon'>
-          <FaGamepad className='navbar__middle-icons' />
-          <span className='navbar__notify'>5</span>
+          <Link to='/social/profile'>
+            {/* <FaGamepad className='navbar__middle-icons' /> */}
+            <Chip
+              avatar={<Avatar>P</Avatar>}
+              label='Profile'
+              variant='outlined'
+            />
+          </Link>
         </span>
       </div>
       <div className='navbar__last'>
