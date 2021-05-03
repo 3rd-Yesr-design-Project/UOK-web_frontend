@@ -1,10 +1,3 @@
-/*
- * @Author: Anjana (anjanashakthi95@gmail.com)
- * @Date: 2021-04-30 19:15:30
- * @Last Modified by: Anjana (anjanashakthi95@gmail.com)
- * @Last Modified time: 2021-04-30 19:27:45
- */
-
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -80,14 +73,11 @@ const ResultLogin = ({ resultLoginUser }) => {
 
   return (
     <div className='container-fluid'>
-      <div className='row mt-20'>
-        <div className='col-md-6 m-auto'>
-          <Card className='text-center'>
+      <div className='row'>
+        <div className='col-md-6'>
+          <Card className={classes.root}>
             <CardActionArea>
-              <div className='flex justify-center'>
-                <img src={UokLogo} width={200} />
-              </div>
-
+              <img src={UokLogo} width={200} />
               <CardContent>
                 <Typography gutterBottom variant='h5' component='h2'>
                   University Of Kelaniya
@@ -100,7 +90,7 @@ const ResultLogin = ({ resultLoginUser }) => {
           </Card>
         </div>
 
-        <div className='col-md-6 m-auto'>
+        <div className='col-md-6'>
           <Container component='main' maxWidth='xs'>
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
