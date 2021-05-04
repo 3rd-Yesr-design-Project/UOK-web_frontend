@@ -14,127 +14,128 @@ import elon from '../../../assets/ellon.jpg';
 import { updateProfile } from '../../../Action/userActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import EditProfileForm from './EditProfileForm';
 
 const EditProfile = ({ updateProfile, show, handleClose }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [city, setCity] = useState('');
-  const [hobby, setHobby] = useState('');
-  const [gender, setGender] = useState('');
-  const [image, setImage] = useState('');
-  const [university, setUniversity] = useState('');
-  const [status, setStatus] = useState('');
-  const [birthday, setBirthDay] = useState('2020-08-01');
-  const [profileUrl, setProfileUrl] = useState('');
-  const [school, setSchool] = useState('');
-  const [homeTown, setHomeTown] = useState('');
-  const [currentCity, setCurrentCity] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [city, setCity] = useState('');
+  // const [hobby, setHobby] = useState('');
+  // const [gender, setGender] = useState('');
+  // const [image, setImage] = useState('');
+  // const [university, setUniversity] = useState('');
+  // const [status, setStatus] = useState('');
+  // const [birthday, setBirthDay] = useState('2020-08-01');
+  // const [profileUrl, setProfileUrl] = useState('');
+  // const [school, setSchool] = useState('');
+  // const [homeTown, setHomeTown] = useState('');
+  // const [currentCity, setCurrentCity] = useState('');
 
-  const handleFirstName = (input) => {
-    setFirstName(input);
-  };
-  const handleLastName = (input) => {
-    setLastName(input);
-  };
-  const handleCity = (input) => {
-    setCity(input);
-  };
-  const handleHobby = (input) => {
-    setHobby(input);
-  };
-  const handleGender = (input) => {
-    setGender(input);
-    console.log(input);
-  };
-  const handleImage = (input) => {
-    setImage(input);
-    console.log(input);
-  };
+  // const handleFirstName = (input) => {
+  //   setFirstName(input);
+  // };
+  // const handleLastName = (input) => {
+  //   setLastName(input);
+  // };
+  // const handleCity = (input) => {
+  //   setCity(input);
+  // };
+  // const handleHobby = (input) => {
+  //   setHobby(input);
+  // };
+  // const handleGender = (input) => {
+  //   setGender(input);
+  //   console.log(input);
+  // };
+  // const handleImage = (input) => {
+  //   setImage(input);
+  //   console.log(input);
+  // };
 
-  const handleBirthDate = (input) => {
-    setBirthDay(input);
-  };
+  // const handleBirthDate = (input) => {
+  //   setBirthDay(input);
+  // };
 
-  const handleStatus = (input) => {
-    setStatus(input);
-  };
+  // const handleStatus = (input) => {
+  //   setStatus(input);
+  // };
 
-  const handleSchool = (input) => {
-    setSchool(input);
-  };
-  const handleUniversity = (input) => {
-    setUniversity(input);
-  };
+  // const handleSchool = (input) => {
+  //   setSchool(input);
+  // };
+  // const handleUniversity = (input) => {
+  //   setUniversity(input);
+  // };
 
-  const handleHomeTown = (input) => {
-    setHomeTown(input);
-  };
+  // const handleHomeTown = (input) => {
+  //   setHomeTown(input);
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append('file', image);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData();
+  //   data.append('file', image);
 
-    data.append('upload_preset', 'insta-clone');
-    data.append('cloud_name', 'ddeg8sl19');
-    fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
-      method: 'post',
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setProfileUrl(data.url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  //   data.append('upload_preset', 'insta-clone');
+  //   data.append('cloud_name', 'ddeg8sl19');
+  //   fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
+  //     method: 'post',
+  //     body: data,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setProfileUrl(data.url);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
 
-    console.log(
-      firstName,
-      lastName,
-      city,
-      hobby,
-      gender,
-      profileUrl,
-      status,
-      birthday,
-      school,
-      university,
-      homeTown,
-      currentCity
-    );
-    const isValid =
-      firstName &&
-      lastName &&
-      city &&
-      hobby &&
-      gender &&
-      image &&
-      profileUrl &&
-      birthday &&
-      school &&
-      currentCity &&
-      university &&
-      status &&
-      homeTown &&
-      currentCity;
+  //   console.log(
+  //     firstName,
+  //     lastName,
+  //     city,
+  //     hobby,
+  //     gender,
+  //     profileUrl,
+  //     status,
+  //     birthday,
+  //     school,
+  //     university,
+  //     homeTown,
+  //     currentCity
+  //   );
+  //   const isValid =
+  //     firstName &&
+  //     lastName &&
+  //     city &&
+  //     hobby &&
+  //     gender &&
+  //     image &&
+  //     profileUrl &&
+  //     birthday &&
+  //     school &&
+  //     currentCity &&
+  //     university &&
+  //     status &&
+  //     homeTown &&
+  //     currentCity;
 
-    // if (isValid) {
-    updateProfile({
-      firstName,
-      lastName,
-      city,
-      hobby,
-      gender,
-      profileUrl,
-      status,
-      birthday,
-      school,
-      university,
-      homeTown,
-      currentCity,
-    });
-  };
+  //   // if (isValid) {
+  //   updateProfile({
+  //     firstName,
+  //     lastName,
+  //     city,
+  //     hobby,
+  //     gender,
+  //     profileUrl,
+  //     status,
+  //     birthday,
+  //     school,
+  //     university,
+  //     homeTown,
+  //     currentCity,
+  //   });
+  // };
 
   return (
     <div className='col-md-12'>
@@ -142,7 +143,9 @@ const EditProfile = ({ updateProfile, show, handleClose }) => {
         <Modal.Header closeButton>
           <Modal.Title>Edit Your profile</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <EditProfileForm />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant='secondary' onClick={handleClose}>
             Close
