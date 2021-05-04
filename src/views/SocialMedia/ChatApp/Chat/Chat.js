@@ -1,20 +1,20 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-
+import { SideBar } from '../Sidebar/Sidebar';
 
 function Chat() {
     return (
         <Grid columns="equal">
-          <h3>Header 1</h3>
-          <Grid.Column className="messagepanel">
-            <p>Sahan Hasintha</p>
-          </Grid.Column>
-    
-          <Grid.Column width={3}>
-            <span>
-    
-            </span>
-          </Grid.Column>
+            <SideBar />
+            <Grid.Column className="messagepanel">
+                
+            </Grid.Column>
+
+            <Grid.Column width={3}>
+                <span>
+
+                </span>
+            </Grid.Column>
         </Grid>
     
       );

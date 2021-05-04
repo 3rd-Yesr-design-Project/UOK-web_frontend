@@ -64,7 +64,9 @@ const Navbar = () => {
           <FaPlus />
         </span>
         <span className='navbar__last-section'>
-          <FaFacebookMessenger />
+          <Link to='/social/chat'>
+            <FaFacebookMessenger />
+          </Link>
         </span>
         <span className='navbar__last-section'>
           <FaBell />

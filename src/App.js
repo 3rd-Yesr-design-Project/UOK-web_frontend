@@ -13,6 +13,7 @@ import SocialLogin from './views/SocialMedia/Login/SocialLogin';
 import Result from './views/Results/Result';
 import SocialHome from './views/SocialMedia/home/SocialHome';
 import UserProfile from './views/SocialMedia/profile/UserProfile';
+import Chat from './views/SocialMedia/ChatApp/Chat/Chat'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           {/* <Route exact path='/login' component={Login} /> */}
           <Route exact path='/social/login' component={SocialLogin} />
           <Route exact path='/social/home' component={SocialHome} />
+          <Route exact path='/social/chat' component={Chat} />
           {/* <Route exact path='/social/edit-profile' component={EditProfile} /> */}
           <Route exact path='/social/profile' component={UserProfile} />
           <Route exact path='/create-post' component={CreatePost} />

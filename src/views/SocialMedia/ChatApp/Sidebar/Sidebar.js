@@ -1,11 +1,12 @@
 import React from 'react';
-
-import "./SideBar.css";
+import { Menu } from 'semantic-ui-react';
+import Channel from './Channels/Channel';
+import "./sidebar.css";
 
 export const SideBar = () => {
     return (
-        <div>
-            <h>Side bar</h>
-        </div>
+        <Menu vertical fixed="left" borderless size="large" className="side_bar">
+           <Channel/> 
+        </Menu>
     )
 }
