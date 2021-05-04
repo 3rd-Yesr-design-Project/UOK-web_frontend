@@ -1,5 +1,5 @@
-import React,{useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,7 +26,7 @@ const rows = [
   createData('DataStructured', 'SENG22222', 'A'),
 ];
 
-const ResultTable = ({results}) => {
+const ResultTable = ({ results }) => {
   const classes = useStyles();
 
   return (
@@ -40,7 +40,7 @@ const ResultTable = ({results}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {results.map((result) => (
+          {results?.map((result) => (
             <TableRow key={result.id}>
               <TableCell component='th' scope='row'>
                 {result.subject}
@@ -56,9 +56,11 @@ const ResultTable = ({results}) => {
 };
 
 const mapStateToProps = (state) => {
-    return {
-        results: state.result.results
-    }
-}
+  return {
+    results: state.result.results,
+  };
+};
 
-export default connect(mapStateToProps,{fetchResultByUserIdAndYear})(ResultTable);
+export default connect(mapStateToProps, { fetchResultByUserIdAndYear })(
+  ResultTable
+);
