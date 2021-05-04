@@ -13,6 +13,7 @@ import SocialLogin from './views/SocialMedia/Login/SocialLogin';
 import Result from './views/Results/Result';
 import SocialHome from './views/SocialMedia/home/SocialHome';
 import UserProfile from './views/SocialMedia/profile/UserProfile';
+import About from './componet/socialMedia/profile/about/About';
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
           <Route exact path='/social/login' component={SocialLogin} />
           <Route exact path='/social/home' component={SocialHome} />
           {/* <Route exact path='/social/edit-profile' component={EditProfile} /> */}
-          <Route exact path='/social/profile' component={UserProfile} />
+          <Route exact path='/social/profile/home' component={UserProfile} />
           <Route exact path='/create-post' component={CreatePost} />
+          <Route exact path='/social/profile/about' component={About} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -8,7 +8,7 @@ import ProfileNavbar from './ProfileNavbar';
 
 const TimeLineHeader = () => {
   return (
-    <div className='px-44 shadow'>
+    <div className='px-44 shadow  mb-5'>
       <div className='relative h-96 rounded-b flex justify-center'>
         <img
           src='https://picsum.photos/id/1018/3000'

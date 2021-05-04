@@ -49,7 +49,7 @@ const Navbar = () => {
           <span className='navbar__notify'>22</span>
         </span> */}
         <span className='middleIcon'>
-          <Link to='/social/profile'>
+          <Link to='/social/profile/home'>
             {/* <FaGamepad className='navbar__middle-icons' /> */}
             <Chip
               avatar={<Avatar>P</Avatar>}
