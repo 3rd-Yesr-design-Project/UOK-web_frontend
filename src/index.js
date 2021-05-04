@@ -7,6 +7,8 @@ import './assets/main.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import 'semantic-ui-css/semantic.min.css'
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
