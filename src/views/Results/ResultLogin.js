@@ -20,6 +20,7 @@ import UokLogo from '../../assets/Kelaniya.png';
 import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
 import { Redirect, useHistory } from 'react-router';
+import HomeLayout from '../../componet/layout/HomeLayout';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   root: {
-    maxWidth: 345,
+    maxWidth: 370,
   },
   media: {
     height: 140,
@@ -72,13 +73,16 @@ const ResultLogin = ({ resultLoginUser }) => {
   };
 
   return (
-    <div className='container-fluid'>
-      <div className='row'>
-        <div className='col-md-6'>
-          <Card className={classes.root}>
+    <HomeLayout>
+      <div>
+        <div className='row'>
+          <div className='col-md-6 m-auto flex justify-center'>
             <CardActionArea>
-              <img src={UokLogo} width={200} />
-              <CardContent>
+              <div className='flex justify-center'>
+                <img src={UokLogo} width={200} />
+              </div>
+
+              <CardContent className='text-center'>
                 <Typography gutterBottom variant='h5' component='h2'>
                   University Of Kelaniya
                 </Typography>
@@ -87,71 +91,71 @@ const ResultLogin = ({ resultLoginUser }) => {
                 </Typography>
               </CardContent>
             </CardActionArea>
-          </Card>
-        </div>
+          </div>
 
-        <div className='col-md-6'>
-          <Container component='main' maxWidth='xs'>
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component='h1' variant='h5'>
-                Sign in
-              </Typography>
+          <div className='col-md-6'>
+            <Container component='main' maxWidth='xs'>
+              <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component='h1' variant='h5'>
+                  Sign in
+                </Typography>
 
-              <form className={classes.form} onSubmit={submitForm}>
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  required
-                  fullWidth
-                  id='email'
-                  label='Email Address'
-                  name='email'
-                  // value={state.email}
-                  onChange={handleChange}
-                  //autoFocus
-                />
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  required
-                  fullWidth
-                  name='password'
-                  // value={state.password}
-                  label='Password'
-                  type='password'
-                  id='password'
-                  onChange={handleChange}
-                />
-                <Button
-                  type='submit'
-                  fullWidth
-                  variant='contained'
-                  color='primary'
-                  className={classes.submit}
-                >
-                  Sign In
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href='#' variant='body2'>
-                      Forgot password?
-                    </Link>
+                <form className={classes.form} onSubmit={submitForm}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    // value={state.email}
+                    onChange={handleChange}
+                    //autoFocus
+                  />
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='password'
+                    // value={state.password}
+                    label='Password'
+                    type='password'
+                    id='password'
+                    onChange={handleChange}
+                  />
+                  <Button
+                    type='submit'
+                    fullWidth
+                    variant='contained'
+                    color='primary'
+                    className={classes.submit}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href='#' variant='body2'>
+                        Forgot password?
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href='#' variant='body2'>
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Link href='#' variant='body2'>
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
-              </form>
-            </div>
-          </Container>
+                </form>
+              </div>
+            </Container>
+          </div>
         </div>
       </div>
-    </div>
+    </HomeLayout>
   );
 };
 
