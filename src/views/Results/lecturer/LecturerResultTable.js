@@ -13,7 +13,8 @@ import {
 } from '@material-ui/core';
 import { Delete, BorderColor } from '@material-ui/icons';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { getSubjectByAcadamicYear } from '../../../Action/ResultActions';
+import { getStudentByStudentIdndAcadomicYear } from '../../../Action/studentAction';
+import { getSubjectByAcadamicYear } from '../../../Action/subjectAction';
 import ResultService from '../../../services/ResultServices';
 const useStyles = makeStyles({
   table: {
@@ -25,10 +26,13 @@ function createData(id, Subject, Subjectcode, Grade) {
   return { id, Subject, Subjectcode, Grade, isEdit: false };
 }
 
-const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
+const LecturerResultTable = ({
+  getSubjectByAcadamicYear,
+  getStudentByStudentIdndAcadomicYear,
+}) => {
   const [rows, setRows] = useState([
-    createData(1, 'Fundementals of computing', 'SENG12222', 'A'),
-    createData(2, 'DataStructured', 'SENG22222', 'A'),
+    createData(1, 'Anjana', `SE/2016/042`, 'A'),
+    createData(2, 'Shakthi', `SE/2016/041`, 'A'),
   ]);
   const [startDate, setStartDate] = useState();
   const [acadomicYear, setAcadomicYear] = useState(1);
@@ -36,9 +40,11 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
   const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   const [subject, setSubject] = useState();
+  const [students, setStudents] = useState([]);
   const users = useSelector((state) => state.user);
-  const subjects = useSelector((state) => state.result);
-  console.log(subjects);
+  const subjects = useSelector((state) => state.subject);
+  // const students = useSelector((state) => state.student);
+
   const togellClick = (id) => {
     console.log();
     setRows([
@@ -52,17 +58,17 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
   };
 
   const changeGrade = (e, row) => {
-    console.log(row);
+    console.log(students);
     const value = e.target.value;
     const name = e.target.name;
     const { id } = row;
-    const newRows = rows.map((row) => {
+    const newRows = students?.map((row) => {
       if (row.id === id) {
         return { ...row, [name]: value };
       }
       return row;
     });
-    setRows(newRows);
+    setStudents(newRows);
   };
 
   const handleSelect = async (e) => {
@@ -91,6 +97,9 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
           e,
           users.resultToken
         );
+        setStudents(students?.data?.data);
+
+        getStudentByStudentIdndAcadomicYear(students.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -137,48 +146,98 @@ const LecturerResultTable = ({ getSubjectByAcadamicYear }) => {
           </label>
         ) : null}
       </div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label='simple table'>
-          <TableHead>
-            <TableRow>
-              <TableCell>Subjects</TableCell>
-              <TableCell align='right'>Subjectcode</TableCell>
-              <TableCell align='right'>Grade</TableCell>
-              <TableCell align='right'>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.Subject}>
-                <TableCell component='th' scope='row'>
-                  {row.Subject}
-                </TableCell>
-                <TableCell align='right'>{row.Subjectcode}</TableCell>
-                <TableCell align='right'>
-                  <input
-                    value={row.Grade}
-                    name='Grade'
-                    onChange={(e) => {
-                      changeGrade(e, row);
-                    }}
-                    disabled={row.isEdit}
-                  />
-                </TableCell>
-                <TableCell align='right'>
-                  <IconButton aria-label='delete'>
-                    <BorderColor onClick={() => togellClick(row.id)} />
-                  </IconButton>
-                  <IconButton aria-label='delete'>
-                    <Delete />
-                  </IconButton>
-                </TableCell>
+      {students?.length > 0 ? (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label='simple table'>
+            <TableHead>
+              <TableRow>
+                <TableCell align='right'>StudenName</TableCell>
+                <TableCell>StudentId</TableCell>
+
+                <TableCell align='right'>Result</TableCell>
+                <TableCell align='right'>Action</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {students?.map((row) => (
+                <TableRow key={row.Subject}>
+                  <TableCell component='th' scope='row'>
+                    {row?.student?.name}
+                  </TableCell>
+                  <TableCell component='th' scope='row'>
+                    {row?.student?.student_no}
+                  </TableCell>
+                  <TableCell align='right'>{row.Subjectcode}</TableCell>
+                  <TableCell align='right'>
+                    <input
+                      value={row?.result}
+                      name='result'
+                      onChange={(e) => {
+                        changeGrade(e, row);
+                      }}
+                      // disabled={row.isEdit}
+                    />
+                  </TableCell>
+                  <TableCell align='right'>
+                    <IconButton aria-label='delete'>
+                      <BorderColor onClick={() => togellClick(row.id)} />
+                    </IconButton>
+                    <IconButton aria-label='delete'>
+                      <Delete />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label='simple table'>
+            <TableHead>
+              <TableRow>
+                <TableCell>Subjects</TableCell>
+                <TableCell align='right'>Subjectcode</TableCell>
+                <TableCell align='right'>Grade</TableCell>
+                <TableCell align='right'>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.Subject}>
+                  <TableCell component='th' scope='row'>
+                    {row.Subject}
+                  </TableCell>
+                  <TableCell align='right'>{row.Subjectcode}</TableCell>
+                  <TableCell align='right'>
+                    <input
+                      value={row.Grade}
+                      name='Grade'
+                      onChange={(e) => {
+                        changeGrade(e, row);
+                      }}
+                      disabled={row.isEdit}
+                    />
+                  </TableCell>
+                  <TableCell align='right'>
+                    <IconButton aria-label='delete'>
+                      <BorderColor onClick={() => togellClick(row.id)} />
+                    </IconButton>
+                    <IconButton aria-label='delete'>
+                      <Delete />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </>
   );
 };
 
-export default connect(null, { getSubjectByAcadamicYear })(LecturerResultTable);
+export default connect(null, {
+  getSubjectByAcadamicYear,
+  getStudentByStudentIdndAcadomicYear,
+})(LecturerResultTable);

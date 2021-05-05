@@ -2,11 +2,15 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import resultReducer from '../Reducer/resultReducer';
 import userReducer from '../Reducer/userReducer';
+import subjectReducer from '../Reducer/subjectReducer';
+import studentReducer from '../Reducer/studentReducer';
 const initialState = {};
 
 const reducer = combineReducers({
   user: userReducer,
-  result: resultReducer
+  result: resultReducer,
+  subject: subjectReducer,
+  student: studentReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
