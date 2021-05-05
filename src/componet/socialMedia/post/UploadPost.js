@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAction } from '../../Action/postAction';
+import { postAction } from '../../../Action/postAction';
 
-const CreatePost = () => {
+const UploadPost = () => {
   const history = useHistory();
 
   const [title, SetTitle] = useState('');
@@ -35,7 +35,7 @@ const CreatePost = () => {
     console.log({ title, description, image, postUrl });
     dispatch(postAction({ title, description, image, postUrl }));
 
-    //  fetch("http://localhost:5000/post/createpost", {
+    //  fetch("http://localhost:5000/post/UploadPost", {
     //         method: "post",
     //         headers: {
     //            "Content-Type": "application/json",
@@ -102,4 +102,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default UploadPost;

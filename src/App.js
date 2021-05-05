@@ -6,7 +6,6 @@ import Login from './componet/Login/Login';
 // import UserProfile from './views/UserProfile';
 // import EditProfile from './views/EditProfile/EditProfile';
 import AddResults from './views/AddResults/AddResults';
-import CreatePost from './views/CreatePost/CreatePost';
 import ResultLogin from './views/Results/ResultLogin';
 import ResultsView from './views/Results/student/ResultsStudentView';
 import SocialLogin from './views/SocialMedia/Login/SocialLogin';
@@ -29,7 +28,7 @@ function App() {
           <Route exact path='/social/home' component={SocialHome} />
           {/* <Route exact path='/social/edit-profile' component={EditProfile} /> */}
           <Route exact path='/social/profile/home' component={UserProfile} />
-          <Route exact path='/create-post' component={CreatePost} />
+          {/* <Route exact path='/create-post' component={CreatePost} /> */}
           <Route exact path='/social/profile/about' component={About} />
         </Switch>
       </BrowserRouter>

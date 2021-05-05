@@ -1,7 +1,6 @@
 import React from 'react';
 import TimelineHeader from '../../../componet/socialMedia/profile/profilehome/TimeLineHeader';
 import Intro from '../../../componet/socialMedia/profile/profilehome/Introduction';
-import CreatePost from '../../../componet/socialMedia/profile/profilehome/CreatePost';
 import Posts from '../../../componet/socialMedia/profile/profilehome/Post';
 import MainPost from '../../../componet/socialMedia/profile/profilehome/MainPost';
 import Photos from '../../../componet/socialMedia/profile/profilehome/Photos';
