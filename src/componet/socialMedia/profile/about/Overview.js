@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap';
 
 const Overview = () => {
   return (
-    <div className='m-5'>
+    <div className='m-3'>
       <Card>
         <div className='shadow-fb rounded w-full bg-white p-4'>
           <div className='text-xl font-bold text-fBlack'>OverView</div>
