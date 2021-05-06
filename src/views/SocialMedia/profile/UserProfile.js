@@ -10,14 +10,17 @@ import ProfileLayout from '../../../componet/layout/ProfileLayout';
 import profileService from '../../../services/ProfileService';
 import { connect } from 'react-redux';
 import { getProfileByUserId } from '../../../Action/profileAction';
+import { useParams } from 'react-router';
 const UserProfile = ({ getProfileByUserId }) => {
+  const { userId } = useParams();
+
   useEffect(() => {
     fetchProfileByUserId();
   }, []);
 
   const fetchProfileByUserId = async () => {
     try {
-      const profile = await profileService.fetchProfileByUserId();
+      const profile = await profileService.fetchProfileByUserId(userId);
       getProfileByUserId(profile.data.data);
     } catch (error) {
       console.log(error);

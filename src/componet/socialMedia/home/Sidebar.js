@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SideBar = ({ users }) => {
   const [state] = useState([
@@ -27,19 +28,21 @@ const SideBar = ({ users }) => {
       <h3>Friends</h3>
       <div className='friends'>
         {' '}
-        {state.map((info) => (
-          <div
-            className='sidebar__list'
-            key={info.id}
-            onClick={() => {
-              selectFrined(info.id);
-            }}
-          >
-            <div className='sidebar__list-img'>
-              <img src={info.image} alt='groupimage' />
+        {users?.map((user) => (
+          <Link to={`/social/profile/home/${user.id}`}>
+            <div
+              className='sidebar__list'
+              key={user?.id}
+              // onClick={() => {
+              //   selectFrined(info.id);
+              // }}
+            >
+              <div className='sidebar__list-img'>
+                <img src='adsdfs' alt='groupimage' />
+              </div>
+              <div className='sidebar__list-name'>{user?.name}</div>
             </div>
-            <div className='sidebar__list-name'>{info.name}</div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

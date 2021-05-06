@@ -16,8 +16,9 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
+import { connect } from 'react-redux';
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -58,7 +59,7 @@ const Navbar = () => {
           <span className='navbar__notify'>22</span>
         </span> */}
           <span className='middleIcon'>
-            <Link to='/social/profile/home'>
+            <Link to={`/social/profile/home/${user?.id}`}>
               {/* <FaGamepad className='navbar__middle-icons' /> */}
               <Chip
                 avatar={<Avatar>P</Avatar>}
@@ -88,4 +89,9 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    user: state?.user?.user,
+  };
+};
+export default connect(mapStateToProps)(Navbar);

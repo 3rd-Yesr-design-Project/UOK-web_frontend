@@ -27,7 +27,11 @@ function App() {
           <Route exact path='/social/login' component={SocialLogin} />
           <Route exact path='/social/home' component={SocialHome} />
           {/* <Route exact path='/social/edit-profile' component={EditProfile} /> */}
-          <Route exact path='/social/profile/home' component={UserProfile} />
+          <Route
+            exact
+            path='/social/profile/home/:userId'
+            component={UserProfile}
+          />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
           <Route exact path='/social/profile/about' component={About} />
         </Switch>

@@ -1,8 +1,8 @@
 import httpSocialService from './HttpSocialService';
 
 class ProfileServie {
-  fetchProfileByUserId() {
-    return httpSocialService.get(`/profile`);
+  fetchProfileByUserId(userId) {
+    return httpSocialService.get(`/profile/${userId}`);
   }
 }
 
