@@ -7,12 +7,14 @@ import {
   UPDATE_PROFILE_ERROR,
   RESULT_LOGIN_SUCCESS,
   SOCIAL_LOGIN_SUCCESS,
+  GET_USERS,
 } from '../Action/types';
 
 const initialState = {
   user: null,
   resultToken: null,
   socialToken: null,
+  users: [],
   // profile: null,
   // profiles: [],
   // posts: [{}],
@@ -32,6 +34,8 @@ export default function (state = initialState, action) {
     case SOCIAL_LOGIN_SUCCESS:
       localStorage.setItem('socialToken', payload.token);
       return { ...state, socialToken: payload.token, user: payload.loginUser };
+    case GET_USERS:
+      return { ...state, users: payload };
     case GET_PROFILE:
       return {
         ...state,
