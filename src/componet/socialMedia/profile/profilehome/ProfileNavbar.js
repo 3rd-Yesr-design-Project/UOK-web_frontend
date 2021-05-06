@@ -22,14 +22,14 @@ const ProfileNavbar = () => {
             <Link to='/social/profile/about'>About</Link>
           </div>
           <div className='px-4 py-5 text-fGrey'>Photos</div>
-          <div className='px-4 py-5 text-fGrey'>Videos</div>
+          {/* <div className='px-4 py-5 text-fGrey'>Videos</div>
           <div className='px-4 py-5 text-fGrey'>Check-Ins</div>
           <div className='px-4 flex items-center py-5 text-fGrey'>
             More
             <span className='ml-1'>
               <DownArrow borderColor='#606770' />
             </span>
-          </div>
+          </div> */}
         </div>
         <div className='flex items-center space-x-2'>
           <Button variant='primary' onClick={handleShow}>

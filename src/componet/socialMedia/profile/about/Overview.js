@@ -6,7 +6,7 @@ import Pin from '../icons/pin';
 import RSS from '../icons/rss';
 import { Card } from 'react-bootstrap';
 
-const Overview = () => {
+const Overview = (props) => {
   return (
     <div className='m-3'>
       <Card>
@@ -16,36 +16,28 @@ const Overview = () => {
             <div>
               <div className='mt-4 flex items-center'>
                 <SuitCase />
-                <span className='ml-4'>
-                  Massa eros etiam diam massa gravida nullam urna{' '}
-                </span>
+                <span className='ml-4'>{props.work}</span>
               </div>
               <div className='mt-4 flex items-center'>
                 <Hat />
-                <span className='ml-4'>Gravida nullam urna</span>
+                <span className='ml-4'>{props.university}</span>
               </div>
               <div className='mt-4 flex items-center'>
                 <Hat />
-                <span className='ml-4'>Etiam diam massa </span>
+                <span className='ml-4'>{props.school} </span>
               </div>
             </div>
             <div>
               <div className='mt-4 flex items-center'>
                 <HomeAlt />
                 <span className='ml-4'>
-                  Lives in <b>Lutsk</b>{' '}
+                  Lives in <b>{props.home_town}</b>{' '}
                 </span>
               </div>
               <div className='mt-4 flex items-center'>
                 <Pin />
                 <span className='ml-4'>
-                  From <b>Lutsk</b>{' '}
-                </span>
-              </div>
-              <div className='mt-4 flex items-center'>
-                <RSS />
-                <span className='ml-4'>
-                  Followed by <b>97 people</b>{' '}
+                  From <b>{props.current_city}</b>{' '}
                 </span>
               </div>
             </div>

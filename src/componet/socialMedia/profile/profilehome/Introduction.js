@@ -4,42 +4,36 @@ import Hat from '../icons/hat';
 import HomeAlt from '../icons/homeAlt';
 import Pin from '../icons/pin';
 import RSS from '../icons/rss';
+import { connect } from 'react-redux';
 
-const Introduction = () => {
+const Introduction = ({ profile }) => {
+  console.log('aaaaaaaaaaaaa', profile);
   return (
     <div className='card'>
       <div className='shadow-fb rounded w-full bg-white p-4'>
         <div className='text-xl font-bold text-fBlack'>Intro</div>
         <div className='mt-4 flex items-center'>
           <SuitCase />
-          <span className='ml-2'>
-            Massa eros etiam diam massa gravida nullam urna{' '}
-          </span>
+          <span className='ml-2'>{profile?.working_place}</span>
         </div>
         <div className='mt-4 flex items-center'>
           <Hat />
-          <span className='ml-2'>Gravida nullam urna</span>
+          <span className='ml-2'>{profile?.university}</span>
         </div>
         <div className='mt-4 flex items-center'>
           <Hat />
-          <span className='ml-2'>Etiam diam massa </span>
+          <span className='ml-2'>{profile?.school} </span>
         </div>
         <div className='mt-4 flex items-center'>
           <HomeAlt />
           <span className='ml-2'>
-            Lives in <b>Lutsk</b>{' '}
+            Lives in <b>{profile?.home_town}</b>
           </span>
         </div>
         <div className='mt-4 flex items-center'>
           <Pin />
           <span className='ml-2'>
-            From <b>Lutsk</b>{' '}
-          </span>
-        </div>
-        <div className='mt-4 flex items-center'>
-          <RSS />
-          <span className='ml-2'>
-            Followed by <b>97 people</b>{' '}
+            From <b>{profile?.current_city}</b>
           </span>
         </div>
       </div>
@@ -47,4 +41,8 @@ const Introduction = () => {
   );
 };
 
-export default Introduction;
+const mapStateToProps = (state) => {
+  return { profile: state?.profile?.userProfile };
+};
+
+export default connect(mapStateToProps)(Introduction);

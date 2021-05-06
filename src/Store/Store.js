@@ -4,6 +4,7 @@ import resultReducer from '../Reducer/resultReducer';
 import userReducer from '../Reducer/userReducer';
 import subjectReducer from '../Reducer/subjectReducer';
 import studentReducer from '../Reducer/studentReducer';
+import profileReducer from '../Reducer/profileReducer';
 const initialState = {};
 
 const reducer = combineReducers({
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   result: resultReducer,
   subject: subjectReducer,
   student: studentReducer,
+  profile: profileReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
