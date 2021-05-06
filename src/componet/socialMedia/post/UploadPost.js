@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAction } from '../../../Action/postAction';
+import { createPost } from '../../../Action/postAction';
 import PostService from '../../../services/PostService';
 const UploadPost = () => {
   const history = useHistory();
@@ -22,10 +22,14 @@ const UploadPost = () => {
         title,
         description,
         image,
+        postUrl: '',
       };
+
       const data = await PostService.createPost(postData);
-      console.log('upload servise', data);
-      // dispatch(postAction({ title, description, image, postUrl }));
+      console.log('upload data', data);
+      if (data !== undefined) {
+        dispatch(createPost(data?.data?.data));
+      }
     } catch (error) {
       console.log('Upload Post error', error);
     }
