@@ -20,22 +20,16 @@ const SideBar = ({ users }) => {
     { id: 12, image: '/images/ellon.jpg', name: 'eeeeeeeeee' },
   ]);
 
-  const selectFrined = () => {
-    console.log('heeeeeeeeeeeee');
-  };
   return (
-    <div className='sidebar' style={{ marginTop: '70px' }}>
-      <h3>Friends</h3>
+    <div className='sidebar bg-gray-100' style={{ marginTop: '70px' }}>
+      <h3 className='text-center'>Friends</h3>
       <div className='friends'>
         {' '}
         {users?.map((user) => (
           <Link to={`/social/profile/home/${user.id}`}>
             <div
-              className='sidebar__list'
+              className='sidebar__list border-b-2  hover:bg-gray-700'
               key={user?.id}
-              // onClick={() => {
-              //   selectFrined(info.id);
-              // }}
             >
               <div className='sidebar__list-img'>
                 <img src='adsdfs' alt='groupimage' />
