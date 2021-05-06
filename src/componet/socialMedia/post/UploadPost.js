@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postAction } from '../../../Action/postAction';
-
+import PostService from '../../../services/PostService';
 const UploadPost = () => {
   const history = useHistory();
 
@@ -10,30 +10,28 @@ const UploadPost = () => {
   const [description, setDescription] = useState('');
   const [image, SetImage] = useState('');
   const [postUrl, setPostUrl] = useState('');
-
+  const user = useSelector((state) => state.user);
+  console.log('user', user);
   const dispatch = useDispatch();
 
-  const PostDetails = () => {
-    console.log(image);
-    const data = new FormData();
-    data.append('file', image);
+  const PostDetails = async () => {
+    try {
+      const user_id = user?.user?.id;
+      const postData = {
+        user_id,
+        title,
+        description,
+        image,
+      };
+      const data = await PostService.createPost(postData);
+      console.log('upload servise', data);
+      // dispatch(postAction({ title, description, image, postUrl }));
+    } catch (error) {
+      console.log('Upload Post error', error);
+    }
 
-    data.append('upload_preset', 'insta-clone');
-    data.append('cloud_name', 'ddeg8sl19');
-    fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
-      method: 'post',
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPostUrl(data.url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    console.log({ title, description, image, postUrl });
-    dispatch(postAction({ title, description, image, postUrl }));
+    // console.log({ title, description, image, postUrl });
+    //  dispatch(postAction({ title, description, image, postUrl }));
 
     //  fetch("http://localhost:5000/post/UploadPost", {
     //         method: "post",
