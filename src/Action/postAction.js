@@ -15,7 +15,7 @@ export const postAction = (post) => (dispatch) => {
   //     url,
   //   }),
   // })
-  console.log('dddddddddddddddddddddddddddddddd', post);
+
   postService
     .createPost(post)
     .then((res) => res.json())
