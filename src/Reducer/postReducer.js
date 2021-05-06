@@ -1,7 +1,7 @@
 import React from 'react';
 import { CREATE_POST_SUCCESS, CREATE_POST_FAIL } from '../Action/types';
 const initialState = {
-  post: {},
+  post: [],
   message: '',
 };
 const postReducer = (state = initialState, action) => {
