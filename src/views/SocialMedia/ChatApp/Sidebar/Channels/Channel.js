@@ -73,7 +73,7 @@ const Channels = (props) => {
     }
 
     const onSubmit = () => {
-
+        console.log('chhh', channelAddState);
         if (!checkIfFormValid()) {
             return;
         }
@@ -84,15 +84,20 @@ const Channels = (props) => {
             id: key,
             name: channelAddState.name,
             description: channelAddState.description,
-            created_by: {
-                name: props.user && props.user.displayName,
-                avatar: props.user && props.user.photoURL
-            }
+            // created_by: {
+            //     name: props.user && props.user.displayName,
+            //     avatar: props.user && props.user.photoURL
+            // }
         }
+        
         setLoadingState(true);
+        console.log('key', key);
+        console.log('chanelref',channelsRef);
+        console.log(channelsRef.child(key))
         channelsRef.child(key)
             .update(channel)
             .then(() => {
+                console.log('success');
                 setChannelAddState({ name: '', description: '' });
                 setLoadingState(false);
                 closeModal();
