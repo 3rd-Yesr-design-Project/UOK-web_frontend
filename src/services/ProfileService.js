@@ -1,4 +1,4 @@
-import httpSocialService from './HttpScicalService';
+import httpSocialService from './HttpSocialService';
 
 class ProfileServie {
   fetchProfileByUserId() {

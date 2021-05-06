@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const httpService = axios.create({
+const httpSocialService = axios.create({
   baseURL: 'http://localhost:4000/api/v1',
 });
 
-httpService.interceptors.request.use((config) => {
+httpSocialService.interceptors.request.use((config) => {
   config.headers.Authorization = localStorage.getItem('socialToken');
   return Promise.resolve(config);
 });
 
-httpService.interceptors.response.use(
+httpSocialService.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -19,4 +19,4 @@ httpService.interceptors.response.use(
   }
 );
 
-export default httpService;
+export default httpSocialService;

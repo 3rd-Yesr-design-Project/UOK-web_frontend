@@ -6,7 +6,8 @@ import {
   UPDATE_PROFILE,
   UPDATE_PROFILE_ERROR,
   RESULT_LOGIN_SUCCESS,
-  SOCIAL_LOGIN_SUCCESS
+  SOCIAL_LOGIN_SUCCESS,
+  GET_USERS,
 } from './types';
 
 import userServices from '../services/UserServices';
@@ -68,15 +69,22 @@ export const loginUser = (data) => async (dispatch) => {
 };
 
 export const resultLoginUser = (payload) => {
-  return({
+  return {
     type: RESULT_LOGIN_SUCCESS,
-    payload: payload
-  })
-}
+    payload: payload,
+  };
+};
 
 export const socialLoginUser = (payload) => {
-  return({
+  return {
     type: SOCIAL_LOGIN_SUCCESS,
-    payload: payload
-  })
-}
+    payload: payload,
+  };
+};
+
+export const getAllUsers = (payload) => {
+  return {
+    type: GET_USERS,
+    payload: payload,
+  };
+};

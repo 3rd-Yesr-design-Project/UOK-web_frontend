@@ -201,8 +201,13 @@ body {
 }
 .sidebar {
   width: 25%;
+
   position: fixed;
   top: 90px;
+}
+.friends {
+  height: 500px;
+  overflow: auto;
 }
 .sidebar__list {
   display: flex;

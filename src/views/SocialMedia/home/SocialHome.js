@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import SideBar from '../views/userprofile/Sidebar';
 // import ChatBar from '../views/userprofile/ChatBar';
@@ -9,18 +9,34 @@ import ChatBar from '../../../componet/socialMedia/home/ChatBar';
 import Posts from '../../../componet/socialMedia/home/Posts';
 import ChatBox from '../../../componet/socialMedia/home/ChatBox';
 import SocialLayout from '../../../componet/layout/SocialLayout';
+import userServices from '../../../services/UserServices';
+import { getAllUsers } from '../../../Action/userActions';
+import { connect } from 'react-redux';
 
-const SocialHome = () => {
-  const [state, setState] = useState(false);
-  const [current, setCurrent] = useState({});
+const SocialHome = ({ getAllUsers }) => {
+  useEffect(() => {
+    fetchFriends();
+  }, []);
 
-  const openChat = (user) => {
-    setState(true);
-    setCurrent(user);
+  const fetchFriends = async () => {
+    try {
+      const friends = await userServices.fetchAllUsers();
+      console.log('xxxxxxxxxxxxxxxxxxxxxx', friends);
+      getAllUsers(friends.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const closeChat = () => {
-    setState(false);
-  };
+  // const [state, setState] = useState(false);
+  // const [current, setCurrent] = useState({});
+
+  // const openChat = (user) => {
+  //   setState(true);
+  //   setCurrent(user);
+  // };
+  // const closeChat = () => {
+  //   setState(false);
+  // };
 
   return (
     <div>
@@ -28,12 +44,12 @@ const SocialHome = () => {
         <div className='facebook'>
           <SideBar />
           <Posts />
-          <ChatBar openChat={openChat} />
-          <ChatBox state={state} current={current} closeChat={closeChat} />
+          {/* <ChatBar openChat={openChat} />
+          <ChatBox state={state} current={current} closeChat={closeChat} /> */}
         </div>
       </SocialLayout>
     </div>
   );
 };
 
-export default SocialHome;
+export default connect(null, { getAllUsers })(SocialHome);

@@ -19,6 +19,7 @@
 //   };
 
 import httpService from './HttpService';
+import httpSocialService from './HttpSocialService';
 
 //   getUserById = async (id) => {
 //     return await this.sendRequest({
@@ -56,6 +57,10 @@ class UserService {
 
   socialLogin(payload) {
     return httpService.post('/social/login', payload);
+  }
+
+  fetchAllUsers() {
+    return httpSocialService.get('/all-user');
   }
 }
 
