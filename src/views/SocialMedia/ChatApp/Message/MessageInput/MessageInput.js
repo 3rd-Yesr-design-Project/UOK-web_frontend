@@ -29,7 +29,10 @@ const MessageInput = (props) => {
     }
 
     const sendMessage = (downloadUrl) => {
+        console.log('xxx')
+        console.log(props.channel.id)
         if (messageState || downloadUrl) {
+            console.log(props.channel.id)
             messageRef.child(props.channel.id)
                 .push()
                 .set(createMessageInfo(downloadUrl))
