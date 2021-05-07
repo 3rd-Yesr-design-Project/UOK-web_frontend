@@ -16,12 +16,22 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
-
+import SocialSearch from '../search/SocialSearch';
+import socialFrienSearch from '../../../services/SearchService';
+import { connect } from 'react-redux';
 const Navbar = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const filterFriend = async (input) => {
+    try {
+      const result = await socialFrienSearch.socialSearchInfo(input);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -35,8 +45,10 @@ const Navbar = () => {
               type='text'
               className='navbar__first-searchbar'
               placeholder='Facebook Search'
+              onChange={filterFriend}
             />
             <FaSistrix className='navar__searchIcon' />
+            <SocialSearch />
           </div>
         </div>
         <div className='navbar__middle'>
@@ -88,4 +100,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default connect(null, null)(Navbar);
