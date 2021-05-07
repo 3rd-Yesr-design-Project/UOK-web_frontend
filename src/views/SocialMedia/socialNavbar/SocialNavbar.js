@@ -17,12 +17,27 @@ import {
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
 import { connect } from 'react-redux';
+import UserSearchPopover from '../../../componet/socialMedia/navbar/UserSearchPopover';
 
 const Navbar = ({ user }) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleModalClose = () => setShow(false);
+  const handleModalShow = () => setShow(true);
+
+  const onChange = (e) => {
+    console.log(e.target.value);
+  };
 
   return (
     <div>
@@ -36,10 +51,13 @@ const Navbar = ({ user }) => {
               type='text'
               className='navbar__first-searchbar'
               placeholder='Facebook Search'
+              onClick={handleClick}
             />
             <FaSistrix className='navar__searchIcon' />
           </div>
+          <div></div>
         </div>
+
         <div className='navbar__middle'>
           <span className='middleIcon'>
             <Link to='/social/home'>
@@ -70,7 +88,7 @@ const Navbar = ({ user }) => {
           </span>
         </div>
         <div className='navbar__last'>
-          <span className='navbar__last-section' onClick={handleShow}>
+          <span className='navbar__last-section' onClick={handleModalShow}>
             <FaPlus />
           </span>
           <span className='navbar__last-section'>
@@ -84,7 +102,13 @@ const Navbar = ({ user }) => {
           </span>
         </div>
       </div>
-      <CreatePost show={show} handleClose={handleClose} />
+
+      <CreatePost show={show} handleClose={handleModalClose} />
+      <UserSearchPopover
+        handleClick={handleClick}
+        handleClose={handleClose}
+        anchorEl={anchorEl}
+      />
     </div>
   );
 };
