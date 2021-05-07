@@ -83,20 +83,6 @@ const EditProfileForm = () => {
         console.log(error);
       });
 
-    console.log(
-      firstName,
-      lastName,
-      city,
-      hobby,
-      gender,
-      profileUrl,
-      status,
-      birthday,
-      school,
-      university,
-      homeTown,
-      currentCity
-    );
     const isValid =
       firstName &&
       lastName &&
