@@ -52,6 +52,7 @@ import httpSocialService from './HttpSocialService';
 // export default userServices;
 class UserService {
   resultLogin(payload) {
+    console.log(payload);
     return httpService.post('/result/login', payload);
   }
 
@@ -61,6 +62,11 @@ class UserService {
 
   fetchAllUsers() {
     return httpSocialService.get('/all-user');
+  }
+
+  forgetPassword(payload) {
+    console.log('ffffffffffffffffff', payload);
+    return httpService.post('/user/forgetpassword', payload);
   }
 }
 

@@ -12,7 +12,7 @@ const Home = () => {
           </div>
           <div className='col-md-6 nopadding '>
             <div className='container mt-5 p-5'>
-              <h2>About Kelaniya</h2>
+              <p className='text-2xl'>About Kelaniya</p>
               <p>
                 The University of Kelaniya is committed to provide high quality
                 education and to conduct high impact research which will
@@ -26,27 +26,32 @@ const Home = () => {
         <div className='m-2'>
           <div className='row'>
             <div className='col-md-6'>
-              <div class='card' style={{ width: '25rem' }}>
-                <div class='card-body'>
-                  <h5 class='card-title'>University Vission</h5>
-                  <p class='card-text'>
-                    "To become a centre of excellence in creation and
-                    dissemination of knowledge for sustainable development."
-                  </p>
+              <div className='row'>
+                <div className='col-md-6'>
+                  <div class='card m-2'>
+                    <div class='card-body'>
+                      <h5 class='card-title'>University Vission</h5>
+                      <p class='card-text'>
+                        "To become a centre of excellence in creation and
+                        dissemination of knowledge for sustainable development."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className='col-md-6'>
+                  <div class='card m-2'>
+                    <div class='card-body'>
+                      <h5 class='card-title'>University Mission</h5>
+                      <p class='card-text'>
+                        "To nurture intellectual citizens through creativity and
+                        innovation, who contribute to the national development."
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className='col-md-6'>
-              <div class='card' style={{ width: '25rem' }}>
-                <div class='card-body'>
-                  <h5 class='card-title'>University Mission</h5>
-                  <p class='card-text'>
-                    "To nurture intellectual citizens through creativity and
-                    innovation, who contribute to the national development."
-                  </p>
-                </div>
-              </div>
-            </div>
+            <div className='col-md-6'></div>
           </div>
         </div>
       </div>

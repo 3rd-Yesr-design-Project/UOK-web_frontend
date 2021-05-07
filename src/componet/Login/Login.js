@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {Avatar,Button,TextField,FormControlLabel,Checkbox,Link,Grid,Typography,Container} from '@material-ui/core';
+import {
+  Avatar,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +17,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { loginUser } from '../../Action/userActions';
+import ForgetPasswordModal from '../common/ForgetPasswordModal';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +45,13 @@ const Login = ({ loginUser }) => {
     email: '',
     password: '',
   });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  console.log('hhhhhhhhhhhhhhhhhhhhh');
+  console.log('xxxxxxxxxxx', show);
   const handleChange = (e) => {
     setState({
       ...state,
@@ -96,9 +114,7 @@ const Login = ({ loginUser }) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href='#' variant='body2'>
-                Forgot password?
-              </Link>
+              <div onClick={handleShow}>Forgot password?</div>
             </Grid>
             <Grid item>
               <Link href='#' variant='body2'>
@@ -107,6 +123,7 @@ const Login = ({ loginUser }) => {
             </Grid>
           </Grid>
         </form>
+        <ForgetPasswordModal show={show} handleClose={handleClose} />
       </div>
     </Container>
   );

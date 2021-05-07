@@ -21,6 +21,7 @@ import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
 import { Redirect, useHistory } from 'react-router';
 import HomeLayout from '../../componet/layout/HomeLayout';
+import ForgetPasswordModal from '../../componet/common/ForgetPasswordModal';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,11 @@ const ResultLogin = ({ resultLoginUser }) => {
   const history = useHistory();
 
   const [state, setState] = useState({ email: null, password: null });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleChange = (e) => {
     setState({
       ...state,
@@ -139,7 +145,7 @@ const ResultLogin = ({ resultLoginUser }) => {
                   </Button>
                   <Grid container>
                     <Grid item xs>
-                      <Link href='#' variant='body2'>
+                      <Link variant='body2' onClick={handleShow}>
                         Forgot password?
                       </Link>
                     </Grid>
@@ -154,6 +160,7 @@ const ResultLogin = ({ resultLoginUser }) => {
             </Container>
           </div>
         </div>
+        <ForgetPasswordModal show={show} handleClose={handleClose} />
       </div>
     </HomeLayout>
   );

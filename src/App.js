@@ -13,12 +13,13 @@ import Result from './views/Results/Result';
 import SocialHome from './views/SocialMedia/home/SocialHome';
 import UserProfile from './views/SocialMedia/profile/UserProfile';
 import About from './componet/socialMedia/profile/about/About';
+import ResetPassword from './componet/common/ResetPassword';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <NavigationBar />
+        {/* <NavigationBar /> */}
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/results/login' component={ResultLogin} />
@@ -34,6 +35,7 @@ function App() {
           />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
           <Route exact path='/social/profile/about' component={About} />
+          <Route exact path='/resetPassword/:id' component={ResetPassword} />
         </Switch>
       </BrowserRouter>
     </div>

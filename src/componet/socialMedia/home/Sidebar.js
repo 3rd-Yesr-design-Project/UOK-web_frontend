@@ -28,7 +28,7 @@ const SideBar = ({ users }) => {
         {users?.map((user) => (
           <Link to={`/social/profile/home/${user.id}`}>
             <div
-              className='sidebar__list border-b-2  hover:bg-gray-700'
+              className='sidebar__list border-b-2  hover:bg-gray-400'
               key={user?.id}
             >
               <div className='sidebar__list-img'>

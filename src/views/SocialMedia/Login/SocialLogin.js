@@ -20,6 +20,7 @@ import UserServices from '../../../services/UserServices';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { socialLoginUser } from '../../../Action/userActions';
+import HomeLayout from '../../../componet/layout/HomeLayout';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,92 +72,98 @@ const SocialLogin = ({ socialLoginUser }) => {
   };
 
   return (
-    <div className='container-fluid mt-20'>
-      <div className='row'>
-        <div className='col-md-6 m-auto'>
-          <Card className='text-center'>
-            <CardActionArea>
-              <div className='flex justify-center'>
-                <img src={ChatPic} width={200} />
+    <HomeLayout>
+      <div className='container-fluid mt-20'>
+        <div className='row'>
+          <div className='col-md-6 m-auto'>
+            <Card className='text-center'>
+              <CardActionArea>
+                <div className='flex justify-center'>
+                  <img src={ChatPic} width={200} />
+                </div>
+                <CardContent>
+                  <Typography gutterBottom variant='h5' component='h2'>
+                    U Chat
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    component='p'
+                  >
+                    Please login to Chat world
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </div>
+
+          <div className='col-md-6'>
+            <Container component='main' maxWidth='xs'>
+              <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component='h1' variant='h5'>
+                  Sign in
+                </Typography>
+
+                <form className={classes.form} onSubmit={submitForm}>
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    // value={state.email}
+                    onChange={handleChange}
+                    //autoFocus
+                  />
+                  <TextField
+                    variant='outlined'
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='password'
+                    // value={state.password}
+                    label='Password'
+                    type='password'
+                    id='password'
+                    onChange={handleChange}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value='remember' color='primary' />}
+                    label='Remember me'
+                  />
+                  <Button
+                    type='submit'
+                    fullWidth
+                    variant='contained'
+                    color='primary'
+                    className={classes.submit}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href='#' variant='body2'>
+                        Forgot password?
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href='#' variant='body2'>
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </form>
               </div>
-              <CardContent>
-                <Typography gutterBottom variant='h5' component='h2'>
-                  U Chat
-                </Typography>
-                <Typography variant='body2' color='textSecondary' component='p'>
-                  Please login to Chat world
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </div>
-
-        <div className='col-md-6'>
-          <Container component='main' maxWidth='xs'>
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component='h1' variant='h5'>
-                Sign in
-              </Typography>
-
-              <form className={classes.form} onSubmit={submitForm}>
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  required
-                  fullWidth
-                  id='email'
-                  label='Email Address'
-                  name='email'
-                  // value={state.email}
-                  onChange={handleChange}
-                  //autoFocus
-                />
-                <TextField
-                  variant='outlined'
-                  margin='normal'
-                  required
-                  fullWidth
-                  name='password'
-                  // value={state.password}
-                  label='Password'
-                  type='password'
-                  id='password'
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  control={<Checkbox value='remember' color='primary' />}
-                  label='Remember me'
-                />
-                <Button
-                  type='submit'
-                  fullWidth
-                  variant='contained'
-                  color='primary'
-                  className={classes.submit}
-                >
-                  Sign In
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href='#' variant='body2'>
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href='#' variant='body2'>
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
-              </form>
-            </div>
-          </Container>
+            </Container>
+          </div>
         </div>
       </div>
-    </div>
+    </HomeLayout>
   );
 };
 
