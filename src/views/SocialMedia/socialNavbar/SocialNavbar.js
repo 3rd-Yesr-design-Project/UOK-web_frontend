@@ -16,7 +16,7 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
-import SocialSearch from '../search/SocialSearch';
+
 import socialFrienSearch from '../../../services/SearchService';
 import { connect } from 'react-redux';
 const Navbar = () => {
@@ -48,7 +48,6 @@ const Navbar = () => {
               onChange={filterFriend}
             />
             <FaSistrix className='navar__searchIcon' />
-            <SocialSearch />
           </div>
         </div>
         <div className='navbar__middle'>
