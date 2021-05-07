@@ -17,6 +17,7 @@ import {
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
 import { connect } from 'react-redux';
+import socialFrienSearch from '../../../services/SearchService';
 
 const Navbar = ({ user }) => {
   const [show, setShow] = useState(false);
