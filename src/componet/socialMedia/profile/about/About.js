@@ -10,19 +10,7 @@ import { connect } from 'react-redux';
 import ProfileService from '../../../../services/ProfileService';
 import { getProfileByUserId } from '../../../../Action/profileAction';
 
-const About = ({ profile, getProfileByUserId }) => {
-  useEffect(() => {
-    fetchProfileByUserId();
-  }, []);
-
-  const fetchProfileByUserId = async () => {
-    try {
-      const profile = await ProfileService.fetchProfileByUserId();
-      getProfileByUserId(profile.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const About = ({ profile }) => {
   console.log('yyyyyyyyyyyy', profile);
   return (
     <div>
