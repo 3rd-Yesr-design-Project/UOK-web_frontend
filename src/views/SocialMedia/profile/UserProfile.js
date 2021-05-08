@@ -21,7 +21,7 @@ const UserProfile = ({ getProfileByUserId }) => {
   const fetchProfileByUserId = async () => {
     try {
       const profile = await profileService.fetchProfileByUserId(userId);
-      getProfileByUserId(profile.data.data);
+      getProfileByUserId(profile?.data?.data);
     } catch (error) {
       console.log(error);
     }
