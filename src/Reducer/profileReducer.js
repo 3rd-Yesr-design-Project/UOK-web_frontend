@@ -5,7 +5,7 @@ import {
 } from '../Action/types';
 
 const initialState = {
-  userProfile: null,
+  userProfile: {},
 };
 
 export default function (state = initialState, action) {
