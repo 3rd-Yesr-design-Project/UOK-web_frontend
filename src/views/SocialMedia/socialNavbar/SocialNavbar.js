@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Chip, Avatar } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import {
   FaFacebook,
@@ -24,6 +25,7 @@ const Navbar = ({ user }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const history = useHistory();
 
   const filterFriend = async (input) => {
     try {
@@ -83,7 +85,10 @@ const Navbar = ({ user }) => {
           <span className='navbar__last-section' onClick={handleShow}>
             <FaPlus />
           </span>
-          <span className='navbar__last-section'>
+          <span
+            className='navbar__last-section'
+            onClick={() => history.push('/signup')}
+          >
             <FaFacebookMessenger />
           </span>
           <span className='navbar__last-section'>
