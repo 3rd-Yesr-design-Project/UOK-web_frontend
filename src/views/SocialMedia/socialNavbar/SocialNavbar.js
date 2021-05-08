@@ -41,7 +41,7 @@ const Navbar = ({ user }) => {
 
   const filterFriend = async (input) => {
     try {
-      const result = await socialFrienSearch.socialSearchInfo(input);
+      // const result = await socialFrienSearch.socialSearchInfo(input);
     } catch (error) {
       console.log(error);
     }

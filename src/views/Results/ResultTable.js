@@ -41,12 +41,14 @@ const ResultTable = ({ results }) => {
         </TableHead>
         <TableBody>
           {results?.map((result) => (
-            <TableRow key={result.id}>
+            <TableRow key={result?.id}>
               <TableCell component='th' scope='row'>
-                {result.subject}
+                {result?.subject?.subject}
               </TableCell>
-              <TableCell align='right'>{result.subject_code}</TableCell>
-              <TableCell align='right'>{result.user_subjects.result}</TableCell>
+              <TableCell align='right'>
+                {result?.subject?.subject_code}
+              </TableCell>
+              <TableCell align='right'>{result?.result}</TableCell>
             </TableRow>
           ))}
         </TableBody>
