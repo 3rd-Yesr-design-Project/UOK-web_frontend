@@ -13,6 +13,7 @@ import ellon from '../../../assets/ellon.jpg';
 import ResultTable from '../../../componet/ResultTable';
 import LecturerResultTable from './LecturerResultTable';
 import LecturerViewUpporRow from './LecturerViewUpporRow';
+import HomeLayout from '../../../componet/layout/HomeLayout';
 
 const useStyles = makeStyles({
   media: {
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
 const ResultsView = () => {
   const classes = useStyles();
   return (
-    <Container>
-      {/* <Row>
+    <HomeLayout>
+      <Container>
+        {/* <Row>
         <Col sm={4}>
           <Card>
             <CardContent>
@@ -59,9 +61,10 @@ const ResultsView = () => {
         <Col sm={8}>set the Drop down</Col>
       </Row>
       <LecturerResultTable /> */}
-      <LecturerViewUpporRow />
-      <LecturerResultTable />
-    </Container>
+        <LecturerViewUpporRow />
+        <LecturerResultTable />
+      </Container>
+    </HomeLayout>
   );
 };
 

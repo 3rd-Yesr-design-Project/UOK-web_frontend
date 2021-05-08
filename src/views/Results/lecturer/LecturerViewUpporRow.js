@@ -6,19 +6,31 @@ import {
   Select,
   MenuItem,
   TextField,
+  makeStyles,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import resultService from '../../../services/ResultServices';
 import { getStudentBySubjectIdndAcadomicYear } from '../../../Action/studentAction';
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 150,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
+  const classes = useStyles();
+
   const [academicYear, setAcademicYear] = useState(null);
   const [year, setYear] = useState(null);
   const [subjectId, setSubjectId] = useState(null);
   const [subjects, setSubjects] = useState([]);
 
   const handleChangeYear = async (e) => {
-    console.log('ppppppppp', e.target.value);
     setYear(e.target.value);
     try {
       const subjects = await resultService.getSubjectsByYear(e.target.value);
@@ -32,7 +44,7 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
   };
 
   const handleChangeSubject = async (e) => {
-    console.log(e.target.value);
+    console.log('xxxxxxxxxxxxx', e.target.value);
     setSubjectId(e.target.value);
     try {
       console.log(academicYear, subjectId);
@@ -40,8 +52,6 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
         academicYear,
         e.target.value
       );
-      console.log('xxxxxxxxxxxx', students);
-      //   setStudents(students?.data?.data);
 
       getStudentBySubjectIdndAcadomicYear(students.data.data);
     } catch (error) {
@@ -49,23 +59,23 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
     }
   };
   return (
-    <div className='mt-5'>
+    <div className=''>
       <div className='row'>
         <div className='col-md-2'>
           <TextField
             id='outlined-textarea'
             label='Academic Year'
-            placeholder='Placeholder'
+            placeholder='Academic Year'
             multiline
             variant='outlined'
             onChange={(e) => setAcademicYear(e.target.value)}
           />
         </div>
         <div className='col-md-2'>
-          <TextField
+          {/* <TextField
             id='outlined-select-currency-native'
             select
-            label='Native select'
+            label='Year'
             value={year}
             onChange={handleChangeYear}
             SelectProps={{
@@ -79,19 +89,19 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
                 {year}
               </option>
             ))}
-          </TextField>
+          </TextField> */}
         </div>
         <div className='col-md-2'>
-          <TextField
+          {/* <TextField
             id='outlined-select-currency-native'
             select
-            label='Native select'
+            label='Subject Code'
             // value={subject}
             onChange={handleChangeSubject}
             SelectProps={{
               native: true,
             }}
-            helperText='Please select your currency'
+            helperText='Please'
             variant='outlined'
           >
             {console.log(subjects)}
@@ -100,9 +110,47 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
                 {subject?.subject_code}
               </option>
             ))}
-          </TextField>
+          </TextField> */}
         </div>
-        <div className='col-md-6'></div>
+        <div className='col-md-2'>
+          <FormControl variant='outlined' className={classes.formControl}>
+            <InputLabel id='demo-simple-select-outlined-label'>Year</InputLabel>
+            <Select
+              labelId='demo-simple-select-outlined-label'
+              id='demo-simple-select-outlined'
+              // value={age}
+              onChange={handleChangeYear}
+              label='Year'
+            >
+              {[1, 2, 3, 4].map((year, index) => (
+                <MenuItem key={index} value={year}>
+                  {year}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className='col-md-2'>
+          <FormControl variant='outlined' className={classes.formControl}>
+            <InputLabel id='demo-simple-select-outlined-label'>
+              Subject Code
+            </InputLabel>
+            <Select
+              labelId='demo-simple-select-outlined-label'
+              id='demo-simple-select-outlined'
+              // value={age}
+              onChange={handleChangeSubject}
+              label='Subject Code'
+            >
+              {subjects.map((subject) => (
+                <MenuItem key={subject?.id} value={subject?.id}>
+                  {subject?.subject_code}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className='col-md-2'></div>
       </div>
     </div>
   );

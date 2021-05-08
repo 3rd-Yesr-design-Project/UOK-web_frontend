@@ -28,10 +28,10 @@ function createData(id, Subject, Subjectcode, Grade) {
 
 const LecturerResultTable = ({ students }) => {
   console.log('xxxxxxxxxxxxxxxxxx', students);
-  const [rows, setRows] = useState([
-    createData(1, 'Anjana', `SE/2016/042`, 'A'),
-    createData(2, 'Shakthi', `SE/2016/041`, 'A'),
-  ]);
+  // const [rows, setRows] = useState([
+  //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
+  //   createData(2, 'Shakthi', `SE/2016/041`, 'A'),
+  // ]);
   const [startDate, setStartDate] = useState();
   const [acadomicYear, setAcadomicYear] = useState(1);
   const [isDate, setIsDate] = useState(false);
@@ -149,11 +149,11 @@ const LecturerResultTable = ({ students }) => {
           <Table className={classes.table} aria-label='simple table'>
             <TableHead>
               <TableRow>
-                <TableCell align='right'>StudenName</TableCell>
+                <TableCell>StudenName</TableCell>
                 <TableCell>StudentId</TableCell>
 
-                <TableCell align='right'>Result</TableCell>
-                <TableCell align='right'>Action</TableCell>
+                <TableCell>Result</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -166,7 +166,7 @@ const LecturerResultTable = ({ students }) => {
                     {row?.student?.student_no}
                   </TableCell>
                   {/* <TableCell align='right'>{row.Subjectcode}</TableCell> */}
-                  <TableCell align='right'>
+                  <TableCell>
                     <input
                       value={row?.result}
                       name='result'
@@ -176,7 +176,7 @@ const LecturerResultTable = ({ students }) => {
                       // disabled={row.isEdit}
                     />
                   </TableCell>
-                  <TableCell align='right'>
+                  <TableCell>
                     <IconButton aria-label='delete'>
                       <BorderColor onClick={() => togellClick(row.id)} />
                     </IconButton>
@@ -190,46 +190,7 @@ const LecturerResultTable = ({ students }) => {
           </Table>
         </TableContainer>
       ) : (
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label='simple table'>
-            <TableHead>
-              <TableRow>
-                <TableCell>Subjects</TableCell>
-                <TableCell align='right'>Subjectcode</TableCell>
-                <TableCell align='right'>Grade</TableCell>
-                <TableCell align='right'>Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.Subject}>
-                  <TableCell component='th' scope='row'>
-                    {row.Subject}
-                  </TableCell>
-                  <TableCell align='right'>{row.Subjectcode}</TableCell>
-                  <TableCell align='right'>
-                    <input
-                      value={row.Grade}
-                      name='Grade'
-                      onChange={(e) => {
-                        changeGrade(e, row);
-                      }}
-                      disabled={row.isEdit}
-                    />
-                  </TableCell>
-                  <TableCell align='right'>
-                    <IconButton aria-label='delete'>
-                      <BorderColor onClick={() => togellClick(row.id)} />
-                    </IconButton>
-                    <IconButton aria-label='delete'>
-                      <Delete />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <h1>NO Dat</h1>
       )}
     </>
   );
