@@ -39,6 +39,14 @@ const Navbar = ({ user }) => {
     console.log(e.target.value);
   };
 
+  const filterFriend = async (input) => {
+    try {
+      const result = await socialFrienSearch.socialSearchInfo(input);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className='navbar' style={{ marginTop: '70px' }}>
@@ -52,6 +60,7 @@ const Navbar = ({ user }) => {
               className='navbar__first-searchbar'
               placeholder='Facebook Search'
               onClick={handleClick}
+              onChange={filterFriend}
             />
             <FaSistrix className='navar__searchIcon' />
           </div>
