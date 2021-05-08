@@ -26,10 +26,8 @@ function createData(id, Subject, Subjectcode, Grade) {
   return { id, Subject, Subjectcode, Grade, isEdit: false };
 }
 
-const LecturerResultTable = ({
-  getSubjectByAcadamicYear,
-  getStudentByStudentIdndAcadomicYear,
-}) => {
+const LecturerResultTable = ({ students }) => {
+  console.log('xxxxxxxxxxxxxxxxxx', students);
   const [rows, setRows] = useState([
     createData(1, 'Anjana', `SE/2016/042`, 'A'),
     createData(2, 'Shakthi', `SE/2016/041`, 'A'),
@@ -39,77 +37,77 @@ const LecturerResultTable = ({
   const [isDate, setIsDate] = useState(false);
   const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
-  const [subject, setSubject] = useState();
-  const [students, setStudents] = useState([]);
-  const users = useSelector((state) => state.user);
-  const subjects = useSelector((state) => state.subject);
+  // const [subject, setSubject] = useState();
+  // const [students, setStudents] = useState([]);
+  // const users = useSelector((state) => state.user);
+  // const subjects = useSelector((state) => state.subject);
   // const students = useSelector((state) => state.student);
 
-  const togellClick = (id) => {
-    console.log();
-    setRows([
-      ...rows.map((row) => {
-        if (row.id === id) {
-          return { ...row, isEdit: !row.isEdit };
-        }
-        return row;
-      }),
-    ]);
+  const togellClick = () => {
+    // console.log();
+    // setRows([
+    //   ...rows.map((row) => {
+    //     if (row.id === id) {
+    //       return { ...row, isEdit: !row.isEdit };
+    //     }
+    //     return row;
+    //   }),
+    // ]);
   };
 
   const changeGrade = (e, row) => {
-    console.log(students);
-    const value = e.target.value;
-    const name = e.target.name;
-    const { id } = row;
-    const newRows = students?.map((row) => {
-      if (row.id === id) {
-        return { ...row, [name]: value };
-      }
-      return row;
-    });
-    setStudents(newRows);
+    // console.log(students);
+    // const value = e.target.value;
+    // const name = e.target.name;
+    // const { id } = row;
+    // const newRows = students?.map((row) => {
+    //   if (row.id === id) {
+    //     return { ...row, [name]: value };
+    //   }
+    //   return row;
+    // });
+    // setStudents(newRows);
   };
 
-  const handleSelect = async (e) => {
-    setAcadomicYear(e);
-    setIsAcadomicYear(true);
-    try {
-      const result = await ResultService.getSubjectsByYear(
-        e,
-        users.resultToken
-      );
+  // const handleSelect = async (e) => {
+  //   setAcadomicYear(e);
+  //   setIsAcadomicYear(true);
+  //   try {
+  //     const result = await ResultService.getSubjectsByYear(
+  //       e,
+  //       users.resultToken
+  //     );
 
-      getSubjectByAcadamicYear(result.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const dateChange = (e) => {
-    setIsDate(true);
-    setStartDate(e.target.value);
-  };
-  const handleSubject = async (e) => {
-    try {
-      if (startDate && acadomicYear) {
-        const students = await ResultService.getStudentByAcadomicYearAndSubject(
-          startDate,
-          e,
-          users.resultToken
-        );
-        setStudents(students?.data?.data);
+  //     getSubjectByAcadamicYear(result.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const dateChange = (e) => {
+  //   setIsDate(true);
+  //   setStartDate(e.target.value);
+  // };
+  // const handleSubject = async (e) => {
+  //   try {
+  //     if (startDate && acadomicYear) {
+  //       const students = await ResultService.getStudentByAcadomicYearAndSubject(
+  //         startDate,
+  //         e,
+  //         users.resultToken
+  //       );
+  //       setStudents(students?.data?.data);
 
-        getStudentByStudentIdndAcadomicYear(students.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //       getStudentByStudentIdndAcadomicYear(students.data.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const classes = useStyles();
   return (
     <>
-      <div>
+      {/* <div>
         <label className='mt-2 p-1'>
           <input
             value={startDate}
@@ -145,7 +143,7 @@ const LecturerResultTable = ({
             </Dropdown>
           </label>
         ) : null}
-      </div>
+      </div> */}
       {students?.length > 0 ? (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='simple table'>
@@ -167,7 +165,7 @@ const LecturerResultTable = ({
                   <TableCell component='th' scope='row'>
                     {row?.student?.student_no}
                   </TableCell>
-                  <TableCell align='right'>{row.Subjectcode}</TableCell>
+                  {/* <TableCell align='right'>{row.Subjectcode}</TableCell> */}
                   <TableCell align='right'>
                     <input
                       value={row?.result}
@@ -237,7 +235,13 @@ const LecturerResultTable = ({
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+  return {
+    students: state.student.subjectStudents,
+  };
+};
+
+export default connect(mapStateToProps, {
   getSubjectByAcadamicYear,
   getStudentByStudentIdndAcadomicYear,
 })(LecturerResultTable);

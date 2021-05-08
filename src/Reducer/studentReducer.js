@@ -1,7 +1,12 @@
-import { GET_SUBJECTS_SUCCESS, GET_SUBJECTS_FAILED } from '../Action/types';
+import {
+  GET_SUBJECTS_SUCCESS,
+  GET_SUBJECTS_FAILED,
+  GET_SUBJECT_STUDENTS,
+} from '../Action/types';
 
 const initialState = {
   students: [],
+  sujectStudents: [],
 };
 
 export default function (state = initialState, action) {
@@ -18,6 +23,8 @@ export default function (state = initialState, action) {
           status: payload.status,
         },
       };
+    case GET_SUBJECT_STUDENTS:
+      return { ...state, subjectStudents: payload };
     default:
       return {};
   }
