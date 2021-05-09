@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Chip, Avatar } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import {
   FaFacebook,
@@ -23,6 +24,7 @@ const Navbar = ({ user }) => {
   const [show, setShow] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -100,7 +102,10 @@ const Navbar = ({ user }) => {
           <span className='navbar__last-section' onClick={handleModalShow}>
             <FaPlus />
           </span>
-          <span className='navbar__last-section'>
+          <span
+            className='navbar__last-section'
+            onClick={() => history.push('/signup')}
+          >
             <FaFacebookMessenger />
           </span>
           <span className='navbar__last-section'>

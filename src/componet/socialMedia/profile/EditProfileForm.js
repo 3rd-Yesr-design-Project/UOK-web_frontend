@@ -108,7 +108,7 @@ const EditProfileForm = ({ editProfile }) => {
       setProfileUrl(newRes.url);
       const isValid =
         gender &&
-        profileUrl &&
+        //   profileUrl &&
         birthday &&
         school &&
         currentCity &&
@@ -120,10 +120,10 @@ const EditProfileForm = ({ editProfile }) => {
         religan &&
         workingPlace;
 
-      if (isValid && profileUrl?.trim()) {
+      if (isValid && newRes?.url?.trim()) {
         try {
           const body = {
-            profileUrl,
+            profileUrl: newRes.url,
             mobile,
             birthDay: birthday,
             status,
