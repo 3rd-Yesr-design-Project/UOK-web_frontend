@@ -15,7 +15,7 @@ const UploadPost = ({ handleClose }) => {
 
   const PostDetails = async () => {
     try {
-      handleClose();
+      // handleClose();
       const user_id = user?.user?.id;
       const postData = {
         user_id,
@@ -26,7 +26,7 @@ const UploadPost = ({ handleClose }) => {
       };
 
       const data = await PostService.createPost(postData);
-      console.log('upload data', data);
+      handleClose();
       if (data !== undefined) {
         dispatch(createPost(data?.data?.data));
       }
