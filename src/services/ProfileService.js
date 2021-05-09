@@ -1,8 +1,8 @@
-import httpSocialService from './HttpSocialService';
+import httpService from './HttpService';
 
 class ProfileServie {
   fetchProfileByUserId(userId) {
-    return httpSocialService.get(`/profile/${userId}`);
+    return httpService.get(`/profile/${userId}`);
   }
 
   editProfileByUserId(profileId, body) {

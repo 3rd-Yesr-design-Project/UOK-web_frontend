@@ -64,14 +64,14 @@ import axios from 'axios';
 
 // export default HttpService;
 
-
 const httpService = axios.create({
-  baseURL: 'http://localhost:4000/api/v1'
-})
+  baseURL: 'http://localhost:4000/api/v1',
+});
 
 httpService.interceptors.request.use((config) => {
-  return Promise.resolve(config)
-})
+  config.headers.Authorization = localStorage.getItem('token');
+  return Promise.resolve(config);
+});
 
 httpService.interceptors.response.use(
   (response) => {
@@ -79,8 +79,8 @@ httpService.interceptors.response.use(
   },
 
   (error) => {
-    return Promise.reject(error.response)
+    return Promise.reject(error.response);
   }
-)
+);
 
-export default httpService
+export default httpService;

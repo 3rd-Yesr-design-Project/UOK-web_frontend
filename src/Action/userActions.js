@@ -8,6 +8,7 @@ import {
   RESULT_LOGIN_SUCCESS,
   SOCIAL_LOGIN_SUCCESS,
   GET_USERS,
+  GET_LOGIN_USER,
 } from './types';
 
 import userServices from '../services/UserServices';
@@ -85,6 +86,13 @@ export const socialLoginUser = (payload) => {
 export const getAllUsers = (payload) => {
   return {
     type: GET_USERS,
+    payload: payload,
+  };
+};
+
+export const getLoginUser = (payload) => {
+  return {
+    type: GET_LOGIN_USER,
     payload: payload,
   };
 };

@@ -45,21 +45,16 @@ import httpService from './HttpService';
 import { useSelector, useDispatch } from 'react-redux';
 
 class ResultService {
-  fethcStudentResultByUserIdAndYear(userId, year) {
-    return httpService.get(`/subject/${userId}/${year}`);
+  fethcStudentResultByUserIdAndYear(year) {
+    return httpService.get(`/student/subject/${year}`);
   }
 
-  getSubjectsByYear(year, authorization) {
-    console.log(authorization);
-    return httpService.get(`/year/subject/${year}`, {
-      headers: { authorization },
-    });
+  getSubjectsByYear(year) {
+    return httpService.get(`/year/subject/${year}`);
   }
 
-  getStudentByAcadomicYearAndSubject(academicYear, subjectId, authorization) {
-    return httpService.get(`/subject/${academicYear}/${subjectId}`, {
-      headers: { authorization },
-    });
+  getStudentByAcadomicYearAndSubjectId(academicYear, subjectId) {
+    return httpService.get(`/subject/${academicYear}/${subjectId}`);
   }
 }
 

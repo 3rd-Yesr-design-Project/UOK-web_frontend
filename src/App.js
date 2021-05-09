@@ -18,10 +18,15 @@ import ResetPassword from './componet/common/ResetPassword';
 import DashboardComponent from './views/SocialMedia/Chat/Dashboard/dashboard';
 import SignupComponent from './views/SocialMedia/Chat/Signup/signup';
 import LoginComponent from './views/SocialMedia/Chat/Login/login';
+import { connect } from 'react-redux';
+import { getAllUsers } from './Action/userActions';
+import userServices from './services/UserServices';
+
+import { getLoginUser } from './Action/userActions';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-function App() {
+const App = ({ getLoginUser }) => {
   const [state, setState] = useState({
     socialUser: null,
   });
@@ -46,8 +51,19 @@ function App() {
     }
   };
 
-  const loggedIn = (user) => setState({ socialUser: user });
+  useEffect(() => {
+    getUser();
+  }, []);
 
+  const getUser = async () => {
+    try {
+      const user = await userServices.fetchLoginUser();
+      getLoginUser(user.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const loggedIn = (user) => setState({ socialUser: user });
   return (
     <div>
       <BrowserRouter>
@@ -76,12 +92,12 @@ function App() {
             component={UserProfile}
           />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
-          <Route exact path='/social/profile/about' component={About} />
+          <Route exact path='/social/profile/about/:userId' component={About} />
           <Route exact path='/resetPassword/:id' component={ResetPassword} />
         </Switch>
       </BrowserRouter>
     </div>
   );
-}
+};
 
-export default App;
+export default connect(null, { getLoginUser })(App);

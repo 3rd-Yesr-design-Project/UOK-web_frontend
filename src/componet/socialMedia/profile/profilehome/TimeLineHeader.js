@@ -5,8 +5,9 @@ import Friend from '../icons/friend';
 import More from '../icons/more';
 import { Button } from '@material-ui/core';
 import ProfileNavbar from './ProfileNavbar';
+import { connect } from 'react-redux';
 
-const TimeLineHeader = () => {
+const TimeLineHeader = ({ profile }) => {
   return (
     <div className='px-44 shadow  mb-5'>
       <div className='relative h-96 rounded-b flex justify-center'>
@@ -24,7 +25,7 @@ const TimeLineHeader = () => {
         </div>
       </div>
       <div className='text-center mt-6 text-3xl font-bold text-fBlack'>
-        Ronald Oliver
+        {profile?.name}
       </div>
       <div className='border border-fGrey mt-6 border-opacity-10' />
       <ProfileNavbar />
@@ -32,4 +33,10 @@ const TimeLineHeader = () => {
   );
 };
 
-export default TimeLineHeader;
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile.userProfile,
+  };
+};
+
+export default connect(mapStateToProps)(TimeLineHeader);

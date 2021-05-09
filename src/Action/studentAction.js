@@ -1,4 +1,8 @@
-import { GET_STUDENTS_SUCCESS, GET_STUDENTS_FAILED } from './types';
+import {
+  GET_STUDENTS_SUCCESS,
+  GET_STUDENTS_FAILED,
+  GET_SUBJECT_STUDENTS,
+} from './types';
 
 export const getStudentByStudentIdndAcadomicYear = (payload) => async (
   dispatch
@@ -17,4 +21,12 @@ export const getStudentByStudentIdndAcadomicYear = (payload) => async (
       },
     });
   }
+};
+//------------------------------------------------------------------------
+export const getStudentBySubjectIdndAcadomicYear = (payload) => {
+  console.log('pppppppppppppppp', payload);
+  return {
+    type: GET_SUBJECT_STUDENTS,
+    payload: payload,
+  };
 };

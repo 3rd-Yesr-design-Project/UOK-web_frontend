@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import {
   Card,
@@ -7,7 +7,7 @@ import {
   CardActions,
   CardMedia,
   makeStyles,
-  Button
+  Button,
 } from '@material-ui/core';
 
 import ellon from '../../../assets/ellon.jpg';
@@ -19,31 +19,32 @@ import { fetchResultByUserIdAndYear } from '../../../Action/ResultActions';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
-
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
   title: {
     fontSize: 14,
-  }
+  },
 });
 
-const ResultsStudentView = ({fetchResultByUserIdAndYear}) => {
+const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    getData(1,1)
-  }, [])
+    getData(1);
+  }, []);
 
-  const getData = async (userId,year) => {
+  const getData = async (year) => {
     try {
-      const result = await resultServices.fethcStudentResultByUserIdAndYear(userId,year);
-      fetchResultByUserIdAndYear(result.data.data.subjects)
+      const result = await resultServices.fethcStudentResultByUserIdAndYear(
+        year
+      );
+      fetchResultByUserIdAndYear(result.data.data.results);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    }
+  };
 
   return (
     <Container>
@@ -92,9 +93,30 @@ const ResultsStudentView = ({fetchResultByUserIdAndYear}) => {
               >
                 2nd Year
               </Typography> */}
-              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,1)}>1st Year</Button>
-              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,2)}>2nd Year</Button>
-              <Button size="small" variant="outlined" fullWidth={true} onClick={() => getData(1,3)}>3rd Year</Button>
+              <Button
+                size='small'
+                variant='outlined'
+                fullWidth={true}
+                onClick={() => getData(1)}
+              >
+                1st Year
+              </Button>
+              <Button
+                size='small'
+                variant='outlined'
+                fullWidth={true}
+                onClick={() => getData(2)}
+              >
+                2nd Year
+              </Button>
+              <Button
+                size='small'
+                variant='outlined'
+                fullWidth={true}
+                onClick={() => getData(3)}
+              >
+                3rd Year
+              </Button>
               {/* <Typography
                 className={classes.title}
                 color='textSecondary'
@@ -113,4 +135,6 @@ const ResultsStudentView = ({fetchResultByUserIdAndYear}) => {
   );
 };
 
-export default connect(null,{fetchResultByUserIdAndYear})(ResultsStudentView);
+export default connect(null, { fetchResultByUserIdAndYear })(
+  ResultsStudentView
+);
