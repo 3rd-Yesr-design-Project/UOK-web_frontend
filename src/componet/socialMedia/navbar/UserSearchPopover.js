@@ -11,6 +11,9 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import socialSearch from '../../../services/SearchService';
+import { searchFilter } from '../../../Action/SearchAction';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserSearchPopover = ({ handleClick, handleClose, anchorEl }) => {
+const UserSearchPopover = ({
+  handleClick,
+  handleClose,
+  anchorEl,
+  friends,
+  searchFilter,
+}) => {
+  console.log('friends', friends);
   const classes = useStyles();
 
   const [state] = useState([
@@ -33,6 +43,15 @@ const UserSearchPopover = ({ handleClick, handleClose, anchorEl }) => {
     { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
     // { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
   ]);
+
+  const filterFriends = async (input) => {
+    let values = {
+      name: input?.target?.value,
+    };
+    const data = await socialSearch.socialSearchInfo(values);
+    console.log('', data.data.data);
+    searchFilter(data.data.data);
+  };
 
   // const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -83,11 +102,11 @@ const UserSearchPopover = ({ handleClick, handleClose, anchorEl }) => {
               type='text'
               className='navbar__first-searchbar'
               placeholder='Facebook Search'
-              onChange={onChange}
+              onChange={filterFriends}
             />
           </div>
 
-          {state?.map((user) => (
+          {friends?.map((user) => (
             <div className={classes.root}>
               <List component='nav' aria-label='main mailbox folders'>
                 <ListItem button>
@@ -97,7 +116,7 @@ const UserSearchPopover = ({ handleClick, handleClose, anchorEl }) => {
                       src='/static/images/avatar/1.jpg'
                     />
                   </ListItemAvatar>
-                  <ListItemText primary='Inbox' />
+                  <ListItemText primary={user?.name} />
                 </ListItem>
               </List>
             </div>
@@ -107,5 +126,11 @@ const UserSearchPopover = ({ handleClick, handleClose, anchorEl }) => {
     </div>
   );
 };
+//important theory
+const mapStateToProps = (state) => {
+  return {
+    friends: state?.searchFriend?.filterFriend,
+  };
+};
 
-export default UserSearchPopover;
+export default connect(mapStateToProps, { searchFilter })(UserSearchPopover);
