@@ -211,16 +211,6 @@ const EditProfileForm = ({ editProfile }) => {
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Hobby</Form.Label>
-          <Form.Control
-            type='text'
-            value={hobby}
-            onChange={(e) => handleHobby(e.target.value)}
-            placeholder='Hobby'
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formBasicPassword'>
           <Form.Label>Mobile</Form.Label>
           <Form.Control
             type='text'
@@ -261,8 +251,8 @@ const EditProfileForm = ({ editProfile }) => {
 
         <Form.Group controlId='formBasicPassword'>
           <DropdownButton id='Gender' title='Gender' onSelect={handleGender}>
-            <Dropdown.Item eventKey='Male'>Male</Dropdown.Item>
-            <Dropdown.Item eventKey='Female'>Female</Dropdown.Item>
+            <Dropdown.Item eventKey='male'>Male</Dropdown.Item>
+            <Dropdown.Item eventKey='female'>Female</Dropdown.Item>
           </DropdownButton>
         </Form.Group>
 
