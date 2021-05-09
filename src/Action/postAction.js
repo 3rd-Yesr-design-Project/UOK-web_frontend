@@ -1,4 +1,4 @@
-import { CREATE_POST_FAIL, CREATE_POST_SUCCESS } from './types';
+import { CREATE_POST_FAIL, CREATE_POST_SUCCESS, GET_POST } from './types';
 import postService from '../services/PostService';
 
 // fetch('http://localhost:4000/post/createpost', {
@@ -47,4 +47,11 @@ export const createPost = (payload) => async (dispatch) => {
       },
     });
   }
+};
+
+export const getPosts = (payload) => {
+  return {
+    type: GET_POST,
+    payload: payload,
+  };
 };

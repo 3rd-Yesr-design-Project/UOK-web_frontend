@@ -12,18 +12,30 @@ import SocialLayout from '../../../componet/layout/SocialLayout';
 import HomeLayout from '../../../componet/layout/HomeLayout';
 import userServices from '../../../services/UserServices';
 import { getAllUsers } from '../../../Action/userActions';
+import { getPosts } from '../../../Action/postAction';
 import { connect } from 'react-redux';
+import postService from '../../../services/PostService';
 
-const SocialHome = ({ getAllUsers }) => {
+const SocialHome = ({ getAllUsers, getPosts }) => {
   useEffect(() => {
     fetchFriends();
+    fetchPosts();
   }, []);
 
   const fetchFriends = async () => {
     try {
       const friends = await userServices.fetchAllUsers();
-      console.log('xxxxxxxxxxxxxxxxxxxxxx', friends);
       getAllUsers(friends.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchPosts = async () => {
+    try {
+      const posts = await postService.fetchPosts();
+      console.log('ppppppppppppp', posts);
+      getPosts(posts.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -55,4 +67,4 @@ const SocialHome = ({ getAllUsers }) => {
   );
 };
 
-export default connect(null, { getAllUsers })(SocialHome);
+export default connect(null, { getAllUsers, getPosts })(SocialHome);
