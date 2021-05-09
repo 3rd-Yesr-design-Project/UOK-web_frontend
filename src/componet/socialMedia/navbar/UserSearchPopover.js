@@ -49,7 +49,6 @@ const UserSearchPopover = ({
       name: input?.target?.value,
     };
     const data = await socialSearch.socialSearchInfo(values);
-    console.log('', data.data.data);
     searchFilter(data.data.data);
   };
 
@@ -111,10 +110,7 @@ const UserSearchPopover = ({
               <List component='nav' aria-label='main mailbox folders'>
                 <ListItem button>
                   <ListItemAvatar>
-                    <Avatar
-                      alt='Remy Sharp'
-                      src='/static/images/avatar/1.jpg'
-                    />
+                    <Avatar alt='Remy Sharp' src={user?.profile?.profile_url} />
                   </ListItemAvatar>
                   <ListItemText primary={user?.name} />
                 </ListItem>
