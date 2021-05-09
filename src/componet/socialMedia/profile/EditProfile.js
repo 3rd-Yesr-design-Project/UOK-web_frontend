@@ -144,7 +144,7 @@ const EditProfile = ({ updateProfile, show, handleClose }) => {
           <Modal.Title>Edit Your profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditProfileForm />
+          <EditProfileForm handleClose={handleClose} />
         </Modal.Body>
       </Modal>
       {/* <h3>Edit Your Profile</h3>

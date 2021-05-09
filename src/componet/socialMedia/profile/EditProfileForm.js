@@ -13,7 +13,7 @@ import { useSelector, connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { editProfile } from '../../../Action/profileAction';
 
-const EditProfileForm = ({ editProfile }) => {
+const EditProfileForm = ({ editProfile, handleClose }) => {
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState('');
   const [image, setImage] = useState('');
@@ -142,6 +142,7 @@ const EditProfileForm = ({ editProfile }) => {
           });
 
           editProfile(result?.data);
+          handleClose();
         } catch (error) {
           console.log(error);
         }
