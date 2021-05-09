@@ -69,7 +69,7 @@ const httpService = axios.create({
 });
 
 httpService.interceptors.request.use((config) => {
-  config.headers.Authorization = localStorage.getItem('resultToken');
+  config.headers.Authorization = localStorage.getItem('token');
   return Promise.resolve(config);
 });
 

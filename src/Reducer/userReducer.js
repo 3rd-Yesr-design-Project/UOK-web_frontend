@@ -8,12 +8,12 @@ import {
   RESULT_LOGIN_SUCCESS,
   SOCIAL_LOGIN_SUCCESS,
   GET_USERS,
+  GET_LOGIN_USER,
 } from '../Action/types';
 
 const initialState = {
   user: null,
-  resultToken: null,
-  socialToken: null,
+  token: null,
   users: [],
   // profile: null,
   // profiles: [],
@@ -29,11 +29,13 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case RESULT_LOGIN_SUCCESS:
-      localStorage.setItem('resultToken', payload.token);
-      return { ...state, resultToken: payload.token, user: payload.loginUser };
+      localStorage.setItem('token', payload.token);
+      return { ...state, token: payload.token, user: payload.loginUser };
     case SOCIAL_LOGIN_SUCCESS:
-      localStorage.setItem('socialToken', payload.token);
-      return { ...state, socialToken: payload.token, user: payload.loginUser };
+      localStorage.setItem('token', payload.token);
+      return { ...state, token: payload.token, user: payload.loginUser };
+    case GET_LOGIN_USER:
+      return { ...state, user: payload };
     case GET_USERS:
       return { ...state, users: payload };
     case GET_PROFILE:

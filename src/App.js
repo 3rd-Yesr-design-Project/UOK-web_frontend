@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useEffect } from 'react';
 import NavigationBar from './componet/NavBar';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Home from './views/Home/Home';
@@ -14,8 +15,25 @@ import SocialHome from './views/SocialMedia/home/SocialHome';
 import UserProfile from './views/SocialMedia/profile/UserProfile';
 import About from './componet/socialMedia/profile/about/About';
 import ResetPassword from './componet/common/ResetPassword';
+import { getAllUsers } from './Action/userActions';
+import userServices from './services/UserServices';
+import { connect } from 'react-redux';
+import { getLoginUser } from './Action/userActions';
 
-function App() {
+const App = ({ getLoginUser }) => {
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    try {
+      const user = await userServices.fetchLoginUser();
+      getLoginUser(user.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <BrowserRouter>
@@ -34,12 +52,12 @@ function App() {
             component={UserProfile}
           />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
-          <Route exact path='/social/profile/about' component={About} />
+          <Route exact path='/social/profile/about/:userId' component={About} />
           <Route exact path='/resetPassword/:id' component={ResetPassword} />
         </Switch>
       </BrowserRouter>
     </div>
   );
-}
+};
 
-export default App;
+export default connect(null, { getLoginUser })(App);

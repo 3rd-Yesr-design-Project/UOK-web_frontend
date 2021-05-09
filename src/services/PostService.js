@@ -14,7 +14,7 @@
 
 // export default new PostService();
 
-import httpSocialService from './HttpSocialService';
+import httpService from './HttpService';
 
 class PostService {
   async createPost(payload) {
@@ -35,7 +35,7 @@ class PostService {
       const datas = await res.json();
 
       if (datas && datas?.url?.trim()) {
-        return await httpSocialService.post('/post', {
+        return await httpService.post('/post', {
           ...payload,
           postUrl: datas?.url,
         });

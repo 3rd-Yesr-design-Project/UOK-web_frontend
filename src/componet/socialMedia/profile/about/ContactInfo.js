@@ -17,7 +17,7 @@ const ContactInfo = (props) => {
         <div className='mt-2 flex items-center'>
           <Hat />
           <div className='ml-4'>
-            <div>anjana@gmail.com</div>
+            <div>{props?.email}</div>
             <div className='text-xs text-gray-500 '>email</div>
           </div>
         </div>
