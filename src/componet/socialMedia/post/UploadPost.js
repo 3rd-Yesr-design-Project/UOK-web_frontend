@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../../Action/postAction';
 import PostService from '../../../services/PostService';
-const UploadPost = () => {
+const UploadPost = ({ handleClose }) => {
   const history = useHistory();
 
   const [title, SetTitle] = useState('');
@@ -11,11 +11,11 @@ const UploadPost = () => {
   const [image, SetImage] = useState('');
   const [postUrl, setPostUrl] = useState('');
   const user = useSelector((state) => state.user);
-  console.log('user', user);
   const dispatch = useDispatch();
 
   const PostDetails = async () => {
     try {
+      handleClose();
       const user_id = user?.user?.id;
       const postData = {
         user_id,
@@ -71,35 +71,72 @@ const UploadPost = () => {
         textAlign: 'center',
       }}
     >
-      <input
+      <div class='mb-3'>
+        <input
+          type='text'
+          class='form-control'
+          id='exampleFormControlInput1'
+          placeholder='Title'
+          value={title}
+          onChange={(e) => {
+            SetTitle(e.target.value);
+          }}
+        />
+      </div>
+      <div class='mb-3'>
+        <textarea
+          class='form-control'
+          id='exampleFormControlTextarea1'
+          rows='3'
+          placeholder='Some thing write here...'
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        ></textarea>
+      </div>
+      <div className='file-field input-field'>
+        <div className='btn'>
+          <input type='file' onChange={(e) => SetImage(e.target.files[0])} />
+        </div>
+      </div>
+      <div class='form-group'>
+        <button
+          type='button'
+          onClick={() => {
+            PostDetails();
+          }}
+          // name='upload'
+          // value='upload'
+          id='upload'
+          class='btn btn-block btn-dark'
+        >
+          <i class='fa fa-fw fa-upload'></i> Upload
+        </button>
+      </div>
+      {/* <input
         type='text'
         value={title}
         onChange={(e) => {
           SetTitle(e.target.value);
         }}
         placeholder='title'
-      />
-      <input
+      /> */}
+      {/* <input
         type='text'
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
         placeholder='body'
-      />
-      <div className='file-field input-field'>
-        <div className='btn'>
-          <span>Upload Image</span>
-          <input type='file' onChange={(e) => SetImage(e.target.files[0])} />
-        </div>
-      </div>
+      /> */}
 
-      <button
+      {/* <button
         onClick={() => PostDetails()}
         className='btn waves-effect waves-light #64b5f6 blue darken-1'
       >
         Submit
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -9,6 +9,7 @@ import ChatBar from '../../../componet/socialMedia/home/ChatBar';
 import Posts from '../../../componet/socialMedia/home/Posts';
 import ChatBox from '../../../componet/socialMedia/home/ChatBox';
 import SocialLayout from '../../../componet/layout/SocialLayout';
+import HomeLayout from '../../../componet/layout/HomeLayout';
 import userServices from '../../../services/UserServices';
 import { getAllUsers } from '../../../Action/userActions';
 import { connect } from 'react-redux';
@@ -39,7 +40,8 @@ const SocialHome = ({ getAllUsers }) => {
   // };
 
   return (
-    <div>
+    // <div>
+    <HomeLayout>
       <SocialLayout>
         <div className='facebook'>
           <SideBar />
@@ -48,7 +50,8 @@ const SocialHome = ({ getAllUsers }) => {
           <ChatBox state={state} current={current} closeChat={closeChat} /> */}
         </div>
       </SocialLayout>
-    </div>
+    </HomeLayout>
+    // </div>
   );
 };
 
