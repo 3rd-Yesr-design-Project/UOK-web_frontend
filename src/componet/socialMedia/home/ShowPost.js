@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ShowPost = ({ posts }) => {
+const ShowPost = ({ posts, user }) => {
   
   const classes = useStyles();
   const [typedText, setTypedText] = React.useState([null]);
@@ -42,7 +42,12 @@ const ShowPost = ({ posts }) => {
         user_id:1,
         post_id: postId
       }
-      const likeAdd = await LikeService.addLike(postId, data);
+      await LikeService.addLike(postId, data);
+      posts = posts.map(p => {
+        if (p.id === clickedPost) {
+          return p.likes = p.likes.filter(l => l.user_id !== user.id);
+        }
+      } )
     } catch (error) {
       console.log(error);
     }
@@ -58,9 +63,12 @@ const ShowPost = ({ posts }) => {
       const obj = {
         post_id: data.postId,
         comment: data.comment,
-        user_id: 1,
+        user_id: user.id,
         userName: 'user1',
-        created_at:'Today at 5:42PM'
+        created_at:'Today at 5:42PM',
+        user: {
+          name: user.name
+        }
       }
       posts = posts.map(p => {
         if (p.id === clickedPost) {
@@ -98,7 +106,7 @@ const ShowPost = ({ posts }) => {
           </div>
           <div className='show__reactions'>
             <span className='reactions' onClick={() => AddLikePost(post.id)}>
-              <FaRegThumbsUp /> <span className='reactions-text'>Like</span>
+              <FaRegThumbsUp /> <span className='reactions-text'>Like {post.likes.length}</span>
             </span>
             <span className='reactions' onClick={() => viewComments(post.id)}>
               <FaRegCommentAlt/>{' '}
@@ -114,10 +122,10 @@ const ShowPost = ({ posts }) => {
                 <List className={classes.root}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar alt="image" src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                      <Avatar alt="image" src={comment.user.profile.profile_url} />
                     </ListItemAvatar>
                     <ListItemText
-                      primary={comment.user_id}
+                      primary={comment.user.name}
                       secondary={
                         <React.Fragment>
                           <Typography
@@ -164,6 +172,7 @@ const ShowPost = ({ posts }) => {
 const mapStateToProps = (state) => {
   return {
     posts: state.post.posts,
+    user: state.user.user
   };
 };
 
