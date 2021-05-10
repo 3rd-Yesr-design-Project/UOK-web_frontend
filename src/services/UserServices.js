@@ -65,6 +65,9 @@ class UserService {
   forgetPassword(payload) {
     return httpService.post('/user/forgetpassword', payload);
   }
+  resetPassword(userId, payload) {
+    return httpService.post(`/user/resetpassword/${userId}`, payload);
+  }
 
   fetchLoginUser() {
     return httpService.get('/whoAmI');

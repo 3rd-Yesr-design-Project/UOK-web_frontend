@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../../Action/postAction';
@@ -7,6 +8,7 @@ const UploadPost = ({ handleClose }) => {
   const history = useHistory();
 
   const [title, SetTitle] = useState('');
+  const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState('');
   const [image, SetImage] = useState('');
   const [postUrl, setPostUrl] = useState('');
@@ -26,6 +28,7 @@ const UploadPost = ({ handleClose }) => {
       };
 
       const data = await PostService.createPost(postData);
+      setLoading(false);
       handleClose();
       if (data !== undefined) {
         dispatch(createPost(data?.data?.data));
@@ -100,18 +103,30 @@ const UploadPost = ({ handleClose }) => {
           <input type='file' onChange={(e) => SetImage(e.target.files[0])} />
         </div>
       </div>
+      {/* <Button variant='primary' disabled>
+        <Spinner
+          as='span'
+          animation='border'
+          size='sm'
+          role='status'
+          aria-hidden='true'
+        />
+        <span className='sr-only'>Loading...</span>
+      </Button> */}
       <div class='form-group'>
         <button
           type='button'
           onClick={() => {
             PostDetails();
+            setLoading(true);
           }}
           // name='upload'
           // value='upload'
           id='upload'
           class='btn btn-block btn-dark'
         >
-          <i class='fa fa-fw fa-upload'></i> Upload
+          {/* <i class='fa fa-fw fa-upload'></i> */}
+          {loading ? 'Uploading...' : 'Post'}
         </button>
       </div>
       {/* <input

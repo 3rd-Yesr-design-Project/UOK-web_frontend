@@ -32,7 +32,7 @@ const SideBar = ({ users }) => {
               key={user?.id}
             >
               <div className='sidebar__list-img'>
-                <img src='adsdfs' alt='groupimage' />
+                <img src={user?.profile?.profile_url} alt='groupimage' />
               </div>
               <div className='sidebar__list-name'>{user?.name}</div>
             </div>
