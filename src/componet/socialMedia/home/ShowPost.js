@@ -11,6 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CommentService from '../../../services/CommentService';
 import { connect } from 'react-redux';
+import LikeService from '../../../services/LikeService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,8 +35,17 @@ const ShowPost = ({ posts }) => {
     console.log(clickedPost);
   }
 
-  const likePost = (postId) => {
+  const AddLikePost = async (postId) => {
     console.log('Like post', postId);
+    try {
+      const data = {
+        user_id:1,
+        post_id: postId
+      }
+      const likeAdd = await LikeService.addLike(postId, data);
+    } catch (error) {
+      console.log(error);
+    }
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,7 +97,7 @@ const ShowPost = ({ posts }) => {
             </div>
           </div>
           <div className='show__reactions'>
-            <span className='reactions' onClick={() => likePost(post.id)}>
+            <span className='reactions' onClick={() => AddLikePost(post.id)}>
               <FaRegThumbsUp /> <span className='reactions-text'>Like</span>
             </span>
             <span className='reactions' onClick={() => viewComments(post.id)}>
