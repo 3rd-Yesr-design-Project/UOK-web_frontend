@@ -48,7 +48,7 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
             </span>
           </div> */}
         </div>
-        {user.id == profile.id && (
+        {user?.id == profile?.id && (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={handleShow}>
               EditProfile

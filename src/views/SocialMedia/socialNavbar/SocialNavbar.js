@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Chip, Avatar } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import {
   FaFacebook,
@@ -14,15 +15,18 @@ import {
   FaBell,
   FaCaretDown,
 } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import CreatePost from '../../../componet/socialMedia/post/CreatePost';
 import { connect } from 'react-redux';
 import UserSearchPopover from '../../../componet/socialMedia/navbar/UserSearchPopover';
+import kelaniyaLogo from '../../../assets/Kelaniya.png';
 
 const Navbar = ({ user }) => {
   const [show, setShow] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,9 +39,9 @@ const Navbar = ({ user }) => {
   const handleModalClose = () => setShow(false);
   const handleModalShow = () => setShow(true);
 
-  const onChange = (e) => {
-    console.log(e.target.value);
-  };
+  // const onChange = (e) => {
+  //   console.log(e.target.value);
+  // };
 
   const filterFriend = async (input) => {
     try {
@@ -52,13 +56,14 @@ const Navbar = ({ user }) => {
       <div className='navbar' style={{ marginTop: '70px' }}>
         <div className='navbar__first'>
           <div className='navbar__first-logo'>
-            <FaFacebook className='navbar__logo' />
+            {/* <FaFacebook className='navbar__logo' /> */}
+            <img src={kelaniyaLogo} width='40px' height='40px' />
           </div>
           <div className='navbar__first-search'>
             <input
               type='text'
               className='navbar__first-searchbar'
-              placeholder='Facebook Search'
+              placeholder='Friend Search'
               onClick={handleClick}
               onChange={filterFriend}
             />
@@ -100,14 +105,17 @@ const Navbar = ({ user }) => {
           <span className='navbar__last-section' onClick={handleModalShow}>
             <FaPlus />
           </span>
-          <span className='navbar__last-section'>
+          <span
+            className='navbar__last-section'
+            onClick={() => history.push('/signup')}
+          >
             <FaFacebookMessenger />
           </span>
           <span className='navbar__last-section'>
             <FaBell />
           </span>
           <span className='navbar__last-section'>
-            <FaCaretDown />
+            <FiLogOut />
           </span>
         </div>
       </div>

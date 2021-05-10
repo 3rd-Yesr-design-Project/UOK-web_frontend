@@ -8,11 +8,12 @@ import {
   Row,
   Modal,
 } from 'react-bootstrap';
+import ProfileService from '../../../services/ProfileService';
+import { useSelector, connect } from 'react-redux';
+import { useParams } from 'react-router';
+import { editProfile } from '../../../Action/profileAction';
 
-const EditProfileForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [city, setCity] = useState('');
+const EditProfileForm = ({ editProfile, handleClose }) => {
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState('');
   const [image, setImage] = useState('');
@@ -23,16 +24,15 @@ const EditProfileForm = () => {
   const [school, setSchool] = useState('');
   const [homeTown, setHomeTown] = useState('');
   const [currentCity, setCurrentCity] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [religan, setReligan] = useState('');
+  const [language, setLanguage] = useState('');
+  const [workingPlace, setWorkingPlace] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleFirstName = (input) => {
-    setFirstName(input);
-  };
-  const handleLastName = (input) => {
-    setLastName(input);
-  };
-  const handleCity = (input) => {
-    setCity(input);
-  };
+  const user = useSelector((state) => state.user);
+  let { userId } = useParams();
+
   const handleHobby = (input) => {
     setHobby(input);
   };
@@ -64,87 +64,96 @@ const EditProfileForm = () => {
     setHomeTown(input);
   };
 
-  const handleSubmit = (e) => {
+  const handleMobile = (input) => {
+    setMobile(input);
+  };
+  const handleLanguage = (input) => {
+    setLanguage(input);
+  };
+  const handleReligan = (input) => {
+    setReligan(input);
+  };
+  const handleWorkingPlace = (input) => {
+    setWorkingPlace(input);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append('file', image);
 
     data.append('upload_preset', 'insta-clone');
     data.append('cloud_name', 'ddeg8sl19');
-    fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
-      method: 'post',
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setProfileUrl(data.url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
+    //   method: 'post',
+    //   body: data,
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setProfileUrl(data.url);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   } );
 
-    const isValid =
-      firstName &&
-      lastName &&
-      city &&
-      hobby &&
-      gender &&
-      image &&
-      profileUrl &&
-      birthday &&
-      school &&
-      currentCity &&
-      university &&
-      status &&
-      homeTown &&
-      currentCity;
+    try {
+      const response = await fetch(
+        'https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload',
+        {
+          method: 'post',
+          body: data,
+        }
+      );
 
-    // if (isValid) {
-    // updateProfile({
-    //   firstName,
-    //   lastName,
-    //   city,
-    //   hobby,
-    //   gender,
-    //   profileUrl,
-    //   status,
-    //   birthday,
-    //   school,
-    //   university,
-    //   homeTown,
-    //   currentCity,
-    // });
+      const newRes = await response.json();
+      setProfileUrl(newRes.url);
+      const isValid =
+        gender &&
+        //   profileUrl &&
+        birthday &&
+        school &&
+        currentCity &&
+        university &&
+        status &&
+        homeTown &&
+        mobile &&
+        language &&
+        religan &&
+        workingPlace;
+
+      if (isValid && newRes?.url?.trim()) {
+        try {
+          const body = {
+            profileUrl: newRes.url,
+            mobile,
+            birthDay: birthday,
+            status,
+            gender,
+            language,
+            religioun: religan,
+            workingPlace,
+            school,
+            university,
+            homeTown,
+            currentCity,
+            user_id: user.id,
+          };
+          const result = await ProfileService.editProfileByUserId(userId, {
+            ...body,
+          });
+
+          editProfile(result?.data);
+          setLoading(false);
+          handleClose();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch (error) {}
   };
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>FirstName</Form.Label>
-          <Form.Control
-            type='text'
-            onChange={(e) => handleFirstName(e.target.value)}
-            placeholder='Password'
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>LastName</Form.Label>
-          <Form.Control
-            type='text'
-            onChange={(e) => handleLastName(e.target.value)}
-            placeholder='Password'
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>City</Form.Label>
-          <Form.Control
-            type='text'
-            onChange={(e) => handleCity(e.target.value)}
-            placeholder='Password'
-          />
-        </Form.Group>
-
+      <Form>
         <Form.Group controlId='formBasicPassword'>
           <Form.Label>Birthday</Form.Label>
           <Form.Control
@@ -170,7 +179,7 @@ const EditProfileForm = () => {
             type='text'
             value={school}
             onChange={(e) => handleSchool(e.target.value)}
-            placeholder='Status'
+            placeholder='School'
           />
         </Form.Group>
 
@@ -180,7 +189,7 @@ const EditProfileForm = () => {
             type='text'
             value={university}
             onChange={(e) => handleUniversity(e.target.value)}
-            placeholder='Status'
+            placeholder='University'
           />
         </Form.Group>
 
@@ -190,7 +199,7 @@ const EditProfileForm = () => {
             type='text'
             value={homeTown}
             onChange={(e) => handleHomeTown(e.target.value)}
-            placeholder='Status'
+            placeholder='Home Town'
           />
         </Form.Group>
 
@@ -200,22 +209,53 @@ const EditProfileForm = () => {
             type='text'
             value={currentCity}
             onChange={(e) => setCurrentCity(e.target.value)}
-            placeholder='Status'
+            placeholder='Current City'
           />
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Hobby</Form.Label>
+          <Form.Label>Mobile</Form.Label>
           <Form.Control
             type='text'
-            onChange={(e) => handleHobby(e.target.value)}
-            placeholder='Hobby'
+            value={mobile}
+            onChange={(e) => handleMobile(e.target.value)}
+            placeholder='Mobile'
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Language</Form.Label>
+          <Form.Control
+            type='text'
+            value={language}
+            onChange={(e) => handleLanguage(e.target.value)}
+            placeholder='Language'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Religan</Form.Label>
+          <Form.Control
+            type='text'
+            value={religan}
+            onChange={(e) => handleReligan(e.target.value)}
+            placeholder='Religan'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>workingPlace</Form.Label>
+          <Form.Control
+            type='text'
+            value={workingPlace}
+            onChange={(e) => handleWorkingPlace(e.target.value)}
+            placeholder='Working Place'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formBasicPassword'>
           <DropdownButton id='Gender' title='Gender' onSelect={handleGender}>
-            <Dropdown.Item eventKey='Male'>Male</Dropdown.Item>
-            <Dropdown.Item eventKey='Female'>Female</Dropdown.Item>
+            <Dropdown.Item eventKey='male'>Male</Dropdown.Item>
+            <Dropdown.Item eventKey='female'>Female</Dropdown.Item>
           </DropdownButton>
         </Form.Group>
 
@@ -228,12 +268,20 @@ const EditProfileForm = () => {
           />
         </Form.Group>
 
-        <Button variant='primary' type='submit'>
-          Submit
+        <Button
+          variant='secondary'
+          type='submit'
+          onClick={(e) => {
+            handleSubmit(e);
+            setLoading(true);
+          }}
+          block
+        >
+          {loading ? 'Updating...' : 'Update'}
         </Button>
       </Form>
     </div>
   );
 };
 
-export default EditProfileForm;
+export default connect(null, { editProfile })(EditProfileForm);

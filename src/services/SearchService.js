@@ -1,8 +1,8 @@
-import httpSocialService from './HttpSocialService';
+import httpService from './HttpService';
 
 class SocialSearch {
   socialSearchInfo(payload) {
-    //   return httpSocialService.post('/', payload)
+    return httpService.post('/user/search', payload);
   }
 }
 
