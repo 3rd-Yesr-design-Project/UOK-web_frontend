@@ -15,7 +15,8 @@ const ForgetPasswordModal = ({ show, handleClose }) => {
 
   const onSubmit = async () => {
     try {
-      await userServices.forgetPassword({ email });
+      await userServices.forgetPassword( { email } );
+      handleClose();
     } catch (error) {
       console.log(error);
     }

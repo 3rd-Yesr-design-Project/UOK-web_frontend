@@ -21,6 +21,7 @@ import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { socialLoginUser } from '../../../Action/userActions';
 import HomeLayout from '../../../componet/layout/HomeLayout';
+import ForgetPasswordModal from '../../../componet/common/ForgetPasswordModal';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,11 @@ const SocialLogin = ({ socialLoginUser }) => {
   const history = useHistory();
 
   const [state, setState] = useState({ email: null, password: null });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleChange = (e) => {
     setState({
       ...state,
@@ -147,7 +153,7 @@ const SocialLogin = ({ socialLoginUser }) => {
                   </Button>
                   <Grid container>
                     <Grid item xs>
-                      <Link href='#' variant='body2'>
+                      <Link variant='body2' onClick={handleShow}>
                         Forgot password?
                       </Link>
                     </Grid>
@@ -162,6 +168,7 @@ const SocialLogin = ({ socialLoginUser }) => {
             </Container>
           </div>
         </div>
+        <ForgetPasswordModal show={show} handleClose={handleClose} />
       </div>
     </HomeLayout>
   );
