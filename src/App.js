@@ -93,7 +93,11 @@ const App = ({ getLoginUser }) => {
           />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
           <Route exact path='/social/profile/about/:userId' component={About} />
-          <Route exact path='/resetPassword/:id' component={ResetPassword} />
+          <Route
+            exact
+            path='/resetPassword/:userId'
+            component={ResetPassword}
+          />
         </Switch>
       </BrowserRouter>
     </div>

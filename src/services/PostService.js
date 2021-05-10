@@ -46,7 +46,7 @@ class PostService {
   }
 
   fetchPosts() {
-    return httpService.get('/posts');
+    return httpService.get('/all-posts');
   }
 }
 

@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import firebase from 'firebase';
+import HomeLayout from '../../../../componet/layout/HomeLayout';
 
 class SignupComponent extends React.Component {
   constructor() {
@@ -26,69 +27,76 @@ class SignupComponent extends React.Component {
     const { classes } = this.props;
 
     return (
-      <main className={classes.main}>
-        <CssBaseline />
-        <Paper className={classes.paper}>
-          <Typography component='h1' variant='h5'>
-            Sign Up!
-          </Typography>
-          <form onSubmit={(e) => this.submitSignup(e)} className={classes.form}>
-            <FormControl required fullWidth margin='normal'>
-              <InputLabel htmlFor='signup-email-input'>
-                Enter Your Email
-              </InputLabel>
-              <Input
-                autoComplete='email'
-                autoFocus
-                onChange={(e) => this.userTyping('email', e)}
-                id='signup-email-input'
-              ></Input>
-            </FormControl>
-            <FormControl required fullWidth margin='normal'>
-              <InputLabel htmlFor='signup-password-input'>
-                Create A Password
-              </InputLabel>
-              <Input
-                type='password'
-                onChange={(e) => this.userTyping('password', e)}
-                id='signup-password-input'
-              ></Input>
-            </FormControl>
-            <FormControl required fullWidth margin='normal'>
-              <InputLabel htmlFor='signup-password-confirmation-input'>
-                Confirm Your Password
-              </InputLabel>
-              <Input
-                type='password'
-                onChange={(e) => this.userTyping('passwordConfirmation', e)}
-                id='signup-password-confirmation-input'
-              ></Input>
-            </FormControl>
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-            >
-              Submit
-            </Button>
-          </form>
-          {this.state.signupError ? (
-            <Typography
-              className={classes.errorText}
-              component='h5'
-              variant='h6'
-            >
-              {this.state.signupError}
+      <HomeLayout>
+        <main className={classes.main}>
+          <CssBaseline />
+          <Paper className={classes.paper}>
+            <Typography component='h1' variant='h5'>
+              Sign Up!
             </Typography>
-          ) : null}
-          <h5 className={classes.hasAccountHeader}>Already Have An Account?</h5>
-          <Link className={classes.logInLink} to='/login'>
-            Log In!
-          </Link>
-        </Paper>
-      </main>
+            <form
+              onSubmit={(e) => this.submitSignup(e)}
+              className={classes.form}
+            >
+              <FormControl required fullWidth margin='normal'>
+                <InputLabel htmlFor='signup-email-input'>
+                  Enter Your Email
+                </InputLabel>
+                <Input
+                  autoComplete='email'
+                  autoFocus
+                  onChange={(e) => this.userTyping('email', e)}
+                  id='signup-email-input'
+                ></Input>
+              </FormControl>
+              <FormControl required fullWidth margin='normal'>
+                <InputLabel htmlFor='signup-password-input'>
+                  Create A Password
+                </InputLabel>
+                <Input
+                  type='password'
+                  onChange={(e) => this.userTyping('password', e)}
+                  id='signup-password-input'
+                ></Input>
+              </FormControl>
+              <FormControl required fullWidth margin='normal'>
+                <InputLabel htmlFor='signup-password-confirmation-input'>
+                  Confirm Your Password
+                </InputLabel>
+                <Input
+                  type='password'
+                  onChange={(e) => this.userTyping('passwordConfirmation', e)}
+                  id='signup-password-confirmation-input'
+                ></Input>
+              </FormControl>
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                color='primary'
+                className={classes.submit}
+              >
+                Submit
+              </Button>
+            </form>
+            {this.state.signupError ? (
+              <Typography
+                className={classes.errorText}
+                component='h5'
+                variant='h6'
+              >
+                {this.state.signupError}
+              </Typography>
+            ) : null}
+            <h5 className={classes.hasAccountHeader}>
+              Already Have An Account?
+            </h5>
+            <Link className={classes.logInLink} to='/login'>
+              Log In!
+            </Link>
+          </Paper>
+        </main>
+      </HomeLayout>
     );
   }
 

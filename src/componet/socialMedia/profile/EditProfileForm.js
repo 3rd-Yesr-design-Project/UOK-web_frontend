@@ -28,6 +28,7 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
   const [religan, setReligan] = useState('');
   const [language, setLanguage] = useState('');
   const [workingPlace, setWorkingPlace] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const user = useSelector((state) => state.user);
   let { userId } = useParams();
@@ -142,6 +143,7 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
           });
 
           editProfile(result?.data);
+          setLoading(false);
           handleClose();
         } catch (error) {
           console.log(error);
@@ -267,11 +269,15 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
         </Form.Group>
 
         <Button
-          variant='primary'
+          variant='secondary'
           type='submit'
-          onClick={(e) => handleSubmit(e)}
+          onClick={(e) => {
+            handleSubmit(e);
+            setLoading(true);
+          }}
+          block
         >
-          Submit
+          {loading ? 'Updating...' : 'Update'}
         </Button>
       </Form>
     </div>
