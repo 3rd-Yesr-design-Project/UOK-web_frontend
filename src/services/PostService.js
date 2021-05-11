@@ -44,6 +44,10 @@ class PostService {
       console.log(error);
     }
   }
+
+  fetchPosts() {
+    return httpService.get('/all-posts');
+  }
 }
 
 export default new PostService();

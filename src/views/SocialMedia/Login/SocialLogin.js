@@ -21,6 +21,7 @@ import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { socialLoginUser } from '../../../Action/userActions';
 import HomeLayout from '../../../componet/layout/HomeLayout';
+import ForgetPasswordModal from '../../../componet/common/ForgetPasswordModal';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,11 @@ const SocialLogin = ({ socialLoginUser }) => {
   const history = useHistory();
 
   const [state, setState] = useState({ email: null, password: null });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleChange = (e) => {
     setState({
       ...state,
@@ -132,10 +138,10 @@ const SocialLogin = ({ socialLoginUser }) => {
                     id='password'
                     onChange={handleChange}
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     control={<Checkbox value='remember' color='primary' />}
                     label='Remember me'
-                  />
+                  /> */}
                   <Button
                     type='submit'
                     fullWidth
@@ -146,22 +152,23 @@ const SocialLogin = ({ socialLoginUser }) => {
                     Sign In
                   </Button>
                   <Grid container>
-                    <Grid item xs>
-                      <Link href='#' variant='body2'>
+                    <Grid item xs className='cursor-pointer'>
+                      <Link
+                        variant='body2'
+                        onClick={handleShow}
+                        className='no-underline'
+                      >
                         Forgot password?
                       </Link>
                     </Grid>
-                    <Grid item>
-                      <Link href='#' variant='body2'>
-                        {"Don't have an account? Sign Up"}
-                      </Link>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </form>
               </div>
             </Container>
           </div>
         </div>
+        <ForgetPasswordModal show={show} handleClose={handleClose} />
       </div>
     </HomeLayout>
   );

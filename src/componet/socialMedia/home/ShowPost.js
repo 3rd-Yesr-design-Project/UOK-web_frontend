@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaRegThumbsUp, FaRegCommentAlt, FaShareAlt } from 'react-icons/fa';
-const ShowPost = () => {
+import { connect } from 'react-redux';
+
+const ShowPost = ({ posts }) => {
   const [state, setState] = React.useState([
     {
       id: 1,
@@ -43,22 +45,23 @@ const ShowPost = () => {
       postImg: '/images/ellon.jpg',
     },
   ]);
+
   return (
     <div className='show'>
-      {state.map((post) => (
+      {posts.map((post) => (
         <div key={post.id} className='empty'>
           <div className='show__header'>
             <div className='show__header-img'>
-              <img src={post.userImg} alt='user' />
+              <img src={post.post_url} alt='user' />
             </div>
             <div className='show__header-name'>
-              {post.name} <div className='date'>{post.time}</div>
+              {post?.user?.name} <div className='date'>{post?.created_at}</div>
             </div>
           </div>
           <div className='show__body'>
-            <div className='show__body-text'>{post.text}</div>
+            <div className='show__body-text'>{post.description}</div>
             <div className='show__body-img'>
-              <img src={post.postImg} alt='post' />
+              <img src={post.post_url} alt='post' />
             </div>
           </div>
           <div className='show__reactions'>
@@ -79,4 +82,10 @@ const ShowPost = () => {
   );
 };
 
-export default ShowPost;
+const mapStateToProps = (state) => {
+  return {
+    posts: state.post.posts,
+  };
+};
+
+export default connect(mapStateToProps)(ShowPost);

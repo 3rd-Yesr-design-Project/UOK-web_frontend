@@ -6,6 +6,7 @@ import subjectReducer from '../Reducer/subjectReducer';
 import studentReducer from '../Reducer/studentReducer';
 import profileReducer from '../Reducer/profileReducer';
 import postReducer from '../Reducer/postReducer';
+import searchReducer from '../Reducer/searchReducer';
 const initialState = {};
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   student: studentReducer,
   profile: profileReducer,
   post: postReducer,
+  searchFriend: searchReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -6,8 +6,8 @@ import ShowPost from './ShowPost';
 const Posts = () => {
   return (
     <div className='posts' style={{ marginTop: '80px' }}>
-      <Stories />
-      <Create />
+      {/* <Stories />
+      <Create /> */}
       <ShowPost />
     </div>
   );

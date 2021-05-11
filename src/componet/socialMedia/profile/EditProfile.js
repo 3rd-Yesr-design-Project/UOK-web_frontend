@@ -144,16 +144,8 @@ const EditProfile = ({ updateProfile, show, handleClose }) => {
           <Modal.Title>Edit Your profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditProfileForm />
+          <EditProfileForm handleClose={handleClose} />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
       {/* <h3>Edit Your Profile</h3>
       <Row>

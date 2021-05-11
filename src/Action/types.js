@@ -39,3 +39,4 @@ export const CREATE_POST_FAIL = 'CREATE_POST_FAIL';
 export const GET_USERS = 'GET_USERS';
 export const GET_SUBJECT_STUDENTS = 'GET_SUBJECT_STUDENTS';
 export const GET_LOGIN_USER = 'GET_LOGIN_USER';
+export const GET_POST = 'GET_POST';

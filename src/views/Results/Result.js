@@ -2,8 +2,10 @@ import React from 'react';
 import ResultsStudentView from './student/ResultsStudentView';
 import ResultLecturerView from './lecturer/ResultLecturerView';
 import { connect } from 'react-redux';
+import Spinner from '../../componet/common/Spinner';
 
 const Result = ({ user }) => {
+  console.log('xxxxxxxxxx', user?.usertype);
   return (
     <div>
       {user?.usertype == 'student' ? (
@@ -11,6 +13,8 @@ const Result = ({ user }) => {
       ) : (
         <ResultLecturerView />
       )}
+
+      {/* <ResultLecturerView /> */}
 
       {/* <ResultLecturerView/> */}
     </div>

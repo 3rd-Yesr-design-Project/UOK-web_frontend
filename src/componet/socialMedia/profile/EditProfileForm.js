@@ -13,7 +13,7 @@ import { useSelector, connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { editProfile } from '../../../Action/profileAction';
 
-const EditProfileForm = ({ editProfile }) => {
+const EditProfileForm = ({ editProfile, handleClose }) => {
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState('');
   const [image, setImage] = useState('');
@@ -28,6 +28,7 @@ const EditProfileForm = ({ editProfile }) => {
   const [religan, setReligan] = useState('');
   const [language, setLanguage] = useState('');
   const [workingPlace, setWorkingPlace] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const user = useSelector((state) => state.user);
   let { userId } = useParams();
@@ -108,7 +109,7 @@ const EditProfileForm = ({ editProfile }) => {
       setProfileUrl(newRes.url);
       const isValid =
         gender &&
-        profileUrl &&
+        //   profileUrl &&
         birthday &&
         school &&
         currentCity &&
@@ -120,10 +121,10 @@ const EditProfileForm = ({ editProfile }) => {
         religan &&
         workingPlace;
 
-      if (isValid && profileUrl?.trim()) {
+      if (isValid && newRes?.url?.trim()) {
         try {
           const body = {
-            profileUrl,
+            profileUrl: newRes.url,
             mobile,
             birthDay: birthday,
             status,
@@ -142,6 +143,8 @@ const EditProfileForm = ({ editProfile }) => {
           });
 
           editProfile(result?.data);
+          setLoading(false);
+          handleClose();
         } catch (error) {
           console.log(error);
         }
@@ -211,16 +214,6 @@ const EditProfileForm = ({ editProfile }) => {
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Hobby</Form.Label>
-          <Form.Control
-            type='text'
-            value={hobby}
-            onChange={(e) => handleHobby(e.target.value)}
-            placeholder='Hobby'
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formBasicPassword'>
           <Form.Label>Mobile</Form.Label>
           <Form.Control
             type='text'
@@ -261,8 +254,8 @@ const EditProfileForm = ({ editProfile }) => {
 
         <Form.Group controlId='formBasicPassword'>
           <DropdownButton id='Gender' title='Gender' onSelect={handleGender}>
-            <Dropdown.Item eventKey='Male'>Male</Dropdown.Item>
-            <Dropdown.Item eventKey='Female'>Female</Dropdown.Item>
+            <Dropdown.Item eventKey='male'>Male</Dropdown.Item>
+            <Dropdown.Item eventKey='female'>Female</Dropdown.Item>
           </DropdownButton>
         </Form.Group>
 
@@ -276,11 +269,15 @@ const EditProfileForm = ({ editProfile }) => {
         </Form.Group>
 
         <Button
-          variant='primary'
+          variant='secondary'
           type='submit'
-          onClick={(e) => handleSubmit(e)}
+          onClick={(e) => {
+            handleSubmit(e);
+            setLoading(true);
+          }}
+          block
         >
-          Submit
+          {loading ? 'Updating...' : 'Update'}
         </Button>
       </Form>
     </div>

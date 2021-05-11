@@ -8,19 +8,32 @@ import {
   Row,
   Modal,
 } from 'react-bootstrap';
+import { useHistory, useParams } from 'react-router';
+import userServices from '../../services/UserServices';
 
 const ResetPassword = () => {
   const [state, setState] = useState({ password: null, conformPassword: null });
   const [show, setShow] = useState(true);
 
+  const { userId } = useParams();
+  const history = useHistory();
+
   const handleClose = () => setShow(false);
 
   const onChange = (e) => {
-    [e.target.name] = e.target.value;
+    setState({ ...state, [e.target.name]: e.target.value });
   };
+  const compairePassword = () => {};
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(state);
+    try {
+      const body = { password: state.password };
+      await userServices.resetPassword(userId, body);
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

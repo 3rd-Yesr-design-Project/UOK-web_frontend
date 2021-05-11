@@ -6,7 +6,7 @@ class ProfileServie {
   }
 
   editProfileByUserId(profileId, body) {
-    return httpSocialService.put(`/profile/${profileId}`, body);
+    return httpService.put(`/profile/${profileId}`, body);
   }
 }
 
