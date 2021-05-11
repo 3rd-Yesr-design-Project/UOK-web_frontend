@@ -28,7 +28,7 @@ const NavigationBar = () => {
           <span>University of kelaniya</span>
         </div>
       </Navbar.Brand>
-      <Nav className='mr-auto'>
+      <Nav className='mr-auto' activeKey='/home'>
         <Nav.Link>
           <Link to='/'>Home</Link>
         </Nav.Link>

@@ -138,10 +138,10 @@ const SocialLogin = ({ socialLoginUser }) => {
                     id='password'
                     onChange={handleChange}
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     control={<Checkbox value='remember' color='primary' />}
                     label='Remember me'
-                  />
+                  /> */}
                   <Button
                     type='submit'
                     fullWidth
@@ -152,16 +152,16 @@ const SocialLogin = ({ socialLoginUser }) => {
                     Sign In
                   </Button>
                   <Grid container>
-                    <Grid item xs>
-                      <Link variant='body2' onClick={handleShow}>
+                    <Grid item xs className='cursor-pointer'>
+                      <Link
+                        variant='body2'
+                        onClick={handleShow}
+                        className='no-underline'
+                      >
                         Forgot password?
                       </Link>
                     </Grid>
-                    <Grid item>
-                      <Link href='#' variant='body2'>
-                        {"Don't have an account? Sign Up"}
-                      </Link>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </form>
               </div>
