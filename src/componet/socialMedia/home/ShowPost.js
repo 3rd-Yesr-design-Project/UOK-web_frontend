@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ShowPost = ({ posts, user }) => {
+const ShowPost = ({ posts, user, profile }) => {
   
   const classes = useStyles();
   const [typedText, setTypedText] = React.useState([null]);
@@ -42,12 +42,20 @@ const ShowPost = ({ posts, user }) => {
         user_id:1,
         post_id: postId
       }
-      await LikeService.addLike(postId, data);
-      posts = posts.map(p => {
-        if (p.id === clickedPost) {
-          return p.likes = p.likes.filter(l => l.user_id !== user.id);
+      posts = posts?.map(p => {
+        console.log(p);
+        if (p?.id === clickedPost) {
+          console.log(p.likes);
+          const likeExists = p.likes?.some(l => l?.user_id === user?.id);
+          if (likeExists) {
+            console.log('true');
+          } else {
+            console.log('false');
+          }
         }
       } )
+      await LikeService.addLike(postId, data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -64,10 +72,12 @@ const ShowPost = ({ posts, user }) => {
         post_id: data.postId,
         comment: data.comment,
         user_id: user.id,
-        userName: 'user1',
-        created_at:'Today at 5:42PM',
+        created_at:new Date(),
         user: {
-          name: user.name
+          name: user.name,
+          profile: {
+            profile_url: "https://react.semantic-ui.com/images/avatar/small/matt.jpg"
+          }
         }
       }
       posts = posts.map(p => {
@@ -122,7 +132,7 @@ const ShowPost = ({ posts, user }) => {
                 <List className={classes.root}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar alt="image" src={comment.user.profile.profile_url} />
+                      <Avatar alt="image" src={comment.user.profile?.profile_url} />
                     </ListItemAvatar>
                     <ListItemText
                       primary={comment.user.name}
@@ -132,9 +142,11 @@ const ShowPost = ({ posts, user }) => {
                             component="span"
                             variant="body2"
                             className={classes.inline}
+                            color="textPrimary"
                           >
-                            {comment.comment}
+                            {comment.comment}<br/>
                           </Typography>
+                          {comment.created_at}
                         </React.Fragment>
                       }
                     />
@@ -172,7 +184,8 @@ const ShowPost = ({ posts, user }) => {
 const mapStateToProps = (state) => {
   return {
     posts: state.post.posts,
-    user: state.user.user
+    user: state.user.user,
+    profile: state.profile.userProfile,
   };
 };
 
