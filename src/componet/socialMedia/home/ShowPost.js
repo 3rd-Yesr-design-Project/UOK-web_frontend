@@ -10,7 +10,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CommentService from '../../../services/CommentService';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import LikeService from '../../../services/LikeService';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +27,14 @@ const ShowPost = ({ posts, user, profile }) => {
   
   const classes = useStyles();
   const [typedText, setTypedText] = React.useState([null]);
-  const [clickedPost, setClickedPost] = React.useState([null]);
+  const [clickedPost, setClickedPost] = React.useState(null);
+  const [commentSectionOn, setCommentSectionOn] = React.useState(false);
+  const [likeExist, setLikeExist] = React.useState(false);
+
+
+  const p = useSelector(state => state.post.posts);
   const viewComments = (postId) => {
+    setCommentSectionOn(!commentSectionOn);
     setTypedText(null);
     console.log('view comments', postId);
     setClickedPost(postId);
@@ -36,25 +42,53 @@ const ShowPost = ({ posts, user, profile }) => {
   }
 
   const AddLikePost = async (postId) => {
-    console.log('Like post', postId);
+    setClickedPost(postId);
     try {
       const data = {
         user_id:1,
         post_id: postId
       }
-      posts = posts?.map(p => {
-        console.log(p);
-        if (p?.id === clickedPost) {
-          console.log(p.likes);
-          const likeExists = p.likes?.some(l => l?.user_id === user?.id);
-          if (likeExists) {
-            console.log('true');
+      // posts = p?.map(post => {
+      //   console.log(post);
+      //   console.log(clickedPost);
+      //   if (post?.id === clickedPost) {
+      //     console.log(post.likes);
+      //     console.log(user.id);
+      //     post.likes.map(like => {
+      //       if (like.user_id === user.id) {
+      //         console.log('done');
+      //         setLikeExist(true);
+      //       }
+      //     })
+      //     console.log(likeExist);
+      //     if(likeExist) {
+      //       post.likes = post.likes.filter(l => l.user_id !== user.id);
+      //     } else {
+      //       post.likes = [...post.likes, {user_id:user.id, post_id: post.id}];
+      //     }
+      //   }
+      // } )
+      posts = p.map(async (post) => {
+        if (post.id === clickedPost){
+          let x = false;
+          console.log('equal');
+          post.likes = post.likes?.map(l => {
+            if (l.user_id === user.id) {
+              console.log('user id equal');
+              x = true;
+            }
+          });
+          if (x) {
+            console.log('x is true');
+            post.likes = post.likes?.filter(like => like?.user_id !== user.id);
           } else {
-            console.log('false');
+            console.log('x is false');
+            post.likes = [...post.likes, data];
           }
+          return await LikeService.addLike(postId, data);
         }
-      } )
-      await LikeService.addLike(postId, data);
+      })
+      console.log(p);
       
     } catch (error) {
       console.log(error);
@@ -72,7 +106,7 @@ const ShowPost = ({ posts, user, profile }) => {
         post_id: data.postId,
         comment: data.comment,
         user_id: user.id,
-        created_at:new Date(),
+        created_at:'2021-05-11T12:44:37.000Z',
         user: {
           name: user.name,
           profile: {
@@ -85,7 +119,7 @@ const ShowPost = ({ posts, user, profile }) => {
           return p.comments = [...p.comments, obj];
         }
       } )
-      setTypedText(null);
+      setTypedText([null]);
        const result = await CommentService.addComment(data);
     } catch (error) {
       
@@ -127,7 +161,7 @@ const ShowPost = ({ posts, user, profile }) => {
             </span>
           </div>
           {post.comments?.map(comment => {
-            if (comment.post_id === post.id && clickedPost === post.id ){
+            if (comment.post_id === post.id && clickedPost === post.id && commentSectionOn){
               return (
                 <List className={classes.root}>
                   <ListItem alignItems="flex-start">
@@ -158,7 +192,7 @@ const ShowPost = ({ posts, user, profile }) => {
             return null;
             })
             }
-            {clickedPost === post.id && (
+            {clickedPost === post.id && commentSectionOn && (
               <div style={{marginLeft:"100px", marginTop:"15px"}}>
               <Form inline onSubmit={(e) => handleSubmit(e)}>
                 <Form.Group>
