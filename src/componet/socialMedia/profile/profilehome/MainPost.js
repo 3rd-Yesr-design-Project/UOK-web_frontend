@@ -15,14 +15,13 @@ const MainPost = ({ getPostByUserId, posts }) => {
 
   const fetchPosts = async () => {
     const result = await postService.getPostsByUserId(userId);
-    console.log(result.data.data);
-    getPostByUserId(result.data.data);
+
+    getPostByUserId(result?.data?.data);
   };
 
-  console.log('mainpost', posts);
   const convertDate = (date) => {
     const newDate = new Date(date);
-    console.log(newDate);
+
     return newDate;
   };
   return (
@@ -38,10 +37,8 @@ const MainPost = ({ getPostByUserId, posts }) => {
                   className='h-10 w-10 rounded-full'
                 />
                 <div className='ml-4'>
-                  <span className='cursor-pointer font-bold'>
-                    Ronald Oliver
-                  </span>{' '}
-                  was with{' '}
+                  <span className='cursor-pointer font-bold'>Anjana</span> was
+                  with{' '}
                   <span className='cursor-pointer font-bold'>
                     Steve Cunningham
                   </span>{' '}
