@@ -1,4 +1,10 @@
-import { CREATE_POST_FAIL, CREATE_POST_SUCCESS, GET_POST } from './types';
+import {
+  CREATE_POST_FAIL,
+  CREATE_POST_SUCCESS,
+  GET_POST,
+  GET_USER_POSTS,
+  GET_USER_POST_FAILED,
+} from './types';
 import postService from '../services/PostService';
 
 // fetch('http://localhost:4000/post/createpost', {
@@ -54,4 +60,21 @@ export const getPosts = (payload) => {
     type: GET_POST,
     payload: payload,
   };
+};
+
+export const getPostByUserId = (payload) => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_USER_POSTS,
+      payload: payload,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_USER_POST_FAILED,
+      payload: {
+        msg: error?.response?.statusText,
+        status: error?.response?.status,
+      },
+    });
+  }
 };
