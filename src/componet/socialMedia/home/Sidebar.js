@@ -27,7 +27,7 @@ const SideBar = ({ users, user }) => {
         {' '}
         {users?.map((frd) => (
           <Link to={`/social/profile/home/${frd.id}`}>
-            {user.id !== frd.id && (
+            {user?.id !== frd?.id && (
               <div
                 className='sidebar__list border-b-2  hover:bg-gray-400'
                 key={frd?.id}
