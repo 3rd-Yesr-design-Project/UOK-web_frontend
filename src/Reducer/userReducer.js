@@ -9,6 +9,8 @@ import {
   SOCIAL_LOGIN_SUCCESS,
   GET_USERS,
   GET_LOGIN_USER,
+  USER_LOGOUT,
+  USER_LOGOUT_FAILED,
 } from '../Action/types';
 
 const initialState = {
@@ -44,6 +46,12 @@ export default function (state = initialState, action) {
         profile: payload,
         loading: false,
       };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        user: null,
+        token: null,
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -51,6 +59,7 @@ export default function (state = initialState, action) {
       };
     case GET_PROFILE_ERROR:
     case LOGIN_FAILED:
+    case USER_LOGOUT_FAILED:
       return {
         ...state,
         error: {
