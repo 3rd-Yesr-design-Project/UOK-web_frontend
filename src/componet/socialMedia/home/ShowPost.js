@@ -219,8 +219,8 @@ const ShowPost = ({ posts, user, profile }) => {
           </div>
           <div className='show__reactions'>
             <span className='reactions' onClick={() => likePost(post.id)}>
-              {post?.isLiked ? (<FaThumbsUp />) : (<FaRegThumbsUp />)}
-               <span className='reactions-text'>Like {post.likes.length}</span>
+              {post?.isLiked ? (<FaThumbsUp fontSize="19px"/>) : (<FaRegThumbsUp fontSize="19px"/>)}
+               <span className='reactions-text'>  {post.likes.length}</span>
             </span>
             <span className='reactions' onClick={() => viewComments(post.id)}>
               <FaRegCommentAlt/>{' '}
