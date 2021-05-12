@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -27,6 +27,8 @@ function createData(id, Subject, Subjectcode, Grade) {
 }
 
 const LecturerResultTable = ({ students }) => {
+  const [isSet, setIsSet] = useState(true);
+  // useEffect(() => {}, [isSet]);
   console.log('xxxxxxxxxxxxxxxxxx', students);
   // const [rows, setRows] = useState([
   //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
@@ -38,7 +40,8 @@ const LecturerResultTable = ({ students }) => {
   const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   // const [subject, setSubject] = useState();
-  // const [students, setStudents] = useState([]);
+  const [student, setStudents] = useState(students);
+
   // const users = useSelector((state) => state.user);
   // const subjects = useSelector((state) => state.subject);
   // const students = useSelector((state) => state.student);
@@ -56,17 +59,29 @@ const LecturerResultTable = ({ students }) => {
   };
 
   const changeGrade = (e, row) => {
-    // console.log(students);
-    // const value = e.target.value;
-    // const name = e.target.name;
-    // const { id } = row;
-    // const newRows = students?.map((row) => {
-    //   if (row.id === id) {
-    //     return { ...row, [name]: value };
-    //   }
-    //   return row;
-    // });
-    // setStudents(newRows);
+    const value = e?.target?.value;
+    const name = e?.target?.name;
+
+    const { id } = row;
+
+    setStudents(
+      student?.map((row) => {
+        if (row.id === id) {
+          return { ...row, [name]: value };
+        }
+        return row;
+      })
+    );
+  };
+
+  const SaveData = async () => {
+    console.log(student);
+
+    setIsSet(student?.every((result) => result?.result !== null));
+
+    if (student?.every((result) => result?.result !== null)) {
+      await ResultService.updateStudentResults(student);
+    }
   };
 
   // const handleSelect = async (e) => {
@@ -187,6 +202,9 @@ const LecturerResultTable = ({ students }) => {
                 </TableRow>
               ))}
             </TableBody>
+            <IconButton aria-label='delete' onClick={() => SaveData()}>
+              Save
+            </IconButton>
           </Table>
         </TableContainer>
       ) : (
