@@ -11,10 +11,14 @@ import {
 import ProfileService from '../../../services/ProfileService';
 import { useSelector, connect } from 'react-redux';
 import { useParams } from 'react-router';
+import Moment from 'moment';
 import { editProfile } from '../../../Action/profileAction';
 
 const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
-  console.log('user profile', userProfile);
+  console.log(
+    'user profile',
+    Moment(userProfile?.profile?.birthday).format('L')
+  );
 
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState('');
@@ -24,7 +28,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
   );
   const [status, setStatus] = useState(userProfile?.profile?.status || '');
   const [birthday, setBirthDay] = useState(
-    userProfile?.profile?.birthday || ''
+    new Date(Moment(userProfile?.profile?.birthday).format('YYYY-MM-DD')) || ''
   );
   const [profileUrl, setProfileUrl] = useState('');
   const [school, setSchool] = useState(userProfile?.profile?.school || '');
@@ -170,9 +174,9 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
           <Form.Label>Birthday</Form.Label>
           <Form.Control
             type='date'
-            value={birthday}
+            value={Moment(birthday).format('YYYY-MM-DD')}
             onChange={(e) => handleBirthDate(e.target.value)}
-            placeholder='Password'
+            placeholder='BirthDay'
           />
         </Form.Group>
 
