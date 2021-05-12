@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaShareAlt } from 'react-icons/fa';
+import React, {useEffect} from 'react';
+import { FaRegThumbsUp, FaRegCommentAlt, FaShareAlt, FaThumbsUp  } from 'react-icons/fa';
 import { Form, Button, Col } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import CommentService from '../../../services/CommentService';
 import { connect, useSelector } from 'react-redux';
 import LikeService from '../../../services/LikeService';
+import {getPosts} from '../../../Action/postAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +29,33 @@ const ShowPost = ({ posts, user, profile }) => {
   const classes = useStyles();
   const [typedText, setTypedText] = React.useState([null]);
   const [clickedPost, setClickedPost] = React.useState(null);
-  const [likeClickedPost, setLikeClickedPost] = React.useState(null);
   const [commentSectionOn, setCommentSectionOn] = React.useState(false);
+  const [isLikedd, setIsLikedd] = React.useState(false);
   const [likeExist, setLikeExist] = React.useState(false);
 
+  useEffect(() => {
+    
+      posts.map(post => {
+      let x = false;
+      post.likes?.map(like => {
+        if (like?.user_id === user?.id) {
+          console.log('user id equal');
+          setLikeExist(true);
+          return x = true;
+
+        }
+        return 1;
+      });
+      if (x) {
+        post.isLiked = true;
+      } else {
+        post.isLiked = false;
+      }
+      return post;
+    })
+    // getPosts(posts);
+    console.log(posts);
+  }, [posts, isLikedd])
 
   const p = useSelector(state => state.post.posts);
   const viewComments = (postId) => {
@@ -42,61 +66,101 @@ const ShowPost = ({ posts, user, profile }) => {
     console.log(clickedPost);
   }
 
-  const AddLikePost = async (postId) => {
-    setLikeClickedPost(postId);
-    try {
-      const data = {
-        user_id:1,
-        post_id: postId
-      }
-      // posts = p?.map(post => {
-      //   console.log(post);
-      //   console.log(clickedPost);
-      //   if (post?.id === clickedPost) {
-      //     console.log(post.likes);
-      //     console.log(user.id);
-      //     post.likes.map(like => {
-      //       if (like.user_id === user.id) {
-      //         console.log('done');
-      //         setLikeExist(true);
-      //       }
-      //     })
-      //     console.log(likeExist);
-      //     if(likeExist) {
-      //       post.likes = post.likes.filter(l => l.user_id !== user.id);
-      //     } else {
-      //       post.likes = [...post.likes, {user_id:user.id, post_id: post.id}];
-      //     }
-      //   }
-      // } )
-      posts = p.map((post) => {
-        if (post.id === likeClickedPost){
-          let x = false;
-          console.log('equal');
-          post.likes = post.likes?.map(l => {
-            if (l.user_id === user.id) {
-              console.log('user id equal');
-              x = true;
-            }
-            return x;
-          });
-          console.log('likes', post.likes);
-          if (x) {
-            console.log('x is true');
-            post.likes = post.likes?.filter(like => like?.user_id !== user.id);
-          } else {
-            console.log('x is false');
-            post.likes = [...post.likes, data];
-          }
-        }
-      })
+  // const AddLikePost = async (postId) => {
+  //   setLikeClickedPost(postId);
+  //   try {
+  //     const data = {
+  //       user_id:1,
+  //       post_id: postId
+  //     }
+  //     // posts = p?.map(post => {
+  //     //   console.log(post);
+  //     //   console.log(clickedPost);
+  //     //   if (post?.id === clickedPost) {
+  //     //     console.log(post.likes);
+  //     //     console.log(user.id);
+  //     //     post.likes.map(like => {
+  //     //       if (like.user_id === user.id) {
+  //     //         console.log('done');
+  //     //         setLikeExist(true);
+  //     //       }
+  //     //     })
+  //     //     console.log(likeExist);
+  //     //     if(likeExist) {
+  //     //       post.likes = post.likes.filter(l => l.user_id !== user.id);
+  //     //     } else {
+  //     //       post.likes = [...post.likes, {user_id:user.id, post_id: post.id}];
+  //     //     }
+  //     //   }
+  //     // } )
+  //     posts = p.map((post) => {
+  //       if (post.id === likeClickedPost){
+  //         let x = false;
+  //         console.log('equal');
+  //         post.likes = post.likes?.map(l => {
+  //           if (l.user_id === user.id) {
+  //             console.log('user id equal');
+  //             x = true;
+  //           }
+  //           return x;
+  //         });
+  //         console.log('likes', post.likes);
+  //         if (x) {
+  //           console.log('x is true');
+  //           post.likes = post.likes?.filter(like => like?.user_id !== user.id);
+  //         } else {
+  //           console.log('x is false');
+  //           post.likes = [...post.likes, data];
+  //         }
+  //       }
+  //     })
       
-      await LikeService.addLike(postId, data);
-      console.log(p);
+  //     await LikeService.addLike(postId, data);
+  //     console.log(p);
       
-    } catch (error) {
-      console.log(error);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  const likePost = async (id) => {
+    setIsLikedd(!isLikedd);
+    const data = {
+      user_id:user.id,
+      post_id: id
     }
+    const newData = p.map(post => {
+      if (post.id === id) {
+        let x = false;
+        console.log('user id is ',user.id );
+        post.likes?.map(like => {
+          if (like.user_id === user.id) {
+            console.log('user id equal');
+            setLikeExist(true);
+            return x = true;
+
+          }
+          return 1;
+        })
+        
+        if (x) {
+          post.isLiked = false;
+          post.likes = post.likes.filter(l => l.user_id !== user.id);
+        } else {
+          post.isLiked = true;
+          post.likes = [...post.likes, data];
+        }
+
+        return post;
+      } else {
+        return post;
+      }
+    })
+    await LikeService.addLike(id, data);
+    posts = newData;
+    console.log(newData);
+    console.log(posts);
+    getPosts(posts);
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -134,6 +198,7 @@ const ShowPost = ({ posts, user, profile }) => {
     console.log('Value changed', e.target.value);
     setTypedText(e.target.value);
   }
+
   return (
     <div className='show'>
       {posts?.map((post) => (
@@ -153,8 +218,9 @@ const ShowPost = ({ posts, user, profile }) => {
             </div>
           </div>
           <div className='show__reactions'>
-            <span className='reactions' onClick={() => AddLikePost(post.id)}>
-              <FaRegThumbsUp /><FaRegThumbsDown /> <span className='reactions-text'>Like {post.likes.length}</span>
+            <span className='reactions' onClick={() => likePost(post.id)}>
+              {post?.isLiked ? (<FaThumbsUp />) : (<FaRegThumbsUp />)}
+               <span className='reactions-text'>Like {post.likes.length}</span>
             </span>
             <span className='reactions' onClick={() => viewComments(post.id)}>
               <FaRegCommentAlt/>{' '}
