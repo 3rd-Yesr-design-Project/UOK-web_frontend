@@ -2,11 +2,12 @@ import {
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_FAILED,
   GET_SUBJECT_STUDENTS,
+  GET_STUDENTS_SUCCESS,
 } from '../Action/types';
 
 const initialState = {
   students: [],
-  sujectStudents: [],
+  subjectStudents: [],
 };
 
 export default function (state = initialState, action) {
@@ -23,7 +24,7 @@ export default function (state = initialState, action) {
           status: payload.status,
         },
       };
-    case GET_SUBJECT_STUDENTS:
+    case GET_STUDENTS_SUCCESS:
       return { ...state, subjectStudents: payload };
     default:
       return {};
