@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import resultService from '../../../services/ResultServices';
-import { getStudentBySubjectIdndAcadomicYear } from '../../../Action/studentAction';
-
+import { getStudentByStudentIdndAcadomicYear } from '../../../Action/studentAction';
+import { getSubjectByAcadamicYear } from '../../../Action/subjectAction';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
+const LecturerViewUpporRow = ({
+  getStudentByStudentIdndAcadomicYear,
+  getSubjectByAcadamicYear,
+}) => {
   const classes = useStyles();
 
   const [academicYear, setAcademicYear] = useState(null);
@@ -35,16 +38,14 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
     try {
       const subjects = await resultService.getSubjectsByYear(e.target.value);
       setSubjects(subjects.data.data);
-      console.log(subjects.data.data);
 
-      //   getSubjectByAcadamicYear(result.data.data);
+      getSubjectByAcadamicYear(subjects.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleChangeSubject = async (e) => {
-    console.log('xxxxxxxxxxxxx', e.target.value);
     setSubjectId(e.target.value);
     try {
       console.log(academicYear, subjectId);
@@ -53,7 +54,7 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
         e.target.value
       );
 
-      getStudentBySubjectIdndAcadomicYear(students.data.data);
+      getStudentByStudentIdndAcadomicYear(students?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -156,6 +157,7 @@ const LecturerViewUpporRow = ({ getStudentBySubjectIdndAcadomicYear }) => {
   );
 };
 
-export default connect(null, { getStudentBySubjectIdndAcadomicYear })(
-  LecturerViewUpporRow
-);
+export default connect(null, {
+  getStudentByStudentIdndAcadomicYear,
+  getSubjectByAcadamicYear,
+})(LecturerViewUpporRow);
