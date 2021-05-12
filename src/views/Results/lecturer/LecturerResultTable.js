@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -10,6 +10,7 @@ import {
   TableRow,
   Paper,
   IconButton,
+  Input,
 } from '@material-ui/core';
 import { Delete, BorderColor } from '@material-ui/icons';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
@@ -27,18 +28,20 @@ function createData(id, Subject, Subjectcode, Grade) {
 }
 
 const LecturerResultTable = ({ students }) => {
+  // useEffect(() => {}, [isSet]);
   console.log('xxxxxxxxxxxxxxxxxx', students);
   // const [rows, setRows] = useState([
   //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
   //   createData(2, 'Shakthi', `SE/2016/041`, 'A'),
   // ]);
-  const [startDate, setStartDate] = useState();
-  const [acadomicYear, setAcadomicYear] = useState(1);
-  const [isDate, setIsDate] = useState(false);
-  const [isAcadomicYear, setIsAcadomicYear] = useState(false);
+  // const [startDate, setStartDate] = useState();
+  // const [acadomicYear, setAcadomicYear] = useState(1);
+  // const [isDate, setIsDate] = useState(false);
+  // const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   // const [subject, setSubject] = useState();
-  // const [students, setStudents] = useState([]);
+  const [student, setStudents] = useState(students ? students : []);
+
   // const users = useSelector((state) => state.user);
   // const subjects = useSelector((state) => state.subject);
   // const students = useSelector((state) => state.student);
@@ -56,17 +59,26 @@ const LecturerResultTable = ({ students }) => {
   };
 
   const changeGrade = (e, row) => {
-    // console.log(students);
-    // const value = e.target.value;
-    // const name = e.target.name;
-    // const { id } = row;
-    // const newRows = students?.map((row) => {
-    //   if (row.id === id) {
-    //     return { ...row, [name]: value };
-    //   }
-    //   return row;
-    // });
-    // setStudents(newRows);
+    const value = e?.target?.value;
+    const name = e?.target?.name;
+
+    const { id } = row;
+
+    const tempStudents = student?.map((row) => {
+      if (row.id === id) {
+        return { ...row, [name]: value };
+      }
+      return row;
+    });
+
+    setStudents(tempStudents);
+    console.log(tempStudents);
+  };
+
+  const SaveData = async () => {
+    if (student?.every((result) => result?.result !== null)) {
+      await ResultService.updateStudentResults(student);
+    }
   };
 
   // const handleSelect = async (e) => {
@@ -157,7 +169,7 @@ const LecturerResultTable = ({ students }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {students?.map((row) => (
+              {student?.map((row, i) => (
                 <TableRow key={row.Subject}>
                   <TableCell component='th' scope='row'>
                     {row?.student?.name}
@@ -167,7 +179,7 @@ const LecturerResultTable = ({ students }) => {
                   </TableCell>
                   {/* <TableCell align='right'>{row.Subjectcode}</TableCell> */}
                   <TableCell>
-                    <input
+                    <Input
                       value={row?.result}
                       name='result'
                       onChange={(e) => {
@@ -187,6 +199,9 @@ const LecturerResultTable = ({ students }) => {
                 </TableRow>
               ))}
             </TableBody>
+            <IconButton aria-label='delete' onClick={() => SaveData()}>
+              Save
+            </IconButton>
           </Table>
         </TableContainer>
       ) : (

@@ -48,6 +48,10 @@ class PostService {
   fetchPosts() {
     return httpService.get('/all-posts');
   }
+
+  getPostsByUserId(id) {
+    return httpService.get(`/posts/${id}`);
+  }
 }
 
 export default new PostService();

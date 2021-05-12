@@ -21,8 +21,9 @@ import CreatePost from '../../../componet/socialMedia/post/CreatePost';
 import { connect } from 'react-redux';
 import UserSearchPopover from '../../../componet/socialMedia/navbar/UserSearchPopover';
 import kelaniyaLogo from '../../../assets/Kelaniya.png';
+import { logOutUser } from '../../../Action/userActions';
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, logOutUser }) => {
   const [show, setShow] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -46,6 +47,15 @@ const Navbar = ({ user }) => {
   const filterFriend = async (input) => {
     try {
       // const result = await socialFrienSearch.socialSearchInfo(input);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const logOut = async () => {
+    try {
+      await logOutUser();
+      history.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -115,7 +125,7 @@ const Navbar = ({ user }) => {
             <FaBell />
           </span>
           <span className='navbar__last-section'>
-            <FiLogOut />
+            <FiLogOut onClick={() => logOut()} />
           </span>
         </div>
       </div>
@@ -135,4 +145,4 @@ const mapStateToProps = (state) => {
     user: state?.user?.user,
   };
 };
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logOutUser })(Navbar);
