@@ -28,20 +28,19 @@ function createData(id, Subject, Subjectcode, Grade) {
 }
 
 const LecturerResultTable = ({ students }) => {
-  const [isSet, setIsSet] = useState(true);
   // useEffect(() => {}, [isSet]);
   console.log('xxxxxxxxxxxxxxxxxx', students);
   // const [rows, setRows] = useState([
   //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
   //   createData(2, 'Shakthi', `SE/2016/041`, 'A'),
   // ]);
-  const [startDate, setStartDate] = useState();
-  const [acadomicYear, setAcadomicYear] = useState(1);
-  const [isDate, setIsDate] = useState(false);
-  const [isAcadomicYear, setIsAcadomicYear] = useState(false);
+  // const [startDate, setStartDate] = useState();
+  // const [acadomicYear, setAcadomicYear] = useState(1);
+  // const [isDate, setIsDate] = useState(false);
+  // const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   // const [subject, setSubject] = useState();
-  const [student, setStudents] = useState(students);
+  const [student, setStudents] = useState(students ? students : []);
 
   // const users = useSelector((state) => state.user);
   // const subjects = useSelector((state) => state.subject);
@@ -65,8 +64,6 @@ const LecturerResultTable = ({ students }) => {
 
     const { id } = row;
 
-    console.log(students);
-
     const tempStudents = student?.map((row) => {
       if (row.id === id) {
         return { ...row, [name]: value };
@@ -79,8 +76,6 @@ const LecturerResultTable = ({ students }) => {
   };
 
   const SaveData = async () => {
-    setIsSet(student?.every((result) => result?.result !== null));
-
     if (student?.every((result) => result?.result !== null)) {
       await ResultService.updateStudentResults(student);
     }
@@ -161,7 +156,7 @@ const LecturerResultTable = ({ students }) => {
           </label>
         ) : null}
       </div> */}
-      {student?.length > 0 ? (
+      {students?.length > 0 ? (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='simple table'>
             <TableHead>
@@ -185,7 +180,7 @@ const LecturerResultTable = ({ students }) => {
                   {/* <TableCell align='right'>{row.Subjectcode}</TableCell> */}
                   <TableCell>
                     <Input
-                      value={student[i].result}
+                      value={row?.result}
                       name='result'
                       onChange={(e) => {
                         changeGrade(e, row);
