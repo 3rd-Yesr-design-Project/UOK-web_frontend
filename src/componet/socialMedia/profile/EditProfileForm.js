@@ -13,21 +13,35 @@ import { useSelector, connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { editProfile } from '../../../Action/profileAction';
 
-const EditProfileForm = ({ editProfile, handleClose }) => {
+const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
+  console.log('user profile', userProfile);
+
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState('');
   const [image, setImage] = useState('');
-  const [university, setUniversity] = useState('');
-  const [status, setStatus] = useState('');
-  const [birthday, setBirthDay] = useState('2020-08-01');
+  const [university, setUniversity] = useState(
+    userProfile?.profile?.university || ''
+  );
+  const [status, setStatus] = useState(userProfile?.profile?.status || '');
+  const [birthday, setBirthDay] = useState(
+    userProfile?.profile?.birthday || ''
+  );
   const [profileUrl, setProfileUrl] = useState('');
-  const [school, setSchool] = useState('');
-  const [homeTown, setHomeTown] = useState('');
-  const [currentCity, setCurrentCity] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [religan, setReligan] = useState('');
-  const [language, setLanguage] = useState('');
-  const [workingPlace, setWorkingPlace] = useState('');
+  const [school, setSchool] = useState(userProfile?.profile?.school || '');
+  const [homeTown, setHomeTown] = useState(
+    userProfile?.profile?.home_town || ''
+  );
+  const [currentCity, setCurrentCity] = useState(
+    userProfile?.profile?.current_city || ''
+  );
+  const [mobile, setMobile] = useState(userProfile?.profile?.mobile || '');
+  const [religan, setReligan] = useState(userProfile?.profile?.religioun || '');
+  const [language, setLanguage] = useState(
+    userProfile?.profile?.language || ''
+  );
+  const [workingPlace, setWorkingPlace] = useState(
+    userProfile?.profile?.working_place || ''
+  );
   const [loading, setLoading] = useState(false);
 
   const user = useSelector((state) => state.user);
@@ -38,11 +52,9 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
   };
   const handleGender = (input) => {
     setGender(input);
-    console.log(input);
   };
   const handleImage = (input) => {
     setImage(input);
-    console.log(input);
   };
 
   const handleBirthDate = (input) => {
@@ -168,6 +180,7 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
           <Form.Label>Status</Form.Label>
           <Form.Control
             type='text'
+            value={status}
             onChange={(e) => handleStatus(e.target.value)}
             placeholder='Status'
           />
@@ -284,4 +297,10 @@ const EditProfileForm = ({ editProfile, handleClose }) => {
   );
 };
 
-export default connect(null, { editProfile })(EditProfileForm);
+const mapStateToProps = (state) => {
+  return {
+    userProfile: state.profile.userProfile,
+  };
+};
+
+export default connect(mapStateToProps, { editProfile })(EditProfileForm);
