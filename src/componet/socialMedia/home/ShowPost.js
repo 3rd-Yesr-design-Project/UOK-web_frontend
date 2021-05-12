@@ -66,63 +66,6 @@ const ShowPost = ({ posts, user, profile }) => {
     console.log(clickedPost);
   }
 
-  // const AddLikePost = async (postId) => {
-  //   setLikeClickedPost(postId);
-  //   try {
-  //     const data = {
-  //       user_id:1,
-  //       post_id: postId
-  //     }
-  //     // posts = p?.map(post => {
-  //     //   console.log(post);
-  //     //   console.log(clickedPost);
-  //     //   if (post?.id === clickedPost) {
-  //     //     console.log(post.likes);
-  //     //     console.log(user.id);
-  //     //     post.likes.map(like => {
-  //     //       if (like.user_id === user.id) {
-  //     //         console.log('done');
-  //     //         setLikeExist(true);
-  //     //       }
-  //     //     })
-  //     //     console.log(likeExist);
-  //     //     if(likeExist) {
-  //     //       post.likes = post.likes.filter(l => l.user_id !== user.id);
-  //     //     } else {
-  //     //       post.likes = [...post.likes, {user_id:user.id, post_id: post.id}];
-  //     //     }
-  //     //   }
-  //     // } )
-  //     posts = p.map((post) => {
-  //       if (post.id === likeClickedPost){
-  //         let x = false;
-  //         console.log('equal');
-  //         post.likes = post.likes?.map(l => {
-  //           if (l.user_id === user.id) {
-  //             console.log('user id equal');
-  //             x = true;
-  //           }
-  //           return x;
-  //         });
-  //         console.log('likes', post.likes);
-  //         if (x) {
-  //           console.log('x is true');
-  //           post.likes = post.likes?.filter(like => like?.user_id !== user.id);
-  //         } else {
-  //           console.log('x is false');
-  //           post.likes = [...post.likes, data];
-  //         }
-  //       }
-  //     })
-      
-  //     await LikeService.addLike(postId, data);
-  //     console.log(p);
-      
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   const likePost = async (id) => {
     setIsLikedd(!isLikedd);
     const data = {
