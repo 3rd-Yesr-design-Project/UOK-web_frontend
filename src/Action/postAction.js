@@ -5,6 +5,7 @@ import {
   GET_USER_POSTS,
   GET_USER_POST_FAILED,
 } from './types';
+import { toast } from 'react-toastify';
 import postService from '../services/PostService';
 
 // fetch('http://localhost:4000/post/createpost', {
@@ -44,6 +45,7 @@ export const createPost = (payload) => async (dispatch) => {
       type: CREATE_POST_SUCCESS,
       payload: payload.data.data,
     });
+    return toast.success('Post Create Successfully');
   } catch (error) {
     dispatch({
       type: CREATE_POST_FAIL,
@@ -52,6 +54,7 @@ export const createPost = (payload) => async (dispatch) => {
         status: error?.response?.status,
       },
     });
+    //  return toast.warn('Post is not created');
   }
 };
 
