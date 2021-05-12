@@ -63,29 +63,6 @@ const MainPost = ({ getPostByUserId, posts }) => {
               <div>26 Likes</div>
               <div>1 Comment</div>
             </div>
-            <div className='border border-fGray border-opacity-10 mt-4' />
-            <div className='flex justify-between items-center mt-4'>
-              <button className='w-1/2 flex items-center justify-center focus:outline-none'>
-                <SLike />
-                <span className='ml-1'>Like</span>
-              </button>
-              <button className='w-1/2 flex items-center justify-center focus:outline-none'>
-                <CommentButton />
-                <span className='ml-1'>Comment</span>
-              </button>
-            </div>
-            <div className='border border-fGray border-opacity-10 mt-4' />
-            <div className='flex space-x-2 mt-4'>
-              <img
-                src={post?.post_url}
-                alt='img'
-                className='h-10 w-10 rounded-full'
-              />
-              <input
-                className='bg-fFill px-4 py-3 w-full focus:outline-none rounded-full'
-                placeholder='Write something to Roland…'
-              />
-            </div>
           </div>
         ))}
       </>
