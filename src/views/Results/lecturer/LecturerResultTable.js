@@ -10,6 +10,7 @@ import {
   TableRow,
   Paper,
   IconButton,
+  Input,
 } from '@material-ui/core';
 import { Delete, BorderColor } from '@material-ui/icons';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
@@ -64,19 +65,20 @@ const LecturerResultTable = ({ students }) => {
 
     const { id } = row;
 
-    setStudents(
-      student?.map((row) => {
-        if (row.id === id) {
-          return { ...row, [name]: value };
-        }
-        return row;
-      })
-    );
+    console.log(students);
+
+    const tempStudents = student?.map((row) => {
+      if (row.id === id) {
+        return { ...row, [name]: value };
+      }
+      return row;
+    });
+
+    setStudents(tempStudents);
+    console.log(tempStudents);
   };
 
   const SaveData = async () => {
-    console.log(student);
-
     setIsSet(student?.every((result) => result?.result !== null));
 
     if (student?.every((result) => result?.result !== null)) {
@@ -159,7 +161,7 @@ const LecturerResultTable = ({ students }) => {
           </label>
         ) : null}
       </div> */}
-      {students?.length > 0 ? (
+      {student?.length > 0 ? (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='simple table'>
             <TableHead>
@@ -172,7 +174,7 @@ const LecturerResultTable = ({ students }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {students?.map((row) => (
+              {student?.map((row, i) => (
                 <TableRow key={row.Subject}>
                   <TableCell component='th' scope='row'>
                     {row?.student?.name}
@@ -182,8 +184,8 @@ const LecturerResultTable = ({ students }) => {
                   </TableCell>
                   {/* <TableCell align='right'>{row.Subjectcode}</TableCell> */}
                   <TableCell>
-                    <input
-                      value={row?.result}
+                    <Input
+                      value={student[i].result}
                       name='result'
                       onChange={(e) => {
                         changeGrade(e, row);
