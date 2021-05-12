@@ -144,16 +144,12 @@ const ResultLogin = ({ resultLoginUser }) => {
                     Sign In
                   </Button>
                   <Grid container>
-                    <Grid item xs>
+                    <Grid item xs className='cursor-pointer'>
                       <Link variant='body2' onClick={handleShow}>
                         Forgot password?
                       </Link>
                     </Grid>
-                    <Grid item>
-                      <Link href='#' variant='body2'>
-                        {"Don't have an account? Sign Up"}
-                      </Link>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </form>
               </div>

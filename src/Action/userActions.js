@@ -9,6 +9,8 @@ import {
   SOCIAL_LOGIN_SUCCESS,
   GET_USERS,
   GET_LOGIN_USER,
+  USER_LOGOUT,
+  USER_LOGOUT_FAILED,
 } from './types';
 
 import userServices from '../services/UserServices';
@@ -95,4 +97,21 @@ export const getLoginUser = (payload) => {
     type: GET_LOGIN_USER,
     payload: payload,
   };
+};
+
+export const logOutUser = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_LOGOUT,
+      payload: [],
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_LOGOUT_FAILED,
+      payload: {
+        msg: error?.response?.statusText,
+        status: error?.response?.status,
+      },
+    });
+  }
 };

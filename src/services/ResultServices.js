@@ -56,6 +56,10 @@ class ResultService {
   getStudentByAcadomicYearAndSubjectId(academicYear, subjectId) {
     return httpService.get(`/subject/${academicYear}/${subjectId}`);
   }
+
+  updateStudentResults(payload) {
+    return httpService.put('/result', payload);
+  }
 }
 
 export default new ResultService();

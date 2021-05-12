@@ -17,6 +17,7 @@ import resultServices from '../../../services/ResultServices';
 import { getDefaultLocale } from 'react-datepicker';
 import { fetchResultByUserIdAndYear } from '../../../Action/ResultActions';
 import { connect } from 'react-redux';
+import HomeLayout from '../../../componet/layout/HomeLayout';
 
 const useStyles = makeStyles({
   media: {
@@ -47,45 +48,46 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
   };
 
   return (
-    <Container>
-      <Row className='main-container'>
-        <Col sm={4}>
-          <Card>
-            <CardMedia
-              className={classes.media}
-              image={ellon}
-              title='Paella dish'
-            />
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                Student Name
-              </Typography>
-              <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                Student No
-              </Typography>
-              <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                Current GPA
-              </Typography>
-              {/* <Typography
+    <HomeLayout>
+      <Container>
+        <Row className='main-container'>
+          <Col sm={4}>
+            <Card>
+              <CardMedia
+                className={classes.media}
+                image={ellon}
+                title='Paella dish'
+              />
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color='textSecondary'
+                  gutterBottom
+                >
+                  Student Name
+                </Typography>
+                <Typography
+                  className={classes.title}
+                  color='textSecondary'
+                  gutterBottom
+                >
+                  Student No
+                </Typography>
+                <Typography
+                  className={classes.title}
+                  color='textSecondary'
+                  gutterBottom
+                >
+                  Current GPA
+                </Typography>
+                {/* <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
               >
                 1st Year
               </Typography> */}
-              {/* <Typography
+                {/* <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
@@ -93,45 +95,46 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
               >
                 2nd Year
               </Typography> */}
-              <Button
-                size='small'
-                variant='outlined'
-                fullWidth={true}
-                onClick={() => getData(1)}
-              >
-                1st Year
-              </Button>
-              <Button
-                size='small'
-                variant='outlined'
-                fullWidth={true}
-                onClick={() => getData(2)}
-              >
-                2nd Year
-              </Button>
-              <Button
-                size='small'
-                variant='outlined'
-                fullWidth={true}
-                onClick={() => getData(3)}
-              >
-                3rd Year
-              </Button>
-              {/* <Typography
+                <Button
+                  size='small'
+                  variant='outlined'
+                  fullWidth={true}
+                  onClick={() => getData(1)}
+                >
+                  1st Year
+                </Button>
+                <Button
+                  size='small'
+                  variant='outlined'
+                  fullWidth={true}
+                  onClick={() => getData(2)}
+                >
+                  2nd Year
+                </Button>
+                <Button
+                  size='small'
+                  variant='outlined'
+                  fullWidth={true}
+                  onClick={() => getData(3)}
+                >
+                  3rd Year
+                </Button>
+                {/* <Typography
                 className={classes.title}
                 color='textSecondary'
                 gutterBottom
               >
                 3st Year
               </Typography> */}
-            </CardContent>
-          </Card>
-        </Col>
-        <Col sm={8}>
-          <ResultTable />
-        </Col>
-      </Row>
-    </Container>
+              </CardContent>
+            </Card>
+          </Col>
+          <Col sm={8}>
+            <ResultTable />
+          </Col>
+        </Row>
+      </Container>
+    </HomeLayout>
   );
 };
 

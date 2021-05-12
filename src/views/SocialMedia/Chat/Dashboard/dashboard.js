@@ -3,6 +3,7 @@ import NewChatComponent from '../NewChat/newChat';
 import ChatListComponent from '../ChatList/chatList';
 import ChatViewComponent from '../ChatView/chatView';
 import ChatTextBoxComponent from '../ChatTextBox/chatTextBox';
+import HomeLayout from '../../../../componet/layout/HomeLayout';
 import styles from './styles';
 import { Button, withStyles } from '@material-ui/core';
 import firebase from 'firebase';
@@ -34,38 +35,40 @@ class DashboardComponent extends React.Component {
 
     if (this.state.email) {
       return (
-        <div className='dashboard-container' id='dashboard-container'>
-          <ChatListComponent
-            history={this.props.history}
-            userEmail={this.state.email}
-            selectChatFn={this.selectChat}
-            chats={this.state.chats}
-            selectedChatIndex={this.state.selectedChat}
-            newChatBtnFn={this.newChatBtnClicked}
-          ></ChatListComponent>
-          {this.state.newChatFormVisible ? null : (
-            <ChatViewComponent
-              user={this.state.email}
-              chat={this.state.chats[this.state.selectedChat]}
-            ></ChatViewComponent>
-          )}
-          {this.state.selectedChat !== null &&
-          !this.state.newChatFormVisible ? (
-            <ChatTextBoxComponent
-              userClickedInputFn={this.messageRead}
-              submitMessageFn={this.submitMessage}
-            ></ChatTextBoxComponent>
-          ) : null}
-          {this.state.newChatFormVisible ? (
-            <NewChatComponent
-              goToChatFn={this.goToChat}
-              newChatSubmitFn={this.newChatSubmit}
-            ></NewChatComponent>
-          ) : null}
-          <Button onClick={this.signOut} className={classes.signOutBtn}>
-            Sign Out
-          </Button>
-        </div>
+        <HomeLayout>
+          <div className='dashboard-container' id='dashboard-container'>
+            <ChatListComponent
+              history={this.props.history}
+              userEmail={this.state.email}
+              selectChatFn={this.selectChat}
+              chats={this.state.chats}
+              selectedChatIndex={this.state.selectedChat}
+              newChatBtnFn={this.newChatBtnClicked}
+            ></ChatListComponent>
+            {this.state.newChatFormVisible ? null : (
+              <ChatViewComponent
+                user={this.state.email}
+                chat={this.state.chats[this.state.selectedChat]}
+              ></ChatViewComponent>
+            )}
+            {this.state.selectedChat !== null &&
+            !this.state.newChatFormVisible ? (
+              <ChatTextBoxComponent
+                userClickedInputFn={this.messageRead}
+                submitMessageFn={this.submitMessage}
+              ></ChatTextBoxComponent>
+            ) : null}
+            {this.state.newChatFormVisible ? (
+              <NewChatComponent
+                goToChatFn={this.goToChat}
+                newChatSubmitFn={this.newChatSubmit}
+              ></NewChatComponent>
+            ) : null}
+            <Button onClick={this.signOut} className={classes.signOutBtn}>
+              Sign Out
+            </Button>
+          </div>
+        </HomeLayout>
       );
     } else {
       return <div>LOADING....</div>;
