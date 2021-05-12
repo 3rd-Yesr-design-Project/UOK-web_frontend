@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegThumbsUp, FaRegCommentAlt, FaShareAlt } from 'react-icons/fa';
+import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaShareAlt } from 'react-icons/fa';
 import { Form, Button, Col } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -28,6 +28,7 @@ const ShowPost = ({ posts, user, profile }) => {
   const classes = useStyles();
   const [typedText, setTypedText] = React.useState([null]);
   const [clickedPost, setClickedPost] = React.useState(null);
+  const [likeClickedPost, setLikeClickedPost] = React.useState(null);
   const [commentSectionOn, setCommentSectionOn] = React.useState(false);
   const [likeExist, setLikeExist] = React.useState(false);
 
@@ -42,7 +43,7 @@ const ShowPost = ({ posts, user, profile }) => {
   }
 
   const AddLikePost = async (postId) => {
-    setClickedPost(postId);
+    setLikeClickedPost(postId);
     try {
       const data = {
         user_id:1,
@@ -68,8 +69,8 @@ const ShowPost = ({ posts, user, profile }) => {
       //     }
       //   }
       // } )
-      posts = p.map(async (post) => {
-        if (post.id === clickedPost){
+      posts = p.map((post) => {
+        if (post.id === likeClickedPost){
           let x = false;
           console.log('equal');
           post.likes = post.likes?.map(l => {
@@ -77,7 +78,9 @@ const ShowPost = ({ posts, user, profile }) => {
               console.log('user id equal');
               x = true;
             }
+            return x;
           });
+          console.log('likes', post.likes);
           if (x) {
             console.log('x is true');
             post.likes = post.likes?.filter(like => like?.user_id !== user.id);
@@ -85,9 +88,10 @@ const ShowPost = ({ posts, user, profile }) => {
             console.log('x is false');
             post.likes = [...post.likes, data];
           }
-          return await LikeService.addLike(postId, data);
         }
       })
+      
+      await LikeService.addLike(postId, data);
       console.log(p);
       
     } catch (error) {
@@ -150,7 +154,7 @@ const ShowPost = ({ posts, user, profile }) => {
           </div>
           <div className='show__reactions'>
             <span className='reactions' onClick={() => AddLikePost(post.id)}>
-              <FaRegThumbsUp /> <span className='reactions-text'>Like {post.likes.length}</span>
+              <FaRegThumbsUp /><FaRegThumbsDown /> <span className='reactions-text'>Like {post.likes.length}</span>
             </span>
             <span className='reactions' onClick={() => viewComments(post.id)}>
               <FaRegCommentAlt/>{' '}
