@@ -21,7 +21,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
   );
 
   const [hobby, setHobby] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState(userProfile?.profile?.gender || '');
   const [image, setImage] = useState('');
   const [university, setUniversity] = useState(
     userProfile?.profile?.university || ''
@@ -46,6 +46,20 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
   const [workingPlace, setWorkingPlace] = useState(
     userProfile?.profile?.working_place || ''
   );
+
+  const [genderErr, setGenderErr] = useState('');
+  const [imageErr, setImageErr] = useState('');
+  const [universityErr, setUniversitErr] = useState('');
+  const [statusErr, setStatusErr] = useState('');
+  const [birthdayErr, setBirthdayErr] = useState('');
+  const [schoolErr, setSchoolErr] = useState('');
+  const [homeTownErr, setHomeTownErr] = useState('');
+  const [currentCityErr, setCurrentCityErr] = useState('');
+  const [mobileErr, setMobileErr] = useState('');
+  const [religanErr, setReliganErr] = useState('');
+  const [languageErr, setLanguageErr] = useState('');
+  const [workingPlaceErr, setWorkingPlaceErr] = useState('');
+
   const [loading, setLoading] = useState(false);
 
   const user = useSelector((state) => state.user);
@@ -56,41 +70,133 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
   };
   const handleGender = (input) => {
     setGender(input);
+    validateGender(input);
   };
+
+  const validateGender = (input) => {
+    if (!input?.trim()) {
+      setGenderErr('Enter your gender');
+    }
+    setGender('');
+  };
+
   const handleImage = (input) => {
     setImage(input);
+    // validateImage(input);
+  };
+
+  const validateImage = (input) => {
+    if (!input?.trim()) {
+      setImageErr('Add your Image');
+    }
+
+    setImageErr('');
   };
 
   const handleBirthDate = (input) => {
     setBirthDay(input);
+    validateBirthDay(input);
+  };
+
+  const validateBirthDay = (input) => {
+    if (!input?.trim()) {
+      setBirthdayErr('Enter birthday');
+    }
+    setBirthdayErr('');
   };
 
   const handleStatus = (input) => {
     setStatus(input);
+    validateStatus(input);
+  };
+
+  const validateStatus = (input) => {
+    if (!input?.trim()) {
+      setStatusErr('Enter your status');
+    }
+    setStatusErr('');
   };
 
   const handleSchool = (input) => {
     setSchool(input);
+    validateSchool(input);
   };
+
+  const validateSchool = (input) => {
+    if (!input?.trim()) {
+      setSchoolErr('Enter your School');
+    }
+    setSchoolErr('');
+  };
+
   const handleUniversity = (input) => {
     setUniversity(input);
+    validateUniversity(input);
+  };
+
+  const validateUniversity = (input) => {
+    if (!input?.trim()) {
+      setUniversitErr('Enter your University');
+    }
+    setUniversitErr('');
   };
 
   const handleHomeTown = (input) => {
     setHomeTown(input);
+    validateHomeTown(input);
+  };
+
+  const validateHomeTown = (input) => {
+    if (!input?.trim()) {
+      setHomeTownErr('Enter your Home Town');
+    }
+    setHomeTownErr('');
   };
 
   const handleMobile = (input) => {
     setMobile(input);
+    validateMobile(input);
   };
+
+  const validateMobile = (input) => {
+    if (!input?.trim()) {
+      setMobileErr('Enter your Mobile');
+    }
+    setMobileErr('');
+  };
+
   const handleLanguage = (input) => {
     setLanguage(input);
+    validateLanguage(input);
   };
+
+  const validateLanguage = (input) => {
+    if (!input?.trim()) {
+      setLanguageErr('Enter your language');
+    }
+  };
+
   const handleReligan = (input) => {
     setReligan(input);
+    validateReligan(input);
   };
+
+  const validateReligan = (input) => {
+    if (!input?.trim()) {
+      setReliganErr('Enter your religen');
+    }
+  };
+
   const handleWorkingPlace = (input) => {
     setWorkingPlace(input);
+    validateWorkingPlace(input);
+  };
+
+  const validateWorkingPlace = (input) => {
+    if (!input?.trim()) {
+      setWorkingPlaceErr('Enter your Working Place');
+    }
+    setWorkingPlaceErr('');
   };
 
   const handleSubmit = async (e) => {
@@ -137,7 +243,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
         religan &&
         workingPlace;
 
-      if (isValid && newRes?.url?.trim()) {
+      if (newRes?.url?.trim()) {
         try {
           const body = {
             profileUrl: newRes.url,
@@ -178,6 +284,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
             onChange={(e) => handleBirthDate(e.target.value)}
             placeholder='BirthDay'
           />
+          <Form.Label style={{ color: 'red' }}>{birthdayErr}</Form.Label>
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
@@ -188,6 +295,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
             onChange={(e) => handleStatus(e.target.value)}
             placeholder='Status'
           />
+          <Form.Label style={{ color: 'red' }}>{statusErr}</Form.Label>
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
@@ -208,6 +316,7 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
             onChange={(e) => handleUniversity(e.target.value)}
             placeholder='University'
           />
+          <Form.Label style={{ color: 'red' }}>{universityErr}</Form.Label>
         </Form.Group>
 
         <Form.Group controlId='formBasicPassword'>
