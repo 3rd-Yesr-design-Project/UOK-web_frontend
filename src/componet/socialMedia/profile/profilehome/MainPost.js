@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import postService from '../../../../services/PostService';
 import { getPostByUserId } from '../../../../Action/postAction';
+import moment from 'moment';
 
 const MainPost = ({ getPostByUserId, posts }) => {
   const { userId } = useParams();
@@ -37,15 +38,17 @@ const MainPost = ({ getPostByUserId, posts }) => {
                   className='h-10 w-10 rounded-full'
                 />
                 <div className='ml-4'>
-                  <span className='cursor-pointer font-bold'>Anjana</span> was
-                  with{' '}
+                  <span className='cursor-pointer font-bold'>
+                    {post?.user?.name}
+                  </span>{' '}
+                  was with{' '}
                   <span className='cursor-pointer font-bold'>
                     Steve Cunningham
                   </span>{' '}
                   <br />
                   <span className='text-fGrey text-opacity-50 text-sm'>
                     {' '}
-                    {post?.created_at}{' '}
+                    {moment(post?.created_at).format('YYYY-MM-DD')}{' '}
                   </span>
                 </div>
               </div>
