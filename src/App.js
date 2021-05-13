@@ -59,7 +59,8 @@ const App = ({ getLoginUser }) => {
   const getUser = async () => {
     try {
       const user = await userServices.fetchLoginUser();
-      getLoginUser(user.data.data);
+
+      getLoginUser(user?.data?.data);
     } catch (error) {
       console.log(error);
     }

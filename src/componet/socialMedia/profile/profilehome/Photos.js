@@ -13,7 +13,12 @@ const Photos = ({ phots }) => {
         </div>
         <div className='grid grid-cols-3 flex gap-1.5 mt-4'>
           {phots?.slice(0, 9).map((photo) => (
-            <img src={photo?.post_url} className='rounded-tl' alt='photo' />
+            <img
+              src={photo?.post_url}
+              className='rounded-tl'
+              alt='photo'
+              style={{ height: '60px' }}
+            />
           ))}
 
           {/* <img src='https://picsum.photos/id/1018/3000' alt='photo' />
