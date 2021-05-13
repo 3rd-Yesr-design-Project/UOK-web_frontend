@@ -60,8 +60,8 @@ const MainPost = ({ getPostByUserId, posts }) => {
               className='w-full h-72 object-cover mt-4 rounded'
             />
             <div className='flex justify-between mt-4 items-center text-fGrey text-opacity-50'>
-              <div>26 Likes</div>
-              <div>1 Comment</div>
+              <div>{post?.likes.length} Likes</div>
+              <div>{post?.comments.length} Comment</div>
             </div>
           </div>
         ))}
