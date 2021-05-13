@@ -4,7 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../../Action/postAction';
 import PostService from '../../../services/PostService';
-const UploadPost = ({ handleClose }) => {
+import { connect } from 'react-redux';
+const UploadPost = ({ handleClose, createPost }) => {
   const history = useHistory();
 
   const [title, SetTitle] = useState('');
@@ -30,8 +31,9 @@ const UploadPost = ({ handleClose }) => {
       const data = await PostService.createPost(postData);
       setLoading(false);
       handleClose();
-      if (data !== undefined) {
-        dispatch(createPost(data?.data?.data));
+      console.log(data);
+      if (data?.data?.post_url !== '') {
+        createPost(data?.data?.data);
       }
     } catch (error) {
       console.log('Upload Post error', error);
@@ -156,4 +158,4 @@ const UploadPost = ({ handleClose }) => {
   );
 };
 
-export default UploadPost;
+export default connect(null, { createPost })(UploadPost);

@@ -9,13 +9,14 @@ import {
   Modal,
 } from 'react-bootstrap';
 import userServices from '../../services/UserServices';
-
+import { toast } from 'react-toastify';
 const ForgetPasswordModal = ({ show, handleClose }) => {
   const [email, setEmail] = useState(null);
 
   const onSubmit = async () => {
     try {
-      await userServices.forgetPassword( { email } );
+      await userServices.forgetPassword({ email });
+      toast.success('Send Email Success To Reset Password');
       handleClose();
     } catch (error) {
       console.log(error);

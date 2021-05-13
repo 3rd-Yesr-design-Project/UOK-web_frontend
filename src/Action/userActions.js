@@ -12,7 +12,7 @@ import {
   USER_LOGOUT,
   USER_LOGOUT_FAILED,
 } from './types';
-
+import { toast } from 'react-toastify';
 import userServices from '../services/UserServices';
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -60,6 +60,7 @@ export const loginUser = (data) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res?.data,
     });
+    return toast.success('Login Success');
   } catch (error) {
     dispatch({
       type: LOGIN_FAILED,
@@ -68,21 +69,32 @@ export const loginUser = (data) => async (dispatch) => {
         status: error?.response?.status,
       },
     });
+    return toast.warn('Login Failed');
   }
 };
 
 export const resultLoginUser = (payload) => {
-  return {
-    type: RESULT_LOGIN_SUCCESS,
-    payload: payload,
-  };
+  try {
+    toast.success('Result Login Success');
+    return {
+      type: RESULT_LOGIN_SUCCESS,
+      payload: payload,
+    };
+  } catch (error) {
+    toast.warn('Result Login Failed');
+  }
 };
 
 export const socialLoginUser = (payload) => {
-  return {
-    type: SOCIAL_LOGIN_SUCCESS,
-    payload: payload,
-  };
+  try {
+    toast.success('Social Login Success');
+    return {
+      type: SOCIAL_LOGIN_SUCCESS,
+      payload: payload,
+    };
+  } catch (error) {
+    toast.warn('Social Login Failed');
+  }
 };
 
 export const getAllUsers = (payload) => {
@@ -105,6 +117,7 @@ export const logOutUser = () => async (dispatch) => {
       type: USER_LOGOUT,
       payload: [],
     });
+    toast.success('Log out Success');
   } catch (error) {
     dispatch({
       type: USER_LOGOUT_FAILED,
@@ -113,5 +126,6 @@ export const logOutUser = () => async (dispatch) => {
         status: error?.response?.status,
       },
     });
+    toast.warn('Logout Failed');
   }
 };
