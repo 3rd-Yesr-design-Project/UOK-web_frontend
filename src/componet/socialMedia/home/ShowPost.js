@@ -176,9 +176,6 @@ const ShowPost = ({ posts, user, profile }) => {
               <FaRegCommentAlt />{' '}
               <span className='reactions-text'>Comments</span>
             </span>
-            <span className='reactions'>
-              <FaShareAlt /> <span className='reactions-text'>Share</span>
-            </span>
           </div>
           {post.comments?.map((comment) => {
             if (
