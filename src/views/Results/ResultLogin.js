@@ -57,6 +57,7 @@ const ResultLogin = ({ resultLoginUser }) => {
   const [state, setState] = useState({ email: null, password: null });
   const [show, setShow] = useState(false);
   const [emailErr, setEmailErr] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -105,7 +106,7 @@ const ResultLogin = ({ resultLoginUser }) => {
         history.push('/results/view');
       }
     } catch (error) {
-      console.log(error);
+      setErrorMsg(error?.data?.message);
     }
   };
 
@@ -141,6 +142,9 @@ const ResultLogin = ({ resultLoginUser }) => {
                 </Typography>
 
                 <form className={classes.form} onSubmit={submitForm}>
+                  {errorMsg !== '' ? (
+                    <span style={{ color: 'red' }}>{errorMsg}</span>
+                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
@@ -153,6 +157,9 @@ const ResultLogin = ({ resultLoginUser }) => {
                     onChange={handleChange}
                     //autoFocus
                   />
+                  {emailErr !== '' ? (
+                    <span style={{ color: 'red' }}>{emailErr}</span>
+                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
@@ -174,9 +181,7 @@ const ResultLogin = ({ resultLoginUser }) => {
                   >
                     Sign In
                   </Button>
-                  {emailErr !== '' ? (
-                    <span style={{ color: 'red' }}>{emailErr}</span>
-                  ) : null}
+
                   <Grid container>
                     <Grid item xs className='cursor-pointer'>
                       <Link variant='body2' onClick={handleShow}>
