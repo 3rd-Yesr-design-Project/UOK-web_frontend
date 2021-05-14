@@ -36,7 +36,7 @@ const NavigationBar = () => {
           <Link to='/results/Login'>Result</Link>
         </Nav.Link>
         <Nav.Link>
-          <Link to='/social/login'>Chat</Link>
+          <Link to='/social/login'>UChat</Link>
         </Nav.Link>
       </Nav>
     </Navbar>

@@ -15,7 +15,8 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import ChatPic from '../../../assets/chat.jpg';
+// import ChatPic from '../../../assets/chat.jpg';
+import socialMedia from '../../../assets/social-media.jpg';
 import UserServices from '../../../services/UserServices';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
@@ -56,6 +57,7 @@ const SocialLogin = ({ socialLoginUser }) => {
   const [state, setState] = useState({ email: null, password: null });
   const [show, setShow] = useState(false);
   const [emailErr, setEmailErr] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -103,6 +105,7 @@ const SocialLogin = ({ socialLoginUser }) => {
         history.push('/social/home');
       }
     } catch (error) {
+      setErrorMsg(error?.data?.message);
       console.log(error);
     }
   };
@@ -115,7 +118,7 @@ const SocialLogin = ({ socialLoginUser }) => {
             <Card className='text-center'>
               <CardActionArea>
                 <div className='flex justify-center'>
-                  <img src={ChatPic} width={200} />
+                  <img src={socialMedia} className='mt-5' />
                 </div>
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='h2'>
@@ -142,7 +145,9 @@ const SocialLogin = ({ socialLoginUser }) => {
                 <Typography component='h1' variant='h5'>
                   Sign in
                 </Typography>
-
+                {errorMsg !== '' ? (
+                  <span style={{ color: 'red' }}>{errorMsg}</span>
+                ) : null}
                 <form className={classes.form} onSubmit={submitForm}>
                   <TextField
                     variant='outlined'
@@ -156,6 +161,9 @@ const SocialLogin = ({ socialLoginUser }) => {
                     onChange={handleChange}
                     //autoFocus
                   />
+                  {emailErr !== '' ? (
+                    <span style={{ color: 'red' }}>{emailErr}</span>
+                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
@@ -181,9 +189,7 @@ const SocialLogin = ({ socialLoginUser }) => {
                   >
                     Sign In
                   </Button>
-                  {emailErr !== '' ? (
-                    <span style={{ color: 'red' }}>{emailErr}</span>
-                  ) : null}
+
                   <Grid container>
                     <Grid item xs className='cursor-pointer'>
                       <Link
