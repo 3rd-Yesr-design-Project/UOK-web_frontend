@@ -70,7 +70,7 @@ const UserSearchPopover = ({
   };
 
   return (
-    <div>
+    <div style={{ zIndex: '10000' }}>
       <Popover
         id={id}
         open={open}
@@ -96,7 +96,7 @@ const UserSearchPopover = ({
           </List>
         </div> */}
         <div>
-          <div className='m-2'>
+          <div>
             <input
               type='text'
               className='navbar__first-searchbar'

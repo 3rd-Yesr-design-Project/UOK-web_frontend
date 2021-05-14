@@ -56,6 +56,7 @@ const ResultLogin = ({ resultLoginUser }) => {
 
   const [state, setState] = useState({ email: null, password: null });
   const [show, setShow] = useState(false);
+  const [emailErr, setEmailErr] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,13 +68,42 @@ const ResultLogin = ({ resultLoginUser }) => {
     });
   };
 
+  const validateEmail = (input) => {
+    if (input == null || !input?.trim()) {
+      setEmailErr('email can not be empty');
+      return false;
+    }
+    if (input?.indexOf('@') >= 0) {
+      const emailParts = input?.split('@');
+
+      const EMAIL_USERNAME_PATTERN =
+        /^[a-z0-9]+(?:[._][a-z0-9]+)*(?:\+[0-9]+)*$/;
+      const EMAIL_DOMAIN_PATTERN =
+        /^([a-z0-9]+?(-[a-z0-9]+)*(?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9]+$/;
+      if (
+        !emailParts[0].match(EMAIL_USERNAME_PATTERN) ||
+        !emailParts[1].match(EMAIL_DOMAIN_PATTERN)
+      ) {
+        setEmailErr('email is invalid');
+        return false;
+      }
+    } else {
+      setEmailErr('email is invalid');
+      return false;
+    }
+    setEmailErr('');
+    return true;
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      const user = await userServices.resultLogin(state);
-      console.log(user);
-      resultLoginUser(user.data.data);
-      history.push('/results/view');
+      if (validateEmail(state?.email)) {
+        const user = await userServices.resultLogin(state);
+        console.log(user);
+        resultLoginUser(user.data.data);
+        history.push('/results/view');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -144,6 +174,9 @@ const ResultLogin = ({ resultLoginUser }) => {
                   >
                     Sign In
                   </Button>
+                  {emailErr !== '' ? (
+                    <span style={{ color: 'red' }}>{emailErr}</span>
+                  ) : null}
                   <Grid container>
                     <Grid item xs className='cursor-pointer'>
                       <Link variant='body2' onClick={handleShow}>

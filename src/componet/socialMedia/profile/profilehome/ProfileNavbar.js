@@ -38,7 +38,9 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           <div className='px-4 py-5 text-fGrey'>
             <Link to={`/social/profile/about/${userId}`}>About</Link>
           </div>
-          <div className='px-4 py-5 text-fGrey'>Photos</div>
+          <div className='px-4 py-5 text-fGrey'>
+            <Link to={`/social/profile/photoes/${userId}`}>Photos</Link>
+          </div>
           {/* <div className='px-4 py-5 text-fGrey'>Videos</div>
           <div className='px-4 py-5 text-fGrey'>Check-Ins</div>
           <div className='px-4 flex items-center py-5 text-fGrey'>

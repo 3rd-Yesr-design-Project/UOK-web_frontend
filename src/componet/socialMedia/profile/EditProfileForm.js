@@ -243,35 +243,35 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
         religan &&
         workingPlace;
 
-      if (newRes?.url?.trim()) {
-        try {
-          const body = {
-            profileUrl: newRes.url,
-            mobile,
-            birthDay: birthday,
-            status,
-            gender,
-            language,
-            religioun: religan,
-            workingPlace,
-            school,
-            university,
-            homeTown,
-            currentCity,
-            user_id: user.id,
-          };
-          const result = await ProfileService.editProfileByUserId(userId, {
-            ...body,
-          });
+      try {
+        const body = {
+          profileUrl: newRes.url,
+          mobile,
+          birthDay: birthday,
+          status,
+          gender,
+          language,
+          religioun: religan,
+          workingPlace,
+          school,
+          university,
+          homeTown,
+          currentCity,
+          user_id: user.id,
+        };
+        const result = await ProfileService.editProfileByUserId(userId, {
+          ...body,
+        });
 
-          editProfile(result?.data);
-          setLoading(false);
-          handleClose();
-        } catch (error) {
-          console.log(error);
-        }
+        editProfile(result?.data);
+        setLoading(false);
+        handleClose();
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

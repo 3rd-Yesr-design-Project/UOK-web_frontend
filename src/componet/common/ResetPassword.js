@@ -14,6 +14,7 @@ import userServices from '../../services/UserServices';
 const ResetPassword = () => {
   const [state, setState] = useState({ password: null, conformPassword: null });
   const [show, setShow] = useState(true);
+  const [ispasswordErr, setIsPasswordErr] = useState(false);
 
   const { userId } = useParams();
   const history = useHistory();
@@ -26,12 +27,16 @@ const ResetPassword = () => {
   const compairePassword = () => {};
 
   const onSubmit = async () => {
-    console.log(state);
     try {
-      const body = { password: state.password };
-      await userServices.resetPassword(userId, body);
-      history.push('/');
+      if (state?.password === state?.conformPassword) {
+        const body = { password: state.password };
+        await userServices.resetPassword(userId, body);
+        history.push('/');
+        setIsPasswordErr('');
+      }
+      setIsPasswordErr('Passwords are mismatch');
     } catch (error) {
+      setIsPasswordErr('Passwords are mismatch');
       console.log(error);
     }
   };
@@ -61,6 +66,11 @@ const ResetPassword = () => {
               onChange={onChange}
             />
           </Form.Group>
+          <Form.Label>
+            {ispasswordErr === '' ? null : (
+              <h5 style={{ color: 'red' }}>{ispasswordErr}</h5>
+            )}
+          </Form.Label>
         </Modal.Body>
         <Modal.Footer>
           <Button variant='secondary' onClick={handleClose}>
