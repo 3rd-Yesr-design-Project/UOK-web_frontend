@@ -30,7 +30,11 @@ function createData(id, Subject, Subjectcode, Grade) {
 
 const LecturerResultTable = ({ students }) => {
   // useEffect(() => {}, [isSet]);
-  console.log('xxxxxxxxxxxxxxxxxx', students);
+  const [student, setStudents] = useState([]);
+  useEffect(() => {
+    setStudents(students ? students : []);
+  }, [students]);
+
   // const [rows, setRows] = useState([
   //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
   //   createData(2, 'Shakthi', `SE/2016/041`, 'A'),
@@ -41,7 +45,6 @@ const LecturerResultTable = ({ students }) => {
   // const [isAcadomicYear, setIsAcadomicYear] = useState(false);
 
   // const [subject, setSubject] = useState();
-  const [student, setStudents] = useState(students ? students : []);
 
   // const users = useSelector((state) => state.user);
   // const subjects = useSelector((state) => state.subject);
@@ -157,7 +160,7 @@ const LecturerResultTable = ({ students }) => {
           </label>
         ) : null}
       </div> */}
-      {students?.length > 0 ? (
+      {student?.length > 0 ? (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='simple table'>
             <TableHead>
