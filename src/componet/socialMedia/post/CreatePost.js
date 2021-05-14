@@ -20,7 +20,7 @@ const CreatePost = ({ updateProfile, show, handleClose }) => {
     <div className='col-md-12'>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Your profile</Modal.Title>
+          <Modal.Title>Create Your Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <UploadPost handleClose={handleClose} />

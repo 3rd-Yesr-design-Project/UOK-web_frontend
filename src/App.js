@@ -21,10 +21,11 @@ import LoginComponent from './views/SocialMedia/Chat/Login/login';
 import { connect } from 'react-redux';
 import { getAllUsers } from './Action/userActions';
 import userServices from './services/UserServices';
-
+import { ToastContainer } from 'react-toastify';
 import { getLoginUser } from './Action/userActions';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({ getLoginUser }) => {
   const [state, setState] = useState({
@@ -58,7 +59,8 @@ const App = ({ getLoginUser }) => {
   const getUser = async () => {
     try {
       const user = await userServices.fetchLoginUser();
-      getLoginUser(user.data.data);
+
+      getLoginUser(user?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -100,6 +102,7 @@ const App = ({ getLoginUser }) => {
           />
         </Switch>
       </BrowserRouter>
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };

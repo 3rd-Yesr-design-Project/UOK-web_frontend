@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar'
 
 const SideBar = ({ users, user }) => {
   // const [state] = useState([
@@ -33,11 +34,13 @@ const SideBar = ({ users, user }) => {
                 key={frd?.id}
               >
                 <div className='sidebar__list-img'>
-                  <img src={frd?.profile?.profile_url} alt='groupimage' />
+                  {frd?.profile?.profile_url ? <img src={frd?.profile?.profile_url} alt='groupimage' />
+                    : <Avatar src="/broken-image.jpg" />}
                 </div>
                 <div className='sidebar__list-name'>{frd?.name}</div>
               </div>
             )}
+            
           </Link>
         ))}
       </div>

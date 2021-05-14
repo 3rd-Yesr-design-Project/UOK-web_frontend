@@ -4,7 +4,7 @@ import {
   UPDATE_PROFILE_ERROR,
   GET_PROFILE_ERROR,
 } from './types';
-
+import { toast } from 'react-toastify';
 export const getProfileByUserId = (payload) => async (dispatch) => {
   try {
     dispatch({
@@ -28,6 +28,7 @@ export const editProfile = (payload) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: payload,
     });
+    toast.success('Profile Edit Success ');
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_ERROR,

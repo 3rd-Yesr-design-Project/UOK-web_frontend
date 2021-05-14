@@ -17,6 +17,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { getStudentByStudentIdndAcadomicYear } from '../../../Action/studentAction';
 import { getSubjectByAcadamicYear } from '../../../Action/subjectAction';
 import ResultService from '../../../services/ResultServices';
+import Empty from '../../../componet/common/Empty';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -205,7 +206,7 @@ const LecturerResultTable = ({ students }) => {
           </Table>
         </TableContainer>
       ) : (
-        <h1>NO Dat</h1>
+        <Empty />
       )}
     </>
   );
