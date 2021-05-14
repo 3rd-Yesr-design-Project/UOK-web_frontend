@@ -46,6 +46,7 @@ const Login = ({ loginUser }) => {
     password: '',
   });
   const [show, setShow] = useState(false);
+  const [emailErr, setEmailErr] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -59,9 +60,39 @@ const Login = ({ loginUser }) => {
     });
   };
 
+  const validateEmail = (input) => {
+    if (input == null || !input?.trim()) {
+      setEmailErr('email can not be empty');
+      return false;
+    }
+    if (input?.indexOf('@') >= 0) {
+      const emailParts = input?.split('@');
+
+      const EMAIL_USERNAME_PATTERN =
+        /^[a-z0-9]+(?:[._][a-z0-9]+)*(?:\+[0-9]+)*$/;
+      const EMAIL_DOMAIN_PATTERN =
+        /^([a-z0-9]+?(-[a-z0-9]+)*(?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9]+$/;
+      if (
+        !emailParts[0].match(EMAIL_USERNAME_PATTERN) ||
+        !emailParts[1].match(EMAIL_DOMAIN_PATTERN)
+      ) {
+        setEmailErr('email is invalid');
+        return false;
+      }
+    } else {
+      setEmailErr('email is invalid');
+      return false;
+    }
+    setEmailErr('');
+    return true;
+  };
+
   const submitForm = () => {
-    loginUser(state);
-    console.log(state);
+    if (validateEmail(state?.email)) {
+      loginUser(state);
+      console.log(state);
+    }
+
     // console.log(state.email, state.password);
   };
   return (
@@ -103,6 +134,9 @@ const Login = ({ loginUser }) => {
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           />
+          {emailErr !== '' ? (
+            <span style={{ color: 'red' }}>{emailErr}</span>
+          ) : null}
           <Button
             type='submit'
             fullWidth
