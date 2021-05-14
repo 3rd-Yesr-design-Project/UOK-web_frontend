@@ -29,18 +29,21 @@ const useStyles = makeStyles({
   },
 });
 
-const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
+const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
   const classes = useStyles();
 
   useEffect(() => {
     getData(1);
   }, []);
 
+  console.log(user);
+
   const getData = async (year) => {
     try {
       const result = await resultServices.fethcStudentResultByUserIdAndYear(
         year
       );
+
       fetchResultByUserIdAndYear(result.data.data.results);
     } catch (error) {
       console.log(error);
@@ -55,7 +58,7 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
             <Card>
               <CardMedia
                 className={classes.media}
-                image={ellon}
+                image={user?.profile?.profile_url}
                 title='Paella dish'
               />
               <CardContent>
@@ -64,14 +67,16 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
                   color='textSecondary'
                   gutterBottom
                 >
-                  Student Name
+                  Student Name:
+                  {user?.name}
                 </Typography>
                 <Typography
                   className={classes.title}
                   color='textSecondary'
                   gutterBottom
                 >
-                  Student No
+                  Student No:
+                  {user?.studnet?.student_no}
                 </Typography>
                 <Typography
                   className={classes.title}
@@ -138,6 +143,12 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear }) => {
   );
 };
 
-export default connect(null, { fetchResultByUserIdAndYear })(
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user,
+  };
+};
+
+export default connect(mapStateToProps, { fetchResultByUserIdAndYear })(
   ResultsStudentView
 );

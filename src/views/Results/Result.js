@@ -10,10 +10,12 @@ const Result = ({ user }) => {
   console.log('xxxxxxxxxx', user?.usertype);
   return (
     <div>
-      {user?.usertype == 'student' ? (
+      {user?.user_type == 'student' ? (
         <ResultsStudentView />
-      ) : (
+      ) : user?.user_type == 'lecturer' ? (
         <ResultLecturerView />
+      ) : (
+        <Spinner />
       )}
 
       {/* <ResultLecturerView /> */}
