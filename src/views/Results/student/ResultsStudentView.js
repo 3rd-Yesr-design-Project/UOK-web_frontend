@@ -36,8 +36,6 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
     getData(1);
   }, []);
 
-  console.log(user);
-
   const getData = async (year) => {
     try {
       const result = await resultServices.fethcStudentResultByUserIdAndYear(
@@ -76,15 +74,15 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
                   gutterBottom
                 >
                   Student No:
-                  {user?.studnet?.student_no}
+                  {user?.student?.student_no}
                 </Typography>
-                <Typography
+                {/* <Typography
                   className={classes.title}
                   color='textSecondary'
                   gutterBottom
                 >
                   Current GPA
-                </Typography>
+                </Typography> */}
                 {/* <Typography
                 className={classes.title}
                 color='textSecondary'
