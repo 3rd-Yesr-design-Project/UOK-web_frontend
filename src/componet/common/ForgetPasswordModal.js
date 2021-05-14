@@ -12,12 +12,41 @@ import userServices from '../../services/UserServices';
 import { toast } from 'react-toastify';
 const ForgetPasswordModal = ({ show, handleClose }) => {
   const [email, setEmail] = useState(null);
+  const [emailErr, setEmailErr] = useState('');
+  const validateEmail = (input) => {
+    if (input == null || !input?.trim()) {
+      setEmailErr('email can not be empty');
+      return false;
+    }
+    if (input?.indexOf('@') >= 0) {
+      const emailParts = input?.split('@');
+
+      const EMAIL_USERNAME_PATTERN =
+        /^[a-z0-9]+(?:[._][a-z0-9]+)*(?:\+[0-9]+)*$/;
+      const EMAIL_DOMAIN_PATTERN =
+        /^([a-z0-9]+?(-[a-z0-9]+)*(?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9]+$/;
+      if (
+        !emailParts[0].match(EMAIL_USERNAME_PATTERN) ||
+        !emailParts[1].match(EMAIL_DOMAIN_PATTERN)
+      ) {
+        setEmailErr('email is invalid');
+        return false;
+      }
+    } else {
+      setEmailErr('email is invalid');
+      return false;
+    }
+    setEmailErr('');
+    return true;
+  };
 
   const onSubmit = async () => {
     try {
-      await userServices.forgetPassword({ email });
-      toast.success('Send Email Success To Reset Password');
-      handleClose();
+      if (validateEmail(email)) {
+        await userServices.forgetPassword({ email });
+        toast.success('Send Email Success To Reset Password');
+        handleClose();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +68,11 @@ const ForgetPasswordModal = ({ show, handleClose }) => {
               />
               <Form.Text className='text-muted'>
                 We'll never share your email with anyone else.
+              </Form.Text>
+              <Form.Text className='text-muted'>
+                {emailErr ? (
+                  <span style={{ color: 'red' }}>{emailErr}</span>
+                ) : null}
               </Form.Text>
             </Form.Group>
           </Form>
