@@ -20,6 +20,7 @@ const EditProfileForm = ({
   userProfile,
   createProfile,
 }) => {
+  console.log(userProfile);
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState(userProfile?.gender || '');
   const [image, setImage] = useState('');
@@ -263,8 +264,14 @@ const EditProfileForm = ({
           const result = await ProfileService.editProfileByUserId(userId, {
             ...body,
           });
+          console.log('emaaaiiall', userProfile);
+          const data = {
+            ...result.data.data,
+            email: userProfile?.email,
+            name: userProfile?.name,
+          };
 
-          editProfile(result?.data?.data);
+          editProfile(data);
           setLoading(false);
           handleClose();
         }
