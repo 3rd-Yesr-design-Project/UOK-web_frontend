@@ -31,6 +31,7 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           email: mail,
           name: userName,
         };
+        console.log('gsidnjwn', data);
         getProfileByUserId(data);
       }
     } catch (error) {

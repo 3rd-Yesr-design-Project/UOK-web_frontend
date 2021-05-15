@@ -7,7 +7,6 @@ import RSS from '../icons/rss';
 import { connect } from 'react-redux';
 
 const Introduction = ({ profile }) => {
-  console.log('intro profile', profile);
   return (
     <div className='card'>
       <div className='shadow-fb rounded w-full bg-white p-4'>
