@@ -12,7 +12,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
-  console.log('update redus', payload);
+
   switch (type) {
     case GET_PROFILE:
       return { ...state, userProfile: payload };
