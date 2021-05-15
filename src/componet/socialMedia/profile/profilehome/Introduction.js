@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SuitCase from '../icons/suitCase';
 import Hat from '../icons/hat';
 import HomeAlt from '../icons/homeAlt';
@@ -7,6 +7,7 @@ import RSS from '../icons/rss';
 import { connect } from 'react-redux';
 
 const Introduction = ({ profile }) => {
+  console.log('intro profile', profile);
   return (
     <div className='card'>
       <div className='shadow-fb rounded w-full bg-white p-4'>
@@ -41,7 +42,11 @@ const Introduction = ({ profile }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { profile: state?.profile?.userProfile?.profile };
+  return {
+    profile: state?.profile?.userProfile?.profile
+      ? state?.profile?.userProfile?.profile
+      : state?.profile?.userProfile,
+  };
 };
 
 export default connect(mapStateToProps)(Introduction);
