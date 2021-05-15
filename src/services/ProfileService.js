@@ -8,6 +8,10 @@ class ProfileServie {
   editProfileByUserId(profileId, body) {
     return httpService.put(`/profile/${profileId}`, body);
   }
+
+  createUserProfile(payload) {
+    return httpService.post(`/profile`, payload);
+  }
 }
 
 export default new ProfileServie();
