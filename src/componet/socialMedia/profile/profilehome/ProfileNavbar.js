@@ -22,7 +22,18 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
   const fetchProfileByUserId = async () => {
     try {
       const profile = await ProfileService.fetchProfileByUserId(userId);
-      getProfileByUserId(profile.data.data);
+
+      if (profile?.data?.data) {
+        const mail = profile?.data?.data?.email;
+        const userName = profile?.data?.data?.name;
+        const data = {
+          ...profile.data.data.profile,
+          email: mail,
+          name: userName,
+        };
+        console.log('gsidnjwn', data);
+        getProfileByUserId(data);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileNavbar from './ProfileNavbar';
 import { connect } from 'react-redux';
 import CoverImg from '../../../../assets/cover4.jpg';
+
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -29,9 +30,9 @@ const TimeLineHeader = ({ profile }) => {
           alt='cover'
         />
         <div className='absolute -bottom-6'>
-          {profile?.profile?.profile_url ? (
+          {profile?.profile_url ? (
             <img
-              src={profile?.profile?.profile_url}
+              src={profile?.profile_url}
               className='object-cover border-4 border-white w-40 h-40 rounded-full'
               alt='cover'
             />

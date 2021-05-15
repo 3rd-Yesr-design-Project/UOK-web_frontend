@@ -14,14 +14,12 @@ const PlaceLived = (props) => {
         <div className='mt-2 flex items-center'>
           <AiOutlineHome />
           <div className='ml-4'>
-            <div>Matara</div>
             <div className='text-xs text-gray-500 '>{props?.current_city}</div>
           </div>
         </div>
         <div className='mt-2 flex items-center'>
           <GoLocation />
           <div className='ml-4'>
-            <div>Kelaniya</div>
             <div className='text-xs text-gray-500 '>{props?.home_town}</div>
           </div>
         </div>
