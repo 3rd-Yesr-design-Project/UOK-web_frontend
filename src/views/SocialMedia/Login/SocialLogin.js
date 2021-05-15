@@ -139,15 +139,15 @@ const SocialLogin = ({ socialLoginUser }) => {
           <div className='col-md-6'>
             <Container component='main' maxWidth='xs'>
               <div className={classes.paper}>
+                {errorMsg !== '' ? (
+                  <span className='bg-red-400 p-2'>{errorMsg}</span>
+                ) : null}
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component='h1' variant='h5'>
                   Sign in
                 </Typography>
-                {errorMsg !== '' ? (
-                  <span style={{ color: 'red' }}>{errorMsg}</span>
-                ) : null}
                 <form className={classes.form} onSubmit={submitForm}>
                   <TextField
                     variant='outlined'

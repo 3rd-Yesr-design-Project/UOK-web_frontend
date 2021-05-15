@@ -10,7 +10,6 @@ import {
   Modal,
 } from 'react-bootstrap';
 
-import elon from '../../../assets/ellon.jpg';
 import { updateProfile } from '../../../Action/userActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

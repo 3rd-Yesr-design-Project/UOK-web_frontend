@@ -10,7 +10,6 @@ import {
   Button,
 } from '@material-ui/core';
 
-import ellon from '../../../assets/ellon.jpg';
 import ResultTable from '../ResultTable';
 import { getAllByPlaceholderText } from '@testing-library/dom';
 import resultServices from '../../../services/ResultServices';

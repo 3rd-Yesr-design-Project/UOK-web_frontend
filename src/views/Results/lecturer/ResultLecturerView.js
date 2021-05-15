@@ -9,7 +9,6 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-import ellon from '../../../assets/ellon.jpg';
 import ResultTable from '../../../componet/ResultTable';
 import LecturerResultTable from './LecturerResultTable';
 import LecturerViewUpporRow from './LecturerViewUpporRow';

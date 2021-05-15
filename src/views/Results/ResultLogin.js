@@ -17,7 +17,7 @@ import {
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import UokLogo from '../../assets/Kelaniya.png';
+import ResultLogo from '../../assets/result.jpg';
 import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
 import { Redirect, useHistory } from 'react-router';
@@ -117,13 +117,13 @@ const ResultLogin = ({ resultLoginUser }) => {
           <div className='col-md-6 m-auto flex justify-center'>
             <CardActionArea>
               <div className='flex justify-center'>
-                <img src={UokLogo} width={200} />
+                <img src={ResultLogo} />
               </div>
 
               <CardContent className='text-center'>
-                <Typography gutterBottom variant='h5' component='h2'>
+                {/* <Typography gutterBottom variant='h5' component='h2'>
                   University Of Kelaniya
-                </Typography>
+                </Typography> */}
                 <Typography variant='body2' color='textSecondary' component='p'>
                   Please login to see your Result
                 </Typography>
@@ -134,6 +134,9 @@ const ResultLogin = ({ resultLoginUser }) => {
           <div className='col-md-6'>
             <Container component='main' maxWidth='xs'>
               <div className={classes.paper}>
+                {errorMsg !== '' ? (
+                  <span className='bg-red-400 p-2'>{errorMsg}</span>
+                ) : null}
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
@@ -142,9 +145,6 @@ const ResultLogin = ({ resultLoginUser }) => {
                 </Typography>
 
                 <form className={classes.form} onSubmit={submitForm}>
-                  {errorMsg !== '' ? (
-                    <span style={{ color: 'red' }}>{errorMsg}</span>
-                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
