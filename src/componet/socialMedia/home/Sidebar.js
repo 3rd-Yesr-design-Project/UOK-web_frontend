@@ -22,7 +22,7 @@ const SideBar = ({ users, user }) => {
   // ]);
 
   return (
-    <div className='sidebar bg-gray-100' style={{ marginTop: '70px' }}>
+    <div className='sidebar bg-gray-100' style={{ marginTop: '70px', minWidth:'300px' }}>
       <h3 className='text-center'>Friends</h3>
       <div className='friends'>
         {' '}
