@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     height: 450,
   },
+  xxx: {
+    minWidth: 935,
+  }
 }));
 const ShowPhotos = ({profile, posts}) => {
     const classes = useStyles();
@@ -27,7 +30,7 @@ const ShowPhotos = ({profile, posts}) => {
             <SocialLayout></SocialLayout>
             <ProfileLayout></ProfileLayout>
             <div>
-            <div className='px-52 grid grid-cols-12 pt-4 gap-4 bg-fFill z-0 pb-56'>
+            <div className='px-52 grid grid-cols-12 pt-4 gap-4 bg-fFill z-0 pb-56' style={{minWidth:1200}}>
               <div className='col-span-5 col-start-1 row-start-1 space-y-4'>
                 <Intro />
               </div>
