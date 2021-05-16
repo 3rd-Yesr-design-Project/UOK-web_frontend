@@ -5,12 +5,15 @@ import EditProfile from '../EditProfile';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import ProfileService from '../../../../services/ProfileService';
+import FriendService from '../../../../services/FriendService';
 import { getProfileByUserId } from '../../../../Action/profileAction';
+import { addFriend } from '../../../../Action/friendAction';
 import { connect } from 'react-redux';
 
-const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
+const ProfileNavbar = ({ getProfileByUserId, user, profile, addFriend }) => {
   const { userId } = useParams();
   const [show, setShow] = useState(false);
+  const [isAddFriend, setAddIsFriend] = useState(false);
 
   useEffect(() => {
     fetchProfileByUserId();
@@ -31,12 +34,24 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           email: mail,
           name: userName,
         };
-        console.log('gsidnjwn', data);
+
         getProfileByUserId(data);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const freindRequest = async () => {
+    const isF = !isAddFriend;
+
+    if (isF === true) {
+      const body = {
+        friendId: userId,
+      };
+      const result = await FriendService.addFriend(body);
+    }
+    setAddIsFriend(!isAddFriend);
   };
 
   return (
@@ -61,12 +76,12 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
             </span>
           </div> */}
         </div>
-        {user?.id == profile?.id && (
+        {/* {user?.id == profile?.id && (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={handleShow}>
               EditProfile
-            </Button>
-            {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
+            </Button> */}
+        {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             edit Profile
           </button>
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
@@ -75,6 +90,25 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             <More />
           </button> */}
+        {/* </div> */}
+        {/* )} */}
+        {user?.id == profile?.id ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={handleShow}>
+              Edit Profile
+            </Button>
+          </div>
+        ) : isAddFriend === true ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={freindRequest}>
+              Cancel Request
+            </Button>
+          </div>
+        ) : (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={freindRequest}>
+              Add Friend
+            </Button>
           </div>
         )}
       </div>
@@ -90,4 +124,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getProfileByUserId })(ProfileNavbar);
+export default connect(mapStateToProps, { getProfileByUserId, addFriend })(
+  ProfileNavbar
+);
