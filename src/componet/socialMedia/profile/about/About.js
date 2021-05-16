@@ -30,7 +30,7 @@ const About = ({ profile, getProfileByUserId }) => {
       <HomeLayout>
         <SocialLayout>
           <ProfileLayout>
-            <div className='container m-auto mt-5'>
+            <div className='container m-auto mt-5'  style={{minWidth:1200}}>
               <Overview
                 work={profile?.profile?.working_place}
                 university={profile?.profile?.university}
@@ -39,7 +39,7 @@ const About = ({ profile, getProfileByUserId }) => {
                 home_town={profile?.profile?.home_town}
               />
             </div>
-            <div className='px-52 grid grid-cols-12 pt-4 gap-4 bg-fFill z-0 pb-56'>
+            <div className='px-52 grid grid-cols-12 pt-4 gap-4 bg-fFill z-0 pb-56'  style={{minWidth:1200}}>
               <div className='col-span-5 col-start-1 row-start-1 space-y-4'>
                 <WorkAndEducation
                   work={profile?.profile?.working_place}
