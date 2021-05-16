@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   inline: {
     display: 'inline',
   },
+  small: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
 }));
 
 const ShowPost = ({ posts, user, profile }) => {
@@ -148,7 +152,10 @@ const ShowPost = ({ posts, user, profile }) => {
         <div key={post.id} className='empty'>
           <div className='show__header'>
             <div className='show__header-img'>
-              <img src={post?.user?.profile?.profile_url} alt='user' />
+            {post?.user?.profile?.profile_url ? 
+              <img src={post?.user?.profile?.profile_url} alt='user' /> 
+            : <Avatar src="/broken-image.jpg" className={classes.small} />}
+              
             </div>
             <div className='show__header-name'>
               {post?.user?.name}{' '}
