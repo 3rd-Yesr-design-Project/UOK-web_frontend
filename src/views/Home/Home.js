@@ -4,6 +4,7 @@ import uok2 from '../../assets/uok2.jpg';
 import HomeLayout from '../../componet/layout/HomeLayout';
 
 const Home = () => {
+  console.log('xxxxxxxxxxxxxx');
   return (
     <HomeLayout>
       <div className='container-fluid bg-gray'>
