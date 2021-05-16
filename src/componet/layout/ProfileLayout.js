@@ -3,7 +3,7 @@ import TimeLineHeader from '../socialMedia/profile/profilehome/TimeLineHeader';
 
 const ProfileLayout = ({ children }) => {
   return (
-    <div>
+    <div style={{minWidth:1200}}>
       <TimeLineHeader />
       {children}
     </div>
