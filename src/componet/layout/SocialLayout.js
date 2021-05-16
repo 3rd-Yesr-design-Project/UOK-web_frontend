@@ -3,7 +3,7 @@ import SocialNavbar from '../../views/SocialMedia/socialNavbar/SocialNavbar';
 
 const SocialLayout = ({ children }) => {
   return (
-    <div>
+    <div style={{minWidth:1200}}>
       <SocialNavbar />
       {children}
       {/* <p>anjana</p> */}
