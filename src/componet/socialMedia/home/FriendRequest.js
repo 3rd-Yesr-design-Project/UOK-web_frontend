@@ -39,39 +39,38 @@ const FriendRequest = ({ friendRequest, addFriend, user }) => {
     >
       <h3 style={{ textAlign: 'center' }}>Friend Requests</h3>
       {friendRequest?.map((freq) => {
-        return (
-          freq?.status === 'pending' &&
-          freq?.friend_id === user?.id && (
-            <div className='card m-2' style={{ width: '300px' }}>
-              <div className='mb-2 ml-1 '>
-                <Avatar />
-                <span className='mr-1'>{freq?.user?.name}</span>
-                <div style={{ width: '200px', float: 'right' }}>
-                  <span className='p-2 pt-3'>
-                    {' '}
-                    <Button
-                      variant='primary'
-                      size='sm'
-                      className='pt-1 pb-1'
-                      onClick={() => requestAccept(freq)}
-                    >
-                      Accept
-                    </Button>
-                  </span>
-                  <span className='p-1'>
-                    <Button
-                      variant='primary'
-                      size='sm'
-                      className='pt-1 pb-1'
-                      onClick={() => rejectRequest(freq)}
-                    >
-                      Reject
-                    </Button>
-                  </span>
-                </div>
+        return freq?.status === 'pending' && freq?.friend_id === user?.id ? (
+          <div className='card m-2' style={{ width: '300px' }}>
+            <div className='mb-2 ml-1 '>
+              <Avatar />
+              <span className='mr-1'>{freq?.user?.name}</span>
+              <div style={{ width: '200px', float: 'right' }}>
+                <span className='p-2 pt-3'>
+                  {' '}
+                  <Button
+                    variant='primary'
+                    size='sm'
+                    className='pt-1 pb-1'
+                    onClick={() => requestAccept(freq)}
+                  >
+                    Accept
+                  </Button>
+                </span>
+                <span className='p-1'>
+                  <Button
+                    variant='primary'
+                    size='sm'
+                    className='pt-1 pb-1'
+                    onClick={() => rejectRequest(freq)}
+                  >
+                    Reject
+                  </Button>
+                </span>
               </div>
             </div>
-          )
+          </div>
+        ) : (
+          <h1></h1>
         );
       })}
     </div>
