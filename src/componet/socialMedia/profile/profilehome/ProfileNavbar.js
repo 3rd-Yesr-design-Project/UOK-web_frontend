@@ -7,13 +7,25 @@ import { Link, useParams } from 'react-router-dom';
 import ProfileService from '../../../../services/ProfileService';
 import FriendService from '../../../../services/FriendService';
 import { getProfileByUserId } from '../../../../Action/profileAction';
-import { addFriend } from '../../../../Action/friendAction';
+import {
+  addFriend,
+  removeFriendRequest,
+} from '../../../../Action/friendAction';
 import { connect } from 'react-redux';
 
-const ProfileNavbar = ({ getProfileByUserId, user, profile, addFriend }) => {
+const ProfileNavbar = ({
+  getProfileByUserId,
+  user,
+  profile,
+  addFriend,
+  friend,
+  removeFriendRequest,
+}) => {
   const { userId } = useParams();
   const [show, setShow] = useState(false);
   const [isAddFriend, setAddIsFriend] = useState(false);
+
+  console.log('profile id', profile?.id, user?.id == profile?.id, user?.id);
 
   useEffect(() => {
     fetchProfileByUserId();
@@ -42,15 +54,36 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile, addFriend }) => {
     }
   };
 
-  const freindRequest = async () => {
+  const AcceptRequest = async () => {
     const isF = !isAddFriend;
 
-    if (isF === true) {
-      const body = {
-        friendId: userId,
-      };
-      const result = await FriendService.addFriend(body);
+    const body = {
+      friendId: userId,
+    };
+    const data = {
+      ...friend,
+      status: 'accept',
+    };
+    const result = await FriendService.addFriend(body);
+    if (result?.data?.message === 'Updated') {
+      addFriend(data);
     }
+    setAddIsFriend(!isAddFriend);
+  };
+
+  const removeFreindRequest = async () => {
+    const isF = !isAddFriend;
+
+    const result = await FriendService.removeFriendRequest(friend?.id);
+    console.log('remove reesult', result);
+    if (result?.data?.message === 'Deleted') {
+      const body = {
+        ...friend,
+        status: 'remove',
+      };
+      removeFriendRequest(body);
+    }
+
     setAddIsFriend(!isAddFriend);
   };
 
@@ -98,15 +131,21 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile, addFriend }) => {
               Edit Profile
             </Button>
           </div>
-        ) : isAddFriend === true ? (
+        ) : friend?.status === 'pending' ? (
           <div className='flex items-center space-x-2'>
-            <Button variant='primary' onClick={freindRequest}>
+            <Button variant='primary' onClick={() => removeFreindRequest()}>
               Cancel Request
+            </Button>
+          </div>
+        ) : friend?.status === 'accept' ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={() => removeFreindRequest()}>
+              Friend
             </Button>
           </div>
         ) : (
           <div className='flex items-center space-x-2'>
-            <Button variant='primary' onClick={freindRequest}>
+            <Button variant='primary' onClick={() => AcceptRequest()}>
               Add Friend
             </Button>
           </div>
@@ -121,9 +160,12 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     profile: state.profile.userProfile,
+    friend: state.friendReq.friend,
   };
 };
 
-export default connect(mapStateToProps, { getProfileByUserId, addFriend })(
-  ProfileNavbar
-);
+export default connect(mapStateToProps, {
+  getProfileByUserId,
+  addFriend,
+  removeFriendRequest,
+})(ProfileNavbar);
