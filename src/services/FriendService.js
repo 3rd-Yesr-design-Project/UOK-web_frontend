@@ -12,6 +12,14 @@ class FriendService {
   getFriend(friendId) {
     return HttpService.get(`/friend/${friendId}`);
   }
+
+  acceptFriendRequest(payload, requestId) {
+    return HttpService.put(`friend/${requestId}`, payload);
+  }
+
+  removeFriendRequest(requestId) {
+    return HttpService.delete(`friend/${requestId}`);
+  }
 }
 
 export default new FriendService();
