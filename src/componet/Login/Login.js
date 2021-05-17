@@ -51,8 +51,6 @@ const Login = ({ loginUser }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log('hhhhhhhhhhhhhhhhhhhhh');
-  console.log('xxxxxxxxxxx', show);
   const handleChange = (e) => {
     setState({
       ...state,
@@ -90,10 +88,7 @@ const Login = ({ loginUser }) => {
   const submitForm = () => {
     if (validateEmail(state?.email)) {
       loginUser(state);
-      console.log(state);
     }
-
-    // console.log(state.email, state.password);
   };
   return (
     <Container component='main' maxWidth='xs'>

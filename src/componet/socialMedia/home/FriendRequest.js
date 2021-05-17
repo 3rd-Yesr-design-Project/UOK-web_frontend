@@ -30,8 +30,6 @@ const FriendRequest = ({ friendRequest, addFriend }) => {
       };
       removeFriendRequest(body);
     }
-
-    console.log('result', result);
   };
 
   return (

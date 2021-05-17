@@ -6,28 +6,9 @@ import { fetchFriend } from '../../../Action/friendAction';
 import Avatar from '@material-ui/core/Avatar';
 
 const SideBar = ({ users, user, fetchFriend, friends }) => {
-  console.log('accept friends', friends);
-  // const [state] = useState([
-  //   { id: 1, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  //   { id: 2, image: '/images/ellon.jpg', name: 'PHP Development' },
-  //   { id: 3, image: '/images/ellon.jpg', name: 'React Native Development' },
-  //   { id: 4, image: '/images/ellon.jpg', name: 'Node JS Development' },
-  //   { id: 5, image: '/images/ellon.jpg', name: 'Vue JS Development' },
-  //   { id: 6, image: '/images/ellon.jpg', name: 'React Development' },
-  //   { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  //   { id: 8, image: '/images/ellon.jpg', name: 'PHP Development' },
-  //   { id: 9, image: '/images/ellon.jpg', name: 'React Native Development' },
-  //   { id: 10, image: '/images/ellon.jpg', name: 'Node JS Development' },
-  //   { id: 11, image: '/images/ellon.jpg', name: 'Vue JS Development' },
-  //   { id: 12, image: '/images/ellon.jpg', name: 'Anjana' },
-  //   { id: 12, image: '/images/ellon.jpg', name: 'Naan' },
-  //   { id: 12, image: '/images/ellon.jpg', name: 'eeeeeeeeee' },
-  // ]);
-
   const fetchFriends = async (id) => {
     const result = await FriendService.getFriend(id);
     fetchFriend(result?.data?.data);
-    console.log('fetchFriend', result);
   };
 
   return (
@@ -35,7 +16,6 @@ const SideBar = ({ users, user, fetchFriend, friends }) => {
       <h3 className='text-center'>Friends</h3>
       <div className='friends'>
         {friends?.map((frd) => {
-          console.log(user?.id !== frd?.friend_id, frd?.status === 'accept');
           return user?.id !== frd?.friend_id && frd?.status === 'accept' ? (
             <Link to={`/social/profile/home/${frd?.friend_id}`}>
               <div

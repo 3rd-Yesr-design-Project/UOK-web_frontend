@@ -25,8 +25,6 @@ const ProfileNavbar = ({
   const [show, setShow] = useState(false);
   const [isAddFriend, setAddIsFriend] = useState(false);
 
-  console.log('profile id', profile?.id, user?.id == profile?.id, user?.id);
-
   useEffect(() => {
     fetchProfileByUserId();
   }, []);
@@ -75,7 +73,7 @@ const ProfileNavbar = ({
     const isF = !isAddFriend;
 
     const result = await FriendService.removeFriendRequest(friend?.id);
-    console.log('remove reesult', result);
+
     if (result?.data?.message === 'Deleted') {
       const body = {
         ...friend,

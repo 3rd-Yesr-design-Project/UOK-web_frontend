@@ -30,7 +30,6 @@ const UserSearchPopover = ({
   friends,
   searchFilter,
 }) => {
-  console.log('friends', friends);
   const classes = useStyles();
 
   const [state] = useState([
@@ -64,10 +63,6 @@ const UserSearchPopover = ({
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-
-  const onChange = () => {
-    console.log('xxxxxxxxxxxxxx');
-  };
 
   return (
     <div style={{ zIndex: '10000' }}>

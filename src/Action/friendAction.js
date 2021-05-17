@@ -10,7 +10,6 @@ import {
 } from './types';
 
 export const addFriend = (payload) => async (dispatch) => {
-  console.log('Accept request', payload);
   try {
     dispatch({
       type: ADD_FRIEND,

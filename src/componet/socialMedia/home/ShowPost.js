@@ -43,7 +43,6 @@ const ShowPost = ({ posts, user, profile }) => {
       let x = false;
       post.likes?.map((like) => {
         if (like?.user_id === user?.id) {
-          console.log('user id equal');
           setLikeExist(true);
           return (x = true);
         }
@@ -56,17 +55,14 @@ const ShowPost = ({ posts, user, profile }) => {
       }
       return post;
     });
-    // getPosts(posts);
-    console.log(posts);
   }, [posts, isLikedd]);
 
   const p = useSelector((state) => state.post.posts);
   const viewComments = (postId) => {
     setCommentSectionOn(!commentSectionOn);
     setTypedText(null);
-    console.log('view comments', postId);
+
     setClickedPost(postId);
-    console.log(clickedPost);
   };
 
   const likePost = async (id) => {
@@ -78,10 +74,9 @@ const ShowPost = ({ posts, user, profile }) => {
     const newData = p.map((post) => {
       if (post.id === id) {
         let x = false;
-        console.log('user id is ', user.id);
+
         post.likes?.map((like) => {
           if (like.user_id === user.id) {
-            console.log('user id equal');
             setLikeExist(true);
             return (x = true);
           }
@@ -103,13 +98,11 @@ const ShowPost = ({ posts, user, profile }) => {
     });
     await LikeService.addLike(id, data);
     posts = newData;
-    console.log(newData);
-    console.log(posts);
     getPosts(posts);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('submitted', typedText);
+
     try {
       const data = {
         postId: clickedPost,
@@ -138,7 +131,6 @@ const ShowPost = ({ posts, user, profile }) => {
   };
 
   const onChangedValue = (e) => {
-    console.log('Value changed', e.target.value);
     setTypedText(e.target.value);
   };
 

@@ -34,7 +34,6 @@ export const getCurrentProfile = () => async (dispatch) => {
 };
 
 export const updateProfile = (data) => async (dispatch) => {
-  console.log('action', data);
   try {
     //  const res = await userServices.updateProfile(id, data);
     dispatch({
@@ -55,7 +54,7 @@ export const updateProfile = (data) => async (dispatch) => {
 export const loginUser = (data) => async (dispatch) => {
   try {
     const res = await userServices.login(data);
-    console.log('response', res);
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res?.data,

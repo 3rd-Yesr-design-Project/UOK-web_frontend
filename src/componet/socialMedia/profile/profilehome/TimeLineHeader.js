@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const TimeLineHeader = ({ profile }) => {
   const classes = useStyles();
-  console.log(profile?.profile?.profile_url);
+
   return (
     <div className='px-44 shadow  mb-5'>
       <div className='relative h-96 rounded-b flex justify-center'>

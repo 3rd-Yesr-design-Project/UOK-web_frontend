@@ -31,39 +31,13 @@ const UploadPost = ({ handleClose, createPost }) => {
       const data = await PostService.createPost(postData);
       setLoading(false);
       handleClose();
-      console.log(data);
+
       if (data?.data?.post_url !== '') {
         createPost(data?.data?.data);
       }
     } catch (error) {
       console.log('Upload Post error', error);
     }
-
-    // console.log({ title, description, image, postUrl });
-    //  dispatch(postAction({ title, description, image, postUrl }));
-
-    //  fetch("http://localhost:5000/post/UploadPost", {
-    //         method: "post",
-    //         headers: {
-    //            "Content-Type": "application/json",
-    //            "Authorization": "Bearer "+ localStorage.getItem("jwt")
-    //         },
-    //        body: JSON.stringify({
-    //                title,
-    //                body,
-    //                url
-    //        })
-    //    }).then(res => res.json())
-    //        .then(data =>{
-    //           if(data.error){
-    //            M.toast({html: data.error, classes:"#c62828 red darken-3" })
-    //         } else {
-    //            M.toast({html: "Created post success", classes:'#76ff03 light-green accent-3'})
-    //           history.push('/')
-    //     }
-    //   }).catch(error => {
-    //     console.log(error)
-    //  })
   };
 
   return (

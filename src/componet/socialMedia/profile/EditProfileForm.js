@@ -20,7 +20,6 @@ const EditProfileForm = ({
   userProfile,
   createProfile,
 }) => {
-  console.log(userProfile);
   const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState(userProfile?.gender || '');
   const [image, setImage] = useState('');
@@ -63,13 +62,11 @@ const EditProfileForm = ({
     setHobby(input);
   };
   const handleGender = (input) => {
-    console.log(input);
     setGender(input);
     validateGender(input);
   };
 
   const validateGender = (input) => {
-    console.log(input);
     if (!input?.trim()) {
       setGenderErr('Enter your gender');
     }
@@ -202,17 +199,6 @@ const EditProfileForm = ({
 
     data.append('upload_preset', 'insta-clone');
     data.append('cloud_name', 'ddeg8sl19');
-    // fetch('https://api.cloudinary.com/v1_1/ddeg8sl19/image/upload', {
-    //   method: 'post',
-    //   body: data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setProfileUrl(data.url);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   } );
 
     try {
       const response = await fetch(
@@ -264,7 +250,7 @@ const EditProfileForm = ({
           const result = await ProfileService.editProfileByUserId(userId, {
             ...body,
           });
-          console.log('emaaaiiall', userProfile);
+
           const data = {
             ...result.data.data,
             email: userProfile?.email,

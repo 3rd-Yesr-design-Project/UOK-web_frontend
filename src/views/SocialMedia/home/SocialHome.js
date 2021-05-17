@@ -47,7 +47,7 @@ const SocialHome = ({ getAllUsers, getPosts, getFriendRequest }) => {
   const fetchPosts = async () => {
     try {
       const posts = await postService.fetchPosts();
-      console.log('ppppppppppppp', posts);
+
       getPosts(posts.data.data);
     } catch (error) {
       console.log(error);

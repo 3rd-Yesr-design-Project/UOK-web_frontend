@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Image,
-  Row,
-  Modal,
-} from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import userServices from '../../services/UserServices';
 import { toast } from 'react-toastify';
 const ForgetPasswordModal = ({ show, handleClose }) => {
