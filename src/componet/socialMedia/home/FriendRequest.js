@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import Avatar from '@material-ui/core/Avatar';
 import FriendService from '../../../services/FriendService';
 import { addFriend, removeFriendRequest } from '../../../Action/friendAction';
-const FriendRequest = ({ friendRequest, addFriend }) => {
+const FriendRequest = ({ friendRequest, addFriend, user }) => {
   const requestAccept = async (freq) => {
     const body = {
       status: 'accept',
@@ -40,7 +40,8 @@ const FriendRequest = ({ friendRequest, addFriend }) => {
       <h3 style={{ textAlign: 'center' }}>Friend Requests</h3>
       {friendRequest?.map((freq) => {
         return (
-          freq?.status === 'pending' && (
+          freq?.status === 'pending' &&
+          freq?.friend_id === user?.id && (
             <div className='card m-2' style={{ width: '300px' }}>
               <div className='mb-2 ml-1 '>
                 <Avatar />
@@ -80,6 +81,7 @@ const FriendRequest = ({ friendRequest, addFriend }) => {
 const mapStateToProps = (state) => {
   return {
     friendRequest: state.friendReq.friendsRequest,
+    user: state?.user?.user,
   };
 };
 
