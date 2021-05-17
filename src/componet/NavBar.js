@@ -21,25 +21,62 @@ const NavigationBar = () => {
     //     </span>
     //   </Navbar>
     // </div>
-    <Navbar bg='light' variant='light'>
-      <Navbar.Brand href='#home'>
-        <div className='flex mr-2'>
-          <img src={kelaniyaLogo} width='40px' height='40px' />
-          <span>University of kelaniya</span>
+
+
+
+    // <Navbar bg='light' variant='light'>
+    //   <Navbar.Brand href="#home">
+    //       <div className='flex mr-2'>
+    //         <img src={kelaniyaLogo} width='40px' height='40px' />
+    //         <span>University of kelaniya</span>
+    //       </div>
+    //   </Navbar.Brand>
+    //   <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    //   <Navbar.Brand href='#home'>
+    //       <Navbar.Collapse id="basic-navbar-nav">
+    //         <Nav className="mr-auto">
+    //         <Nav.Link><Link to='/'>Home</Link></Nav.Link>
+    //         <Nav.Link><Link to='/results/Login'>Result</Link></Nav.Link>
+    //         <Nav.Link><Link to='/social/login'>Chat</Link></Nav.Link>
+    //       </Nav>
+    //     </Navbar.Collapse>
+    //   </Navbar.Brand>
+    //   {/* <Nav className='mr-auto' activeKey='/home'>
+    //     <Nav.Link>
+    //       <Link to='/'>Home</Link>
+    //     </Nav.Link>
+    //     <Nav.Link>
+    //       <Link to='/results/Login'>Result</Link>
+    //     </Nav.Link>
+    //     <Nav.Link>
+    //       <Link to='/social/login'>Chat</Link>
+    //     </Nav.Link>
+    //   </Nav> */}
+    // </Navbar>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <div className='flex mr-2'>
+            <img src={kelaniyaLogo} width='40px' height='40px' />
+            <span>University of kelaniya</span>
+          </div>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <Link class="nav-link active" aria-current="page" to="/">Home</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link active" aria-current="page" to='/results/Login'>Result</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link active" aria-current="page" to='/social/login'>Chat</Link>
+            </li>
+          </ul>
         </div>
-      </Navbar.Brand>
-      <Nav className='mr-auto' activeKey='/home'>
-        <Nav.Link>
-          <Link to='/'>Home</Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to='/results/Login'>Result</Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to='/social/login'>Chat</Link>
-        </Nav.Link>
-      </Nav>
-    </Navbar>
+      </div>
+    </nav>
   );
 };
 
