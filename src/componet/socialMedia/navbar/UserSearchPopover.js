@@ -95,7 +95,7 @@ const UserSearchPopover = ({
             <input
               type='text'
               className='navbar__first-searchbar'
-              placeholder='Facebook Search'
+              placeholder='Friend Search'
               onChange={filterFriends}
             />
           </div>
