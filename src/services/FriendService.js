@@ -20,6 +20,10 @@ class FriendService {
   removeFriendRequest(requestId) {
     return HttpService.delete(`friend/${requestId}`);
   }
+
+  getMyFriendRequest() {
+    return HttpService.get('friend/pending');
+  }
 }
 
 export default new FriendService();

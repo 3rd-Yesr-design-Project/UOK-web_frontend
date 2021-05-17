@@ -27,6 +27,7 @@ export const addFriend = (payload) => async (dispatch) => {
 };
 
 export const getFriendRequest = (payload) => async (dispatch) => {
+  console.log('action', payload);
   try {
     dispatch({
       type: GET_FRIEND_REQUESTS,
