@@ -102,14 +102,19 @@ const UserSearchPopover = ({
 
           {friends?.map((user) => (
             <div className={classes.root}>
-              <List component='nav' aria-label='main mailbox folders'>
-                <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar alt='Remy Sharp' src={user?.profile?.profile_url} />
-                  </ListItemAvatar>
-                  <ListItemText primary={user?.name} />
-                </ListItem>
-              </List>
+              <Link to={`/social/profile/home/${user?.id}`}>
+                <List component='nav' aria-label='main mailbox folders'>
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt='Remy Sharp'
+                        src={user?.profile?.profile_url}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText primary={user?.name} />
+                  </ListItem>
+                </List>
+              </Link>
             </div>
           ))}
         </div>
