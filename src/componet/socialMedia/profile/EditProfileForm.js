@@ -12,7 +12,6 @@ const EditProfileForm = ({
   userProfile,
   createProfile,
 }) => {
-  // const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState(userProfile?.gender || '');
   const [image, setImage] = useState('');
   const [university, setUniversity] = useState(userProfile?.university || '');
