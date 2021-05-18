@@ -95,22 +95,27 @@ const UserSearchPopover = ({
             <input
               type='text'
               className='navbar__first-searchbar'
-              placeholder='Facebook Search'
+              placeholder='Friend Search'
               onChange={filterFriends}
             />
           </div>
 
           {friends?.map((user) => (
-            <div className={classes.root}>
-              <List component='nav' aria-label='main mailbox folders'>
-                <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar alt='Remy Sharp' src={user?.profile?.profile_url} />
-                  </ListItemAvatar>
-                  <ListItemText primary={user?.name} />
-                </ListItem>
-              </List>
-            </div>
+            <Link to={`/social/profile/home/${user?.id}`}>
+              <div className={classes.root}>
+                <List component='nav' aria-label='main mailbox folders'>
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt='Remy Sharp'
+                        src={user?.profile?.profile_url}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText primary={user?.name} />
+                  </ListItem>
+                </List>
+              </div>
+            </Link>
           ))}
         </div>
       </Popover>

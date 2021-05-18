@@ -10,6 +10,7 @@ import { getProfileByUserId } from '../../../../Action/profileAction';
 import {
   addFriend,
   removeFriendRequest,
+  getFriend,
 } from '../../../../Action/friendAction';
 import { connect } from 'react-redux';
 
@@ -19,6 +20,7 @@ const ProfileNavbar = ({
   profile,
   addFriend,
   friend,
+  getFriend,
   removeFriendRequest,
 }) => {
   const { userId } = useParams();
@@ -27,6 +29,7 @@ const ProfileNavbar = ({
 
   useEffect(() => {
     fetchProfileByUserId();
+    fetchFriend();
   }, []);
 
   const handleClose = () => setShow(false);
@@ -52,37 +55,46 @@ const ProfileNavbar = ({
     }
   };
 
-  const AcceptRequest = async () => {
-    const isF = !isAddFriend;
+  const fetchFriend = async () => {
+    try {
+      const friend = await FriendService.fetchFriend(userId);
+      getFriend(friend.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendRequest = async () => {
+    // const isF = !isAddFriend;
 
     const body = {
       friendId: userId,
     };
-    const data = {
-      ...friend,
-      status: 'accept',
-    };
+    // const data = {
+    //   ...friend,
+    //   status: 'accept',
+    // };
     const result = await FriendService.addFriend(body);
-    if (result?.data?.message === 'Updated') {
-      addFriend(data);
-    }
-    setAddIsFriend(!isAddFriend);
+    fetchFriend(userId);
+    // if (result?.data?.message === 'Updated') {
+    //   addFriend(data);
+    // }
+    // setAddIsFriend(!isAddFriend);
   };
 
   const removeFreindRequest = async () => {
-    const isF = !isAddFriend;
+    // const isF = !isAddFriend;
+    await FriendService.removeFriendRequest(friend?.friend_id);
+    fetchFriend(userId);
+    // if (result?.data?.message === 'Deleted') {
+    //   const body = {
+    //     ...friend,
+    //     status: 'remove',
+    //   };
+    //   removeFriendRequest(body);
+    // }
 
-    const result = await FriendService.removeFriendRequest(friend?.id);
-
-    if (result?.data?.message === 'Deleted') {
-      const body = {
-        ...friend,
-        status: 'remove',
-      };
-      removeFriendRequest(body);
-    }
-
-    setAddIsFriend(!isAddFriend);
+    // setAddIsFriend(!isAddFriend);
   };
 
   return (
@@ -138,12 +150,12 @@ const ProfileNavbar = ({
         ) : friend?.status === 'accept' ? (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={() => removeFreindRequest()}>
-              Friend
+              UnFriend
             </Button>
           </div>
         ) : (
           <div className='flex items-center space-x-2'>
-            <Button variant='primary' onClick={() => AcceptRequest()}>
+            <Button variant='primary' onClick={() => sendRequest()}>
               Add Friend
             </Button>
           </div>
@@ -166,4 +178,5 @@ export default connect(mapStateToProps, {
   getProfileByUserId,
   addFriend,
   removeFriendRequest,
+  getFriend,
 })(ProfileNavbar);

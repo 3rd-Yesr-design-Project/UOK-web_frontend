@@ -5,9 +5,9 @@ class FriendService {
     return HttpService.post('/friend', payload);
   }
 
-  getFriendRequests() {
-    return HttpService.get('/all-friends');
-  }
+  // getFriendRequests() {
+  //   return HttpService.get('/all-friends');
+  // }
 
   getFriend(friendId) {
     return HttpService.get(`/friend/${friendId}`);
@@ -23,6 +23,14 @@ class FriendService {
 
   getMyFriendRequest() {
     return HttpService.get('friend/pending');
+  }
+
+  fetchUOKFriends() {
+    return HttpService.get('friend/all-friends');
+  }
+
+  fetchFriend(friendId) {
+    return HttpService.get(`friend/friend/${friendId}`);
   }
 }
 

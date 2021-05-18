@@ -15,15 +15,20 @@ import userServices from '../../../services/UserServices';
 import FriendService from '../../../services/FriendService';
 import { getAllUsers } from '../../../Action/userActions';
 import { getPosts } from '../../../Action/postAction';
-import { getFriendRequest } from '../../../Action/friendAction';
+import { getFriendRequest, getUOKFriends } from '../../../Action/friendAction';
 import { connect } from 'react-redux';
 import postService from '../../../services/PostService';
 
-const SocialHome = ({ getAllUsers, getPosts, getFriendRequest }) => {
+const SocialHome = ({
+  getAllUsers,
+  getPosts,
+  getFriendRequest,
+  getUOKFriends,
+}) => {
   useEffect(() => {
     fetchFriends();
     fetchPosts();
-    getFriendRequests();
+    fetchUOKFriends();
   }, []);
 
   const fetchFriends = async () => {
@@ -35,10 +40,12 @@ const SocialHome = ({ getAllUsers, getPosts, getFriendRequest }) => {
     }
   };
 
-  const getFriendRequests = async () => {
+  const fetchUOKFriends = async () => {
     try {
-      const friendRequests = await FriendService.getFriendRequests();
-      getFriendRequest(friendRequests?.data?.data);
+      const friends = await FriendService.fetchUOKFriends();
+      console.log('xxxxxxxxxxxxxx', friends);
+      getUOKFriends(friends?.data?.data);
+      // getFriendRequest(friends?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +88,9 @@ const SocialHome = ({ getAllUsers, getPosts, getFriendRequest }) => {
   );
 };
 
-export default connect(null, { getAllUsers, getPosts, getFriendRequest })(
-  SocialHome
-);
+export default connect(null, {
+  getAllUsers,
+  getPosts,
+  getFriendRequest,
+  getUOKFriends,
+})(SocialHome);

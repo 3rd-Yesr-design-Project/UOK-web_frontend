@@ -30,7 +30,7 @@ const SideBar = ({ users, user, fetchFriend, friends }) => {
                     <Avatar src='/broken-image.jpg' />
                   )}
                 </div>
-                <div className='sidebar__list-name'>{frd?.user?.name}</div>
+                <div className='sidebar__list-name'>{frd?.friend?.name}</div>
               </div>
             </Link>
           ) : null;
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
   return {
     users: state.user.users,
     user: state.user.user,
-    friends: state.friendReq.friendsRequest,
+    friends: state.friendReq.friends,
   };
 };
 

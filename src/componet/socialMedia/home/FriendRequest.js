@@ -7,57 +7,73 @@ import {
   addFriend,
   removeFriendRequest,
   getFriendRequest,
+  getUOKFriends,
 } from '../../../Action/friendAction';
 const FriendRequest = ({
   friendRequest,
   addFriend,
   user,
   getFriendRequest,
+  getUOKFriends,
 }) => {
   const [localUser, setLocalUser] = useState({});
 
   useEffect(() => {
-    fetchFriends();
+    fetchFriendRequest();
   }, []);
 
-  const fetchFriends = async () => {
+  const fetchFriendRequest = async () => {
     const result = await FriendService.getMyFriendRequest();
-    console.log('ressult', result);
     if (result?.data?.data) {
       getFriendRequest(result?.data?.data);
     }
   };
 
+  const fetchUOKFriends = async () => {
+    try {
+      const friends = await FriendService.fetchUOKFriends();
+      console.log('xxxxxxxxxxxxxx', friends);
+      getUOKFriends(friends?.data?.data);
+      // getFriendRequest(friends?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const requestAccept = async (freq) => {
+    console.log('yyyyyyyyy', freq);
     setLocalUser(freq);
 
     const body = {
       status: 'accept',
     };
-    const data = {
-      ...freq,
-      status: 'accept',
-    };
-
-    const result = await FriendService.acceptFriendRequest(
-      body,
-      freq?.id ? freq?.id : localUser?.id
-    );
-
-    if (result?.data?.message === 'Updated') {
-      addFriend(data);
+    // const data = {
+    //   ...freq,
+    //   status: 'accept',
+    // };
+    try {
+      const result = await FriendService.acceptFriendRequest(body, freq?.id);
+      fetchFriendRequest();
+      fetchUOKFriends();
+    } catch (error) {
+      console.log(error);
     }
+
+    // if (result?.data?.message === 'Updated') {
+    //   addFriend(data);
+    // }
   };
 
   const rejectRequest = async (freq) => {
     const result = await FriendService.removeFriendRequest(freq?.id);
-    if (result?.data?.message === 'Deleted') {
-      const body = {
-        ...freq,
-        status: 'reject',
-      };
-      removeFriendRequest(body);
-    }
+    fetchFriendRequest();
+    // if (result?.data?.message === 'Deleted') {
+    //   const body = {
+    //     ...freq,
+    //     status: 'reject',
+    //   };
+    //   removeFriendRequest(body);
+    // }
   };
 
   return (
@@ -68,10 +84,13 @@ const FriendRequest = ({
       <h3 style={{ textAlign: 'center' }}>Friend Requests</h3>
       {friendRequest?.map((freq) => {
         return freq?.status === 'pending' && freq?.friend_id === user?.id ? (
-          <div className='card m-2' style={{ width: '300px' }}>
-            <div className='mb-2 ml-1 '>
-              <Avatar />
-              <span className='mr-1'>{freq?.user?.name}</span>
+          <div className='card m-2' style={{ width: '275px' }}>
+            <div className='p-3'>
+              <div className='flex items-center'>
+                <Avatar />
+                <span className='mx-2'>{freq?.user?.name}</span>
+              </div>
+
               <div style={{ width: '200px', float: 'right' }}>
                 <span className='p-2 pt-3'>
                   {' '}
@@ -112,6 +131,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addFriend, getFriendRequest })(
-  FriendRequest
-);
+export default connect(mapStateToProps, {
+  addFriend,
+  getFriendRequest,
+  getUOKFriends,
+})(FriendRequest);
