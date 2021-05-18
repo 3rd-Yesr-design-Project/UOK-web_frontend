@@ -86,7 +86,7 @@ const ProfileNavbar = ({
             <Link to={`/social/profile/photoes/${userId}`}>Photos</Link>
           </div>
         </div>
-        {user?.id == profile?.id ? (
+        {user?.id == userId ? (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={handleShow}>
               Edit Profile
