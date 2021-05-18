@@ -2,6 +2,8 @@ import {
   GET_PROFILE,
   UPDATE_PROFILE_ERROR,
   UPDATE_PROFILE,
+  CREATE_PROFILE,
+  CREATE_PROFILE_FAILED,
 } from '../Action/types';
 
 const initialState = {
@@ -16,7 +18,10 @@ export default function (state = initialState, action) {
       return { ...state, userProfile: payload };
     case UPDATE_PROFILE:
       return { ...state, userProfile: payload };
+    case CREATE_PROFILE:
+      return { ...state, userProfile: payload };
     case UPDATE_PROFILE_ERROR:
+    case CREATE_PROFILE_FAILED:
       return {
         ...state,
         error: {

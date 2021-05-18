@@ -18,18 +18,18 @@ const UserProfile = ({ getProfileByUserId }) => {
   //   fetchProfileByUserId();
   // }, []);
 
-  useEffect(() => {
-    fetchProfileByUserId();
-  }, []);
+  // useEffect(() => {
+  //   fetchProfileByUserId();
+  // }, []);
 
-  const fetchProfileByUserId = async () => {
-    try {
-      const profile = await profileService.fetchProfileByUserId(userId);
-      getProfileByUserId(profile?.data?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchProfileByUserId = async () => {
+  //   try {
+  //     const profile = await profileService.fetchProfileByUserId(userId);
+  //     getProfileByUserId(profile?.data?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <HomeLayout>
       <SocialLayout>

@@ -15,7 +15,8 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import ChatPic from '../../../assets/chat.jpg';
+// import ChatPic from '../../../assets/chat.jpg';
+import socialMedia from '../../../assets/social-media.jpg';
 import UserServices from '../../../services/UserServices';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
@@ -55,6 +56,8 @@ const SocialLogin = ({ socialLoginUser }) => {
 
   const [state, setState] = useState({ email: null, password: null });
   const [show, setShow] = useState(false);
+  const [emailErr, setEmailErr] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -66,13 +69,43 @@ const SocialLogin = ({ socialLoginUser }) => {
     });
   };
 
+  const validateEmail = (input) => {
+    if (input == null || !input?.trim()) {
+      setEmailErr('email can not be empty');
+      return false;
+    }
+    if (input?.indexOf('@') >= 0) {
+      const emailParts = input?.split('@');
+
+      const EMAIL_USERNAME_PATTERN =
+        /^[a-z0-9]+(?:[._][a-z0-9]+)*(?:\+[0-9]+)*$/;
+      const EMAIL_DOMAIN_PATTERN =
+        /^([a-z0-9]+?(-[a-z0-9]+)*(?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9]+$/;
+      if (
+        !emailParts[0].match(EMAIL_USERNAME_PATTERN) ||
+        !emailParts[1].match(EMAIL_DOMAIN_PATTERN)
+      ) {
+        setEmailErr('email is invalid');
+        return false;
+      }
+    } else {
+      setEmailErr('email is invalid');
+      return false;
+    }
+    setEmailErr('');
+    return true;
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      const user = await UserServices.socialLogin(state);
-      socialLoginUser(user.data.data);
-      history.push('/social/home');
+      if (validateEmail(state?.email)) {
+        const user = await UserServices.socialLogin(state);
+        socialLoginUser(user.data.data);
+        history.push('/social/home');
+      }
     } catch (error) {
+      setErrorMsg(error?.data?.message);
       console.log(error);
     }
   };
@@ -85,7 +118,7 @@ const SocialLogin = ({ socialLoginUser }) => {
             <Card className='text-center'>
               <CardActionArea>
                 <div className='flex justify-center'>
-                  <img src={ChatPic} width={200} />
+                  <img src={socialMedia} className='mt-5' />
                 </div>
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='h2'>
@@ -106,13 +139,15 @@ const SocialLogin = ({ socialLoginUser }) => {
           <div className='col-md-6'>
             <Container component='main' maxWidth='xs'>
               <div className={classes.paper}>
+                {errorMsg !== '' ? (
+                  <span className='bg-red-400 p-2'>{errorMsg}</span>
+                ) : null}
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component='h1' variant='h5'>
                   Sign in
                 </Typography>
-
                 <form className={classes.form} onSubmit={submitForm}>
                   <TextField
                     variant='outlined'
@@ -126,6 +161,9 @@ const SocialLogin = ({ socialLoginUser }) => {
                     onChange={handleChange}
                     //autoFocus
                   />
+                  {emailErr !== '' ? (
+                    <span style={{ color: 'red' }}>{emailErr}</span>
+                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
@@ -151,6 +189,7 @@ const SocialLogin = ({ socialLoginUser }) => {
                   >
                     Sign In
                   </Button>
+
                   <Grid container>
                     <Grid item xs className='cursor-pointer'>
                       <Link

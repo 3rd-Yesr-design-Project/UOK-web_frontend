@@ -26,7 +26,7 @@ class ChatListComponent extends React.Component {
             onClick={this.newChat}
             className={classes.newChatBtn}
           >
-            New Message
+            Start Chat
           </Button>
           <List>
             {this.props.chats.map((_chat, _index) => {

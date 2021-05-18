@@ -1,14 +1,26 @@
 import React from 'react';
-import DownArrow from '../icons/downArrow';
-import Phone from '../icons/phone';
-import Friend from '../icons/friend';
-import More from '../icons/more';
-import { Button } from '@material-ui/core';
 import ProfileNavbar from './ProfileNavbar';
 import { connect } from 'react-redux';
-import CoverImg from '../../../../assets/cover1.jpg';
+import CoverImg from '../../../../assets/cover4.jpg';
 
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(18),
+    height: theme.spacing(18),
+  },
+}));
 const TimeLineHeader = ({ profile }) => {
+  const classes = useStyles();
+  console.log(profile?.profile?.profile_url);
   return (
     <div className='px-44 shadow  mb-5'>
       <div className='relative h-96 rounded-b flex justify-center'>
@@ -18,11 +30,15 @@ const TimeLineHeader = ({ profile }) => {
           alt='cover'
         />
         <div className='absolute -bottom-6'>
-          <img
-            src={profile?.profile?.profile_url}
-            className='object-cover border-4 border-white w-40 h-40 rounded-full'
-            alt='cover'
-          />
+          {profile?.profile_url ? (
+            <img
+              src={profile?.profile_url}
+              className='object-cover border-4 border-white w-40 h-40 rounded-full'
+              alt='cover'
+            />
+          ) : (
+            <Avatar src='/broken-image.jpg' className={classes.large} />
+          )}
         </div>
       </div>
       <div className='text-center mt-6 text-3xl font-bold text-fBlack'>

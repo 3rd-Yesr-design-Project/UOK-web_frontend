@@ -33,16 +33,16 @@ const UserSearchPopover = ({
   console.log('friends', friends);
   const classes = useStyles();
 
-  const [state] = useState([
-    { id: 1, image: '/images/ellon.jpg', name: 'Flutter Development' },
-    { id: 2, image: '/images/ellon.jpg', name: 'PHP Development' },
-    { id: 3, image: '/images/ellon.jpg', name: 'React Native Development' },
-    { id: 4, image: '/images/ellon.jpg', name: 'Node JS Development' },
-    { id: 5, image: '/images/ellon.jpg', name: 'Vue JS Development' },
-    { id: 6, image: '/images/ellon.jpg', name: 'React Development' },
-    { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
-    // { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  ]);
+  // const [state] = useState([
+  //   { id: 1, image: '/images/ellon.jpg', name: 'Flutter Development' },
+  //   { id: 2, image: '/images/ellon.jpg', name: 'PHP Development' },
+  //   { id: 3, image: '/images/ellon.jpg', name: 'React Native Development' },
+  //   { id: 4, image: '/images/ellon.jpg', name: 'Node JS Development' },
+  //   { id: 5, image: '/images/ellon.jpg', name: 'Vue JS Development' },
+  //   { id: 6, image: '/images/ellon.jpg', name: 'React Development' },
+  //   { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
+  //   // { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
+  // ]);
 
   const filterFriends = async (input) => {
     let values = {
@@ -70,7 +70,7 @@ const UserSearchPopover = ({
   };
 
   return (
-    <div>
+    <div style={{ zIndex: '10000' }}>
       <Popover
         id={id}
         open={open}
@@ -96,7 +96,7 @@ const UserSearchPopover = ({
           </List>
         </div> */}
         <div>
-          <div className='m-2'>
+          <div>
             <input
               type='text'
               className='navbar__first-searchbar'

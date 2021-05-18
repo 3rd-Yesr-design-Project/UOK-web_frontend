@@ -153,14 +153,14 @@ const ShowPost = ({ posts, user, profile }) => {
             <div className='show__header-name'>
               {post?.user?.name}{' '}
               <div className='date'>
-                {moment(post?.created_at).format('YYYY/MM/DD')}
+                {moment(post?.created_at).format('YYYY/MM/DD HH:mm')}
               </div>
             </div>
           </div>
           <div className='show__body'>
             <div className='show__body-text'>{post.description}</div>
             <div className='show__body-img'>
-              <img src={post.post_url} alt='post' />
+              <img src={post?.post_url} alt='post' />
             </div>
           </div>
           <div className='show__reactions'>

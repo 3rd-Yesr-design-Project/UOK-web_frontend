@@ -17,7 +17,7 @@ import {
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import UokLogo from '../../assets/Kelaniya.png';
+import ResultLogo from '../../assets/result.jpg';
 import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
 import { Redirect, useHistory } from 'react-router';
@@ -56,6 +56,8 @@ const ResultLogin = ({ resultLoginUser }) => {
 
   const [state, setState] = useState({ email: null, password: null });
   const [show, setShow] = useState(false);
+  const [emailErr, setEmailErr] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,15 +69,44 @@ const ResultLogin = ({ resultLoginUser }) => {
     });
   };
 
+  const validateEmail = (input) => {
+    if (input == null || !input?.trim()) {
+      setEmailErr('email can not be empty');
+      return false;
+    }
+    if (input?.indexOf('@') >= 0) {
+      const emailParts = input?.split('@');
+
+      const EMAIL_USERNAME_PATTERN =
+        /^[a-z0-9]+(?:[._][a-z0-9]+)*(?:\+[0-9]+)*$/;
+      const EMAIL_DOMAIN_PATTERN =
+        /^([a-z0-9]+?(-[a-z0-9]+)*(?:[a-z0-9]*[a-z0-9])?\.)+[a-z0-9]+$/;
+      if (
+        !emailParts[0].match(EMAIL_USERNAME_PATTERN) ||
+        !emailParts[1].match(EMAIL_DOMAIN_PATTERN)
+      ) {
+        setEmailErr('email is invalid');
+        return false;
+      }
+    } else {
+      setEmailErr('email is invalid');
+      return false;
+    }
+    setEmailErr('');
+    return true;
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      const user = await userServices.resultLogin(state);
-      console.log(user);
-      resultLoginUser(user.data.data);
-      history.push('/results/view');
+      if (validateEmail(state?.email)) {
+        const user = await userServices.resultLogin(state);
+        console.log(user);
+        resultLoginUser(user.data.data);
+        history.push('/results/view');
+      }
     } catch (error) {
-      console.log(error);
+      setErrorMsg(error?.data?.message);
     }
   };
 
@@ -86,13 +117,13 @@ const ResultLogin = ({ resultLoginUser }) => {
           <div className='col-md-6 m-auto flex justify-center'>
             <CardActionArea>
               <div className='flex justify-center'>
-                <img src={UokLogo} width={200} />
+                <img src={ResultLogo} />
               </div>
 
               <CardContent className='text-center'>
-                <Typography gutterBottom variant='h5' component='h2'>
+                {/* <Typography gutterBottom variant='h5' component='h2'>
                   University Of Kelaniya
-                </Typography>
+                </Typography> */}
                 <Typography variant='body2' color='textSecondary' component='p'>
                   Please login to see your Result
                 </Typography>
@@ -103,6 +134,9 @@ const ResultLogin = ({ resultLoginUser }) => {
           <div className='col-md-6'>
             <Container component='main' maxWidth='xs'>
               <div className={classes.paper}>
+                {errorMsg !== '' ? (
+                  <span className='bg-red-400 p-2'>{errorMsg}</span>
+                ) : null}
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
@@ -123,6 +157,9 @@ const ResultLogin = ({ resultLoginUser }) => {
                     onChange={handleChange}
                     //autoFocus
                   />
+                  {emailErr !== '' ? (
+                    <span style={{ color: 'red' }}>{emailErr}</span>
+                  ) : null}
                   <TextField
                     variant='outlined'
                     margin='normal'
@@ -144,6 +181,7 @@ const ResultLogin = ({ resultLoginUser }) => {
                   >
                     Sign In
                   </Button>
+
                   <Grid container>
                     <Grid item xs className='cursor-pointer'>
                       <Link variant='body2' onClick={handleShow}>

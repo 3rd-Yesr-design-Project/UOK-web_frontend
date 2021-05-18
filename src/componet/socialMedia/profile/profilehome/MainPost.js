@@ -40,11 +40,7 @@ const MainPost = ({ getPostByUserId, posts }) => {
                 <div className='ml-4'>
                   <span className='cursor-pointer font-bold'>
                     {post?.user?.name}
-                  </span>{' '}
-                  was with{' '}
-                  <span className='cursor-pointer font-bold'>
-                    Steve Cunningham
-                  </span>{' '}
+                  </span>
                   <br />
                   <span className='text-fGrey text-opacity-50 text-sm'>
                     {' '}

@@ -12,39 +12,34 @@ import ProfileService from '../../../services/ProfileService';
 import { useSelector, connect } from 'react-redux';
 import { useParams } from 'react-router';
 import Moment from 'moment';
-import { editProfile } from '../../../Action/profileAction';
+import { editProfile, createProfile } from '../../../Action/profileAction';
 
-const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
-  console.log(
-    'user profile',
-    Moment(userProfile?.profile?.birthday).format('L')
-  );
-
+const EditProfileForm = ({
+  editProfile,
+  handleClose,
+  userProfile,
+  createProfile,
+}) => {
+  console.log(userProfile);
   const [hobby, setHobby] = useState('');
-  const [gender, setGender] = useState(userProfile?.profile?.gender || '');
+  const [gender, setGender] = useState(userProfile?.gender || '');
   const [image, setImage] = useState('');
-  const [university, setUniversity] = useState(
-    userProfile?.profile?.university || ''
-  );
-  const [status, setStatus] = useState(userProfile?.profile?.status || '');
+  const [university, setUniversity] = useState(userProfile?.university || '');
+  const [status, setStatus] = useState(userProfile?.status || '');
   const [birthday, setBirthDay] = useState(
-    new Date(Moment(userProfile?.profile?.birthday).format('YYYY-MM-DD')) || ''
+    new Date(Moment(userProfile?.birthday).format('YYYY-MM-DD')) || ''
   );
-  const [profileUrl, setProfileUrl] = useState('');
-  const [school, setSchool] = useState(userProfile?.profile?.school || '');
-  const [homeTown, setHomeTown] = useState(
-    userProfile?.profile?.home_town || ''
-  );
+  const [profileUrl, setProfileUrl] = useState(userProfile?.profile_url || '');
+  const [school, setSchool] = useState(userProfile?.school || '');
+  const [homeTown, setHomeTown] = useState(userProfile?.home_town || '');
   const [currentCity, setCurrentCity] = useState(
-    userProfile?.profile?.current_city || ''
+    userProfile?.current_city || ''
   );
-  const [mobile, setMobile] = useState(userProfile?.profile?.mobile || '');
-  const [religan, setReligan] = useState(userProfile?.profile?.religioun || '');
-  const [language, setLanguage] = useState(
-    userProfile?.profile?.language || ''
-  );
+  const [mobile, setMobile] = useState(userProfile?.mobile || '');
+  const [religan, setReligan] = useState(userProfile?.religioun || '');
+  const [language, setLanguage] = useState(userProfile?.language || '');
   const [workingPlace, setWorkingPlace] = useState(
-    userProfile?.profile?.working_place || ''
+    userProfile?.working_place || ''
   );
 
   const [genderErr, setGenderErr] = useState('');
@@ -62,22 +57,23 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const user = useSelector((state) => state.user);
   let { userId } = useParams();
 
   const handleHobby = (input) => {
     setHobby(input);
   };
   const handleGender = (input) => {
+    console.log(input);
     setGender(input);
     validateGender(input);
   };
 
   const validateGender = (input) => {
+    console.log(input);
     if (!input?.trim()) {
       setGenderErr('Enter your gender');
     }
-    setGender('');
+    setGenderErr('');
   };
 
   const handleImage = (input) => {
@@ -243,35 +239,48 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
         religan &&
         workingPlace;
 
-      if (newRes?.url?.trim()) {
-        try {
-          const body = {
-            profileUrl: newRes.url,
-            mobile,
-            birthDay: birthday,
-            status,
-            gender,
-            language,
-            religioun: religan,
-            workingPlace,
-            school,
-            university,
-            homeTown,
-            currentCity,
-            user_id: user.id,
-          };
+      try {
+        const body = {
+          profileUrl: newRes.url ? newRes?.url : profileUrl,
+          mobile,
+          birthDay: birthday,
+          status,
+          gender,
+          language,
+          religioun: religan,
+          workingPlace,
+          school,
+          university,
+          homeTown,
+          currentCity,
+          user_id: userId,
+        };
+
+        if (userProfile?.profile === null) {
+          const response = await ProfileService.createUserProfile(body);
+
+          createProfile(response?.data);
+        } else {
           const result = await ProfileService.editProfileByUserId(userId, {
             ...body,
           });
+          console.log('emaaaiiall', userProfile);
+          const data = {
+            ...result.data.data,
+            email: userProfile?.email,
+            name: userProfile?.name,
+          };
 
-          editProfile(result?.data);
+          editProfile(data);
           setLoading(false);
           handleClose();
-        } catch (error) {
-          console.log(error);
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -412,8 +421,10 @@ const EditProfileForm = ({ editProfile, handleClose, userProfile }) => {
 
 const mapStateToProps = (state) => {
   return {
-    userProfile: state.profile.userProfile,
+    userProfile: state.profile?.userProfile,
   };
 };
 
-export default connect(mapStateToProps, { editProfile })(EditProfileForm);
+export default connect(mapStateToProps, { editProfile, createProfile })(
+  EditProfileForm
+);

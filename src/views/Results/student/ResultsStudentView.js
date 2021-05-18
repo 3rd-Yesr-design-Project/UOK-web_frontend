@@ -10,7 +10,6 @@ import {
   Button,
 } from '@material-ui/core';
 
-import ellon from '../../../assets/ellon.jpg';
 import ResultTable from '../ResultTable';
 import { getAllByPlaceholderText } from '@testing-library/dom';
 import resultServices from '../../../services/ResultServices';
@@ -35,8 +34,6 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
   useEffect(() => {
     getData(1);
   }, []);
-
-  console.log(user);
 
   const getData = async (year) => {
     try {
@@ -76,15 +73,15 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
                   gutterBottom
                 >
                   Student No:
-                  {user?.studnet?.student_no}
+                  {user?.student?.student_no}
                 </Typography>
-                <Typography
+                {/* <Typography
                   className={classes.title}
                   color='textSecondary'
                   gutterBottom
                 >
                   Current GPA
-                </Typography>
+                </Typography> */}
                 {/* <Typography
                 className={classes.title}
                 color='textSecondary'

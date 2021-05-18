@@ -4,6 +4,9 @@ import Hat from '../icons/hat';
 import HomeAlt from '../icons/homeAlt';
 import Pin from '../icons/pin';
 import RSS from '../icons/rss';
+import { FaBirthdayCake, FaPrayingHands } from 'react-icons/fa';
+import { CgGenderFemale } from 'react-icons/cg';
+import { AiOutlineMessage } from 'react-icons/ai';
 
 const BasicInfo = (props) => {
   return (
@@ -11,28 +14,28 @@ const BasicInfo = (props) => {
       <div className='shadow-fb rounded w-full bg-white p-4'>
         <div className='text-xl font-bold text-fBlack'>BasicInfo</div>
         <div className='mt-2 flex items-center'>
-          <SuitCase />
+          <CgGenderFemale />
           <div className='ml-4'>
             <div>{props?.gender}</div>
             <div className='text-xs text-gray-500 '>Gender</div>
           </div>
         </div>
         <div className='mt-2 flex items-center'>
-          <Hat />
+          <FaBirthdayCake />
           <div className='ml-4'>
             <div>{props?.birth_day}</div>
             <div className='text-xs text-gray-500 '>Birth Day</div>
           </div>
         </div>
         <div className='mt-2 flex items-center'>
-          <Hat />
+          <AiOutlineMessage />
           <div className='ml-4'>
             <div>{props?.language}</div>
             <div className='text-xs text-gray-500 '>Language</div>
           </div>
         </div>
         <div className='mt-2 flex items-center'>
-          <Hat />
+          <FaPrayingHands />
           <div className='ml-4'>
             <div>{props?.religioun}</div>
             <div className='text-xs text-gray-500 '>Religioun</div>

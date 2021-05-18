@@ -22,7 +22,18 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
   const fetchProfileByUserId = async () => {
     try {
       const profile = await ProfileService.fetchProfileByUserId(userId);
-      getProfileByUserId(profile.data.data);
+
+      if (profile?.data?.data) {
+        const mail = profile?.data?.data?.email;
+        const userName = profile?.data?.data?.name;
+        const data = {
+          ...profile.data.data.profile,
+          email: mail,
+          name: userName,
+        };
+        console.log('gsidnjwn', data);
+        getProfileByUserId(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +49,9 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           <div className='px-4 py-5 text-fGrey'>
             <Link to={`/social/profile/about/${userId}`}>About</Link>
           </div>
-          <div className='px-4 py-5 text-fGrey'>Photos</div>
+          <div className='px-4 py-5 text-fGrey'>
+            <Link to={`/social/profile/photoes/${userId}`}>Photos</Link>
+          </div>
           {/* <div className='px-4 py-5 text-fGrey'>Videos</div>
           <div className='px-4 py-5 text-fGrey'>Check-Ins</div>
           <div className='px-4 flex items-center py-5 text-fGrey'>

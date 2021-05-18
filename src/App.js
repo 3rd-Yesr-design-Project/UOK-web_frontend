@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import { getAllUsers } from './Action/userActions';
 import userServices from './services/UserServices';
 import { ToastContainer } from 'react-toastify';
+import ShowPhotos from './componet/socialMedia/profile/photos/ShowPhotos';
 import { getLoginUser } from './Action/userActions';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -95,6 +96,11 @@ const App = ({ getLoginUser }) => {
           />
           {/* <Route exact path='/create-post' component={CreatePost} /> */}
           <Route exact path='/social/profile/about/:userId' component={About} />
+          <Route
+            exact
+            path='/social/profile/photoes/:userId'
+            component={ShowPhotos}
+          />
           <Route
             exact
             path='/resetPassword/:userId'

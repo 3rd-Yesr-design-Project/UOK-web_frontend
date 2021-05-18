@@ -1,8 +1,10 @@
 import React from 'react';
 import uok from '../../assets/uok.jpg';
+import uok2 from '../../assets/uok2.jpg';
 import HomeLayout from '../../componet/layout/HomeLayout';
 
 const Home = () => {
+  console.log('xxxxxxxxxxxxxx');
   return (
     <HomeLayout>
       <div className='container-fluid bg-gray'>
@@ -51,7 +53,9 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className='col-md-6'></div>
+            <div className='col-md-6 nopadding'>
+              <img src={uok2} alt='uok logo' width={700} />
+            </div>
           </div>
         </div>
       </div>
