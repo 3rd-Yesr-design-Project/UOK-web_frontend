@@ -4,7 +4,7 @@ const httpService = axios.create({
   baseURL: 'http://34.203.13.248/api/v1',
 });
 
-httpService.interceptors.request.use((config) => {
+http: httpService.interceptors.request.use((config) => {
   config.headers.Authorization = localStorage.getItem('token');
   return Promise.resolve(config);
 });

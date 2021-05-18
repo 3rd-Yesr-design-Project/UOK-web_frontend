@@ -231,10 +231,15 @@ const EditProfileForm = ({
           user_id: userId,
         };
 
-        if (userProfile?.profile === null) {
-          const response = await ProfileService.createUserProfile(body);
-
-          createProfile(response?.data);
+        if (userProfile?.id === undefined) {
+          const result = await ProfileService.createUserProfile(body);
+          const data = {
+            ...result.data.data,
+            email: userProfile?.email,
+            name: userProfile?.name,
+          };
+          createProfile(data);
+          handleClose();
         } else {
           const result = await ProfileService.editProfileByUserId(userId, {
             ...body,
