@@ -5,10 +5,6 @@ class FriendService {
     return HttpService.post('/friend', payload);
   }
 
-  // getFriendRequests() {
-  //   return HttpService.get('/all-friends');
-  // }
-
   getFriend(friendId) {
     return HttpService.get(`/friend/${friendId}`);
   }

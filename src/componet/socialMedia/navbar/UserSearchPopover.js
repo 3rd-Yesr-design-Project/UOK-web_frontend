@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Popover,
-  Typography,
-  Button,
   List,
   ListItem,
   ListItemAvatar,
@@ -24,24 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserSearchPopover = ({
-  handleClick,
   handleClose,
   anchorEl,
   friends,
   searchFilter,
 }) => {
   const classes = useStyles();
-
-  // const [state] = useState([
-  //   { id: 1, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  //   { id: 2, image: '/images/ellon.jpg', name: 'PHP Development' },
-  //   { id: 3, image: '/images/ellon.jpg', name: 'React Native Development' },
-  //   { id: 4, image: '/images/ellon.jpg', name: 'Node JS Development' },
-  //   { id: 5, image: '/images/ellon.jpg', name: 'Vue JS Development' },
-  //   { id: 6, image: '/images/ellon.jpg', name: 'React Development' },
-  //   { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  //   // { id: 7, image: '/images/ellon.jpg', name: 'Flutter Development' },
-  // ]);
 
   const filterFriends = async (input) => {
     let values = {
@@ -50,16 +36,6 @@ const UserSearchPopover = ({
     const data = await socialSearch.socialSearchInfo(values);
     searchFilter(data.data.data);
   };
-
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -80,16 +56,6 @@ const UserSearchPopover = ({
           horizontal: 'center',
         }}
       >
-        {/* <div className={classes.root}>
-          <List component='nav' aria-label='main mailbox folders'>
-            <ListItem button>
-              <ListItemAvatar>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
-              </ListItemAvatar>
-              <ListItemText primary='Inbox' />
-            </ListItem>
-          </List>
-        </div> */}
         <div>
           <div>
             <input

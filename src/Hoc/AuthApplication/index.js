@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import userServices from '../../services/UserServices';
 import { useHistory } from 'react-router-dom';
-import Home from '../../views/Home/Home';
-import { CgLayoutGrid } from 'react-icons/cg';
+
 export default function ProtectRoute(ComposedComponent) {
   const Authentication = (props) => {
     const user = useSelector((state) => state.user);

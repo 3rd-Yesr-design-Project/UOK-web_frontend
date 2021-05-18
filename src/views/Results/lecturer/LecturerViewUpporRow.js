@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import {
   FormControl,
   InputLabel,
@@ -71,54 +70,14 @@ const LecturerViewUpporRow = ({
             onChange={(e) => setAcademicYear(e.target.value)}
           />
         </div>
-        <div className='col-md-2'>
-          {/* <TextField
-            id='outlined-select-currency-native'
-            select
-            label='Year'
-            value={year}
-            onChange={handleChangeYear}
-            SelectProps={{
-              native: true,
-            }}
-            helperText='Please select your currency'
-            variant='outlined'
-          >
-            {[1, 2, 3, 4].map((year, index) => (
-              <option key={index} value={year}>
-                {year}
-              </option>
-            ))}
-          </TextField> */}
-        </div>
-        <div className='col-md-2'>
-          {/* <TextField
-            id='outlined-select-currency-native'
-            select
-            label='Subject Code'
-            // value={subject}
-            onChange={handleChangeSubject}
-            SelectProps={{
-              native: true,
-            }}
-            helperText='Please'
-            variant='outlined'
-          >
-            {console.log(subjects)}
-            {subjects.map((subject) => (
-              <option key={subject?.id} value={subject?.id}>
-                {subject?.subject_code}
-              </option>
-            ))}
-          </TextField> */}
-        </div>
+        <div className='col-md-2'></div>
+        <div className='col-md-2'></div>
         <div className='col-md-2'>
           <FormControl variant='outlined' className={classes.formControl}>
             <InputLabel id='demo-simple-select-outlined-label'>Year</InputLabel>
             <Select
               labelId='demo-simple-select-outlined-label'
               id='demo-simple-select-outlined'
-              // value={age}
               onChange={handleChangeYear}
               label='Year'
             >
@@ -138,7 +97,6 @@ const LecturerViewUpporRow = ({
             <Select
               labelId='demo-simple-select-outlined-label'
               id='demo-simple-select-outlined'
-              // value={age}
               onChange={handleChangeSubject}
               label='Subject Code'
             >

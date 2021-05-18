@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { Chip, Avatar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
+
 import {
-  FaFacebook,
   FaSistrix,
   FaHome,
-  FaFontAwesomeFlag,
-  FaVideo,
-  FaUsers,
-  FaGamepad,
   FaPlus,
   FaFacebookMessenger,
   FaBell,
-  FaCaretDown,
 } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -62,7 +56,6 @@ const Navbar = ({ user, logOutUser }) => {
       <div className='navbar' style={{ marginTop: '70px' }}>
         <div className='navbar__first'>
           <div className='navbar__first-logo'>
-            {/* <FaFacebook className='navbar__logo' /> */}
             <img src={kelaniyaLogo} width='40px' height='40px' />
           </div>
           <div className='navbar__first-search'>

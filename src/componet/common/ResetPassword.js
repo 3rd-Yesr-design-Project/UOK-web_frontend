@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Image,
-  Row,
-  Modal,
-} from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router';
 import userServices from '../../services/UserServices';
 
@@ -24,7 +16,6 @@ const ResetPassword = () => {
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-  const compairePassword = () => {};
 
   const onSubmit = async () => {
     try {

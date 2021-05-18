@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -10,7 +10,7 @@ import {
   Typography,
   Container,
 } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';

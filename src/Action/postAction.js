@@ -6,7 +6,6 @@ import {
   GET_USER_POST_FAILED,
 } from './types';
 import { toast } from 'react-toastify';
-import postService from '../services/PostService';
 
 export const createPost = (payload) => async (dispatch) => {
   try {

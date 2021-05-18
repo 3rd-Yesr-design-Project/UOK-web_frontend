@@ -5,13 +5,12 @@ import Avatar from '@material-ui/core/Avatar';
 import FriendService from '../../../services/FriendService';
 import {
   addFriend,
-  removeFriendRequest,
   getFriendRequest,
   getUOKFriends,
 } from '../../../Action/friendAction';
 const FriendRequest = ({
   friendRequest,
-  addFriend,
+
   user,
   getFriendRequest,
   getUOKFriends,
@@ -32,25 +31,20 @@ const FriendRequest = ({
   const fetchUOKFriends = async () => {
     try {
       const friends = await FriendService.fetchUOKFriends();
-      console.log('xxxxxxxxxxxxxx', friends);
+
       getUOKFriends(friends?.data?.data);
-      // getFriendRequest(friends?.data?.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const requestAccept = async (freq) => {
-    console.log('yyyyyyyyy', freq);
     setLocalUser(freq);
 
     const body = {
       status: 'accept',
     };
-    // const data = {
-    //   ...freq,
-    //   status: 'accept',
-    // };
+
     try {
       const result = await FriendService.acceptFriendRequest(body, freq?.id);
       fetchFriendRequest();
@@ -58,22 +52,11 @@ const FriendRequest = ({
     } catch (error) {
       console.log(error);
     }
-
-    // if (result?.data?.message === 'Updated') {
-    //   addFriend(data);
-    // }
   };
 
   const rejectRequest = async (freq) => {
     const result = await FriendService.removeFriendRequest(freq?.id);
     fetchFriendRequest();
-    // if (result?.data?.message === 'Deleted') {
-    //   const body = {
-    //     ...freq,
-    //     status: 'reject',
-    //   };
-    //   removeFriendRequest(body);
-    // }
   };
 
   return (

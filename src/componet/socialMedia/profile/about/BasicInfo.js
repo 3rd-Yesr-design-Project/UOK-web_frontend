@@ -1,9 +1,5 @@
 import React from 'react';
-import SuitCase from '../icons/suitCase';
-import Hat from '../icons/hat';
-import HomeAlt from '../icons/homeAlt';
-import Pin from '../icons/pin';
-import RSS from '../icons/rss';
+
 import { FaBirthdayCake, FaPrayingHands } from 'react-icons/fa';
 import { CgGenderFemale } from 'react-icons/cg';
 import { AiOutlineMessage } from 'react-icons/ai';

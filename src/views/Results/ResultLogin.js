@@ -4,13 +4,10 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
   Container,
-  Card,
   CardActionArea,
   CardContent,
 } from '@material-ui/core';
@@ -20,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ResultLogo from '../../assets/result.jpg';
 import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import HomeLayout from '../../componet/layout/HomeLayout';
 import ForgetPasswordModal from '../../componet/common/ForgetPasswordModal';
 
@@ -117,13 +114,10 @@ const ResultLogin = ({ resultLoginUser }) => {
           <div className='col-md-6 m-auto flex justify-center'>
             <CardActionArea>
               <div className='flex justify-center'>
-                <img src={ResultLogo} />
+                <img src={ResultLogo} alt={ResultLogo} />
               </div>
 
               <CardContent className='text-center'>
-                {/* <Typography gutterBottom variant='h5' component='h2'>
-                  University Of Kelaniya
-                </Typography> */}
                 <Typography variant='body2' color='textSecondary' component='p'>
                   Please login to see your Result
                 </Typography>

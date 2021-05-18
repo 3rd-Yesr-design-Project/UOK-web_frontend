@@ -3,8 +3,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
@@ -15,7 +13,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-// import ChatPic from '../../../assets/chat.jpg';
+
 import socialMedia from '../../../assets/social-media.jpg';
 import UserServices from '../../../services/UserServices';
 import { useHistory } from 'react-router';
@@ -118,7 +116,7 @@ const SocialLogin = ({ socialLoginUser }) => {
             <Card className='text-center'>
               <CardActionArea>
                 <div className='flex justify-center'>
-                  <img src={socialMedia} className='mt-5' />
+                  <img src={socialMedia} className='mt-5' alt={socialMedia} />
                 </div>
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='h2'>
@@ -176,10 +174,7 @@ const SocialLogin = ({ socialLoginUser }) => {
                     id='password'
                     onChange={handleChange}
                   />
-                  {/* <FormControlLabel
-                    control={<Checkbox value='remember' color='primary' />}
-                    label='Remember me'
-                  /> */}
+
                   <Button
                     type='submit'
                     fullWidth

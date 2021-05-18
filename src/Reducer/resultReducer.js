@@ -1,18 +1,7 @@
-import {
-  ADD_RESULT_SUCCESS,
-  STUDENT_RESULT,
-  GET_SUBJECTS_SUCCESS,
-  GET_SUBJECTS_FAILED,
-  GET_STUDENTS_SUCCESS,
-  GET_STUDENT_FAILED,
-} from '../Action/types';
+import { ADD_RESULT_SUCCESS, STUDENT_RESULT } from '../Action/types';
 
 const initialState = {
-  // result: {},
-  // results: [{}],
   results: [],
-  // subjects: [],
-  // students: [],
 };
 
 export default function (state = initialState, action) {

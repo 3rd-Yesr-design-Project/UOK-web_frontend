@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  FaRegThumbsUp,
-  FaRegCommentAlt,
-  FaShareAlt,
-  FaThumbsUp,
-} from 'react-icons/fa';
+import { FaRegThumbsUp, FaRegCommentAlt, FaThumbsUp } from 'react-icons/fa';
 import { Form, Button, Col } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';

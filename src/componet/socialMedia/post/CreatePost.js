@@ -1,14 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import UploadPost from './UploadPost';
-import {
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Image,
-  Row,
-  Modal,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { updateProfile } from '../../../Action/userActions';
 import { connect } from 'react-redux';

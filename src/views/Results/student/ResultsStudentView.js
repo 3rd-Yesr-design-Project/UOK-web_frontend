@@ -4,16 +4,15 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
   CardMedia,
   makeStyles,
   Button,
 } from '@material-ui/core';
 
 import ResultTable from '../ResultTable';
-import { getAllByPlaceholderText } from '@testing-library/dom';
+
 import resultServices from '../../../services/ResultServices';
-import { getDefaultLocale } from 'react-datepicker';
+
 import { fetchResultByUserIdAndYear } from '../../../Action/ResultActions';
 import { connect } from 'react-redux';
 import HomeLayout from '../../../componet/layout/HomeLayout';
@@ -75,28 +74,7 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
                   Student No:
                   {user?.student?.student_no}
                 </Typography>
-                {/* <Typography
-                  className={classes.title}
-                  color='textSecondary'
-                  gutterBottom
-                >
-                  Current GPA
-                </Typography> */}
-                {/* <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                1st Year
-              </Typography> */}
-                {/* <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-                onClick={() => getData(1,2)}
-              >
-                2nd Year
-              </Typography> */}
+
                 <Button
                   size='small'
                   variant='outlined'
@@ -121,13 +99,6 @@ const ResultsStudentView = ({ fetchResultByUserIdAndYear, user }) => {
                 >
                   3rd Year
                 </Button>
-                {/* <Typography
-                className={classes.title}
-                color='textSecondary'
-                gutterBottom
-              >
-                3st Year
-              </Typography> */}
               </CardContent>
             </Card>
           </Col>

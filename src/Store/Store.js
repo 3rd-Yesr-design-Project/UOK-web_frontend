@@ -8,7 +8,7 @@ import profileReducer from '../Reducer/profileReducer';
 import postReducer from '../Reducer/postReducer';
 import searchReducer from '../Reducer/searchReducer';
 import friendReducer from '../Reducer/friendReducer';
-import fredReducer from '../Reducer/fredReducer';
+
 const initialState = {};
 
 const reducer = combineReducers({

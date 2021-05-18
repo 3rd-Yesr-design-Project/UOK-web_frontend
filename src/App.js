@@ -1,14 +1,10 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import NavigationBar from './componet/NavBar';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Home from './views/Home/Home';
-import Login from './componet/Login/Login';
-// import UserProfile from './views/UserProfile';
-// import EditProfile from './views/EditProfile/EditProfile';
-import AddResults from './views/AddResults/AddResults';
+
 import ResultLogin from './views/Results/ResultLogin';
-import ResultsView from './views/Results/student/ResultsStudentView';
+
 import SocialLogin from './views/SocialMedia/Login/SocialLogin';
 import Result from './views/Results/Result';
 import SocialHome from './views/SocialMedia/home/SocialHome';
@@ -19,7 +15,7 @@ import DashboardComponent from './views/SocialMedia/Chat/Dashboard/dashboard';
 import SignupComponent from './views/SocialMedia/Chat/Signup/signup';
 import LoginComponent from './views/SocialMedia/Chat/Login/login';
 import { connect } from 'react-redux';
-import { getAllUsers } from './Action/userActions';
+
 import userServices from './services/UserServices';
 import { ToastContainer } from 'react-toastify';
 import ShowPhotos from './componet/socialMedia/profile/photos/ShowPhotos';

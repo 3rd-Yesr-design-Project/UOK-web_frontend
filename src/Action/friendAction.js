@@ -2,9 +2,7 @@ import {
   ADD_FRIEND,
   ADD_FRIEND_FAILED,
   GET_FRIEND_REQUESTS,
-  GET_FRIEND_REQUESTS_FAILED,
   FETCH_FRIEND,
-  FETCH_FRIEND_FAILED,
   REMOVE_FRIEND,
   REMOVE_FRIEND_FAILED,
   FETCH_UOKFRIEND,
@@ -32,20 +30,6 @@ export const getFriendRequest = (payload) => {
     type: GET_FRIEND_REQUESTS,
     payload: payload,
   };
-  // try {
-  //   dispatch({
-  //     type: GET_FRIEND_REQUESTS,
-  //     payload: payload,
-  //   });
-  // } catch (error) {
-  //   dispatch({
-  //     type: GET_FRIEND_REQUESTS_FAILED,
-  //     payload: {
-  //       msg: error?.response?.statusText,
-  //       status: error?.response?.status,
-  //     },
-  //   });
-  // }
 };
 
 export const getUOKFriends = (payload) => {

@@ -3,15 +3,15 @@ import ResultsStudentView from './student/ResultsStudentView';
 import ResultLecturerView from './lecturer/ResultLecturerView';
 import { connect } from 'react-redux';
 import Spinner from '../../componet/common/Spinner';
-import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const Result = ({ user }) => {
   return (
     <div>
-      {user?.user_type == 'student' ? (
+      {user?.user_type === 'student' ? (
         <ResultsStudentView />
-      ) : user?.user_type == 'lecturer' ? (
+      ) : user?.user_type === 'lecturer' ? (
         <ResultLecturerView />
       ) : (
         <Spinner />
