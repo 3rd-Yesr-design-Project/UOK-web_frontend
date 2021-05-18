@@ -30,16 +30,18 @@ const ProfileNavbar = ({
   useEffect(() => {
     fetchProfileByUserId();
     fetchFriend();
-  }, []);
+  }, [userId]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const fetchProfileByUserId = async () => {
     try {
+      console.log('xxxxxxxx', userId);
       const profile = await ProfileService.fetchProfileByUserId(userId);
+      console.log('cccccccccccccccccccc', profile);
 
-      if (profile?.data?.data) {
+      if (profile && profile?.data?.data) {
         const mail = profile?.data?.data?.email;
         const userName = profile?.data?.data?.name;
         const data = {
