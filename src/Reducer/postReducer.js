@@ -1,6 +1,4 @@
 import {
-  CREATE_POST_SUCCESS,
-  CREATE_POST_FAIL,
   GET_POST,
   GET_USER_POSTS,
   GET_USER_POST_FAILED,
@@ -25,10 +23,6 @@ export default function (state = initialState, action) {
           status: payload.status,
         },
       };
-    // case CREATE_POST_SUCCESS:
-    //   return { ...state, post: action.payload };
-    // case CREATE_POST_FAIL:
-    //   return { ...state, message: action.payload };
     default:
       return state;
   }

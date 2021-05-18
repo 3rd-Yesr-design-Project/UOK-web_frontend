@@ -1,7 +1,6 @@
 import {
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_FAILED,
-  GET_SUBJECT_STUDENTS,
   GET_STUDENTS_SUCCESS,
 } from '../Action/types';
 

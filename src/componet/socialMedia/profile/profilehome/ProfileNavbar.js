@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DownArrow from '../icons/downArrow';
-// import { Button, Modal } from '@material-ui/core';
 import EditProfile from '../EditProfile';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
@@ -18,14 +16,11 @@ const ProfileNavbar = ({
   getProfileByUserId,
   user,
   profile,
-  addFriend,
   friend,
   getFriend,
-  removeFriendRequest,
 }) => {
   const { userId } = useParams();
   const [show, setShow] = useState(false);
-  const [isAddFriend, setAddIsFriend] = useState(false);
 
   useEffect(() => {
     fetchProfileByUserId();
@@ -37,9 +32,7 @@ const ProfileNavbar = ({
 
   const fetchProfileByUserId = async () => {
     try {
-      console.log('xxxxxxxx', userId);
       const profile = await ProfileService.fetchProfileByUserId(userId);
-      console.log('cccccccccccccccccccc', profile);
 
       if (profile && profile?.data?.data) {
         const mail = profile?.data?.data?.email;
@@ -67,36 +60,16 @@ const ProfileNavbar = ({
   };
 
   const sendRequest = async () => {
-    // const isF = !isAddFriend;
-
     const body = {
       friendId: userId,
     };
-    // const data = {
-    //   ...friend,
-    //   status: 'accept',
-    // };
-    const result = await FriendService.addFriend(body);
+    await FriendService.addFriend(body);
     fetchFriend(userId);
-    // if (result?.data?.message === 'Updated') {
-    //   addFriend(data);
-    // }
-    // setAddIsFriend(!isAddFriend);
   };
 
   const removeFreindRequest = async () => {
-    // const isF = !isAddFriend;
     await FriendService.removeFriendRequest(friend?.friend_id);
     fetchFriend(userId);
-    // if (result?.data?.message === 'Deleted') {
-    //   const body = {
-    //     ...friend,
-    //     status: 'remove',
-    //   };
-    //   removeFriendRequest(body);
-    // }
-
-    // setAddIsFriend(!isAddFriend);
   };
 
   return (
@@ -112,31 +85,7 @@ const ProfileNavbar = ({
           <div className='px-4 py-5 text-fGrey'>
             <Link to={`/social/profile/photoes/${userId}`}>Photos</Link>
           </div>
-          {/* <div className='px-4 py-5 text-fGrey'>Videos</div>
-          <div className='px-4 py-5 text-fGrey'>Check-Ins</div>
-          <div className='px-4 flex items-center py-5 text-fGrey'>
-            More
-            <span className='ml-1'>
-              <DownArrow borderColor='#606770' />
-            </span>
-          </div> */}
         </div>
-        {/* {user?.id == profile?.id && (
-          <div className='flex items-center space-x-2'>
-            <Button variant='primary' onClick={handleShow}>
-              EditProfile
-            </Button> */}
-        {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
-            edit Profile
-          </button>
-          <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
-            <Friend />
-          </button>
-          <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
-            <More />
-          </button> */}
-        {/* </div> */}
-        {/* )} */}
         {user?.id == profile?.id ? (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={handleShow}>

@@ -104,7 +104,7 @@ class LoginComponent extends React.Component {
   };
 
   submitLogin = async (e) => {
-    e.preventDefault(); // This is to prevent the automatic refreshing of the page on submit.
+    e.preventDefault();
 
     await firebase
       .auth()

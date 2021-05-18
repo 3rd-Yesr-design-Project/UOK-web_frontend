@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { createPost } from '../../../Action/postAction';
 import PostService from '../../../services/PostService';
 import { connect } from 'react-redux';
 const UploadPost = ({ handleClose, createPost }) => {
-  const history = useHistory();
-
   const [title, SetTitle] = useState('');
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState('');
   const [image, SetImage] = useState('');
-  const [postUrl, setPostUrl] = useState('');
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const PostDetails = async () => {
     try {
-      // handleClose();
       const user_id = user?.user?.id;
       const postData = {
         user_id,
@@ -79,16 +73,6 @@ const UploadPost = ({ handleClose, createPost }) => {
           <input type='file' onChange={(e) => SetImage(e.target.files[0])} />
         </div>
       </div>
-      {/* <Button variant='primary' disabled>
-        <Spinner
-          as='span'
-          animation='border'
-          size='sm'
-          role='status'
-          aria-hidden='true'
-        />
-        <span className='sr-only'>Loading...</span>
-      </Button> */}
       <div class='form-group'>
         <button
           type='button'
@@ -96,38 +80,12 @@ const UploadPost = ({ handleClose, createPost }) => {
             PostDetails();
             setLoading(true);
           }}
-          // name='upload'
-          // value='upload'
           id='upload'
           class='btn btn-block btn-dark'
         >
-          {/* <i class='fa fa-fw fa-upload'></i> */}
           {loading ? 'Uploading...' : 'Post'}
         </button>
       </div>
-      {/* <input
-        type='text'
-        value={title}
-        onChange={(e) => {
-          SetTitle(e.target.value);
-        }}
-        placeholder='title'
-      /> */}
-      {/* <input
-        type='text'
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-        placeholder='body'
-      /> */}
-
-      {/* <button
-        onClick={() => PostDetails()}
-        className='btn waves-effect waves-light #64b5f6 blue darken-1'
-      >
-        Submit
-      </button> */}
     </div>
   );
 };

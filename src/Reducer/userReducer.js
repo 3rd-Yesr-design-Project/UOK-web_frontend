@@ -4,7 +4,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   UPDATE_PROFILE,
-  UPDATE_PROFILE_ERROR,
   RESULT_LOGIN_SUCCESS,
   SOCIAL_LOGIN_SUCCESS,
   GET_USERS,
@@ -17,13 +16,6 @@ const initialState = {
   user: null,
   token: null,
   users: [],
-  // profile: null,
-  // profiles: [],
-  // posts: [{}],
-  // isAdmin: false,
-  // results: [{}],
-  // loading: true,
-  // error: { msg: '', status: '' },
 };
 
 export default function (state = initialState, action) {

@@ -122,7 +122,7 @@ class SignupComponent extends React.Component {
   formIsValid = () => this.state.password === this.state.passwordConfirmation;
 
   submitSignup = (e) => {
-    e.preventDefault(); // This is to prevent the automatic refreshing of the page on submit.
+    e.preventDefault();
 
     if (!this.formIsValid()) {
       this.setState({ signupError: 'Passwords do not match' });

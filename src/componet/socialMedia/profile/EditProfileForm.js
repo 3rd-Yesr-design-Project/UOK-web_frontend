@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Image,
-  Row,
-  Modal,
-} from 'react-bootstrap';
+import { Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import ProfileService from '../../../services/ProfileService';
-import { useSelector, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import Moment from 'moment';
 import { editProfile, createProfile } from '../../../Action/profileAction';
@@ -20,7 +12,7 @@ const EditProfileForm = ({
   userProfile,
   createProfile,
 }) => {
-  const [hobby, setHobby] = useState('');
+  // const [hobby, setHobby] = useState('');
   const [gender, setGender] = useState(userProfile?.gender || '');
   const [image, setImage] = useState('');
   const [university, setUniversity] = useState(userProfile?.university || '');
@@ -58,9 +50,9 @@ const EditProfileForm = ({
 
   let { userId } = useParams();
 
-  const handleHobby = (input) => {
-    setHobby(input);
-  };
+  // const handleHobby = (input) => {
+  //   setHobby(input);
+  // };
   const handleGender = (input) => {
     setGender(input);
     validateGender(input);
@@ -75,7 +67,6 @@ const EditProfileForm = ({
 
   const handleImage = (input) => {
     setImage(input);
-    // validateImage(input);
   };
 
   const validateImage = (input) => {
@@ -213,7 +204,6 @@ const EditProfileForm = ({
       setProfileUrl(newRes.url);
       const isValid =
         gender &&
-        //   profileUrl &&
         birthday &&
         school &&
         currentCity &&

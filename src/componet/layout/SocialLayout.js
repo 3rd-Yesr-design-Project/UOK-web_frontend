@@ -6,7 +6,6 @@ const SocialLayout = ({ children }) => {
     <div>
       <SocialNavbar />
       {children}
-      {/* <p>anjana</p> */}
     </div>
   );
 };

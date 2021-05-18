@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProfileLayout from '../../../layout/ProfileLayout';
 import SocialLayout from '../../../layout/SocialLayout';
 import BasicInfo from './BasicInfo';
@@ -7,11 +7,10 @@ import Overview from './Overview';
 import PlaceLived from './PlaceLived';
 import WorkAndEducation from './WorkAndEducation';
 import { connect } from 'react-redux';
-import ProfileService from '../../../../services/ProfileService';
 import { getProfileByUserId } from '../../../../Action/profileAction';
 import HomeLayout from '../../../layout/HomeLayout';
 
-const About = ({ profile, getProfileByUserId }) => {
+const About = ({ profile }) => {
   return (
     <div>
       <HomeLayout>

@@ -1,6 +1,4 @@
 import React from 'react';
-import SuitCase from '../icons/suitCase';
-import Hat from '../icons/hat';
 import { ImMobile } from 'react-icons/im';
 import { AiOutlineMail } from 'react-icons/ai';
 const ContactInfo = (props) => {

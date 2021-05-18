@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -111,7 +111,6 @@ const Login = ({ loginUser }) => {
             name='email'
             value={state.email}
             onChange={handleChange}
-            //autoFocus
           />
           <TextField
             variant='outlined'

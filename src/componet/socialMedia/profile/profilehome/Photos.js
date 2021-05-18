@@ -20,27 +20,6 @@ const Photos = ({ phots }) => {
               style={{ height: '60px' }}
             />
           ))}
-
-          {/* <img src='https://picsum.photos/id/1018/3000' alt='photo' />
-          <img
-            src='https://picsum.photos/id/1018/3000'
-            className='rounded-tr'
-            alt='photo'
-          />
-          <img src='https://picsum.photos/id/1018/3000' alt='photo' />
-          <img src='https://picsum.photos/id/1018/3000' alt='photo' />
-          <img src='https://picsum.photos/id/1018/3000' alt='photo' />
-          <img
-            src='https://picsum.photos/id/1018/3000'
-            className='rounded-bl'
-            alt='photo'
-          />
-          <img src='https://picsum.photos/id/1018/3000' alt='photo' />
-          <img
-            src='https://picsum.photos/id/1018/3000'
-            className='rounded-br'
-            alt='photo'
-          /> */}
         </div>
       </div>
     </div>

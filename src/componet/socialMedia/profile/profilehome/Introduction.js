@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SuitCase from '../icons/suitCase';
 import Hat from '../icons/hat';
 import HomeAlt from '../icons/homeAlt';
 import Pin from '../icons/pin';
-import RSS from '../icons/rss';
 import { connect } from 'react-redux';
 
 const Introduction = ({ profile }) => {

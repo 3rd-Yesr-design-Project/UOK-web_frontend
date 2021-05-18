@@ -8,11 +8,7 @@ import {
 } from '../Action/types';
 
 const initialState = {
-  // result: {},
-  // results: [{}],
   results: [],
-  // subjects: [],
-  // students: [],
 };
 
 export default function (state = initialState, action) {

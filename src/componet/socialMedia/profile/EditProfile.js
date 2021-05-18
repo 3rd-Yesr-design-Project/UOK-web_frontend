@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Image,
-  Row,
-  Modal,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { updateProfile } from '../../../Action/userActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EditProfileForm from './EditProfileForm';
 
-const EditProfile = ({ updateProfile, show, handleClose }) => {
+const EditProfile = ({ show, handleClose }) => {
   return (
     <div className='col-md-12'>
       <Modal show={show} onHide={handleClose} animation={false}>

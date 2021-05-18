@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,22 +9,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { fetchResultByUserIdAndYear } from '../../Action/ResultActions';
-import ResultServices from '../../services/ResultServices';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
-function createData(Subject, Subjectcode, Grade) {
-  return { Subject, Subjectcode, Grade };
-}
-
-const rows = [
-  createData('Fundementals of computing', 'SENG12222', 'A'),
-  createData('DataStructured', 'SENG22222', 'A'),
-];
 
 const ResultTable = ({ results }) => {
   const classes = useStyles();

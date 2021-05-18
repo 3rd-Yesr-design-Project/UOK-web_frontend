@@ -3,8 +3,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
@@ -15,7 +13,6 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-// import ChatPic from '../../../assets/chat.jpg';
 import socialMedia from '../../../assets/social-media.jpg';
 import UserServices from '../../../services/UserServices';
 import { useHistory } from 'react-router';
@@ -36,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -157,9 +154,7 @@ const SocialLogin = ({ socialLoginUser }) => {
                     id='email'
                     label='Email Address'
                     name='email'
-                    // value={state.email}
                     onChange={handleChange}
-                    //autoFocus
                   />
                   {emailErr !== '' ? (
                     <span style={{ color: 'red' }}>{emailErr}</span>
@@ -170,16 +165,11 @@ const SocialLogin = ({ socialLoginUser }) => {
                     required
                     fullWidth
                     name='password'
-                    // value={state.password}
                     label='Password'
                     type='password'
                     id='password'
                     onChange={handleChange}
                   />
-                  {/* <FormControlLabel
-                    control={<Checkbox value='remember' color='primary' />}
-                    label='Remember me'
-                  /> */}
                   <Button
                     type='submit'
                     fullWidth

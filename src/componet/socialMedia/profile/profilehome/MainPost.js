@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import More from '../icons/more';
-import SLike from '../icons/likesmall';
-import CommentButton from '../icons/lovesmall';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import postService from '../../../../services/PostService';

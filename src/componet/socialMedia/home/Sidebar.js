@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FriendService from '../../../services/FriendService';
 import { fetchFriend } from '../../../Action/friendAction';
 import Avatar from '@material-ui/core/Avatar';
 
-const SideBar = ({ users, user, fetchFriend, friends }) => {
+const SideBar = ({ user, fetchFriend, friends }) => {
   const fetchFriends = async (id) => {
     const result = await FriendService.getFriend(id);
     fetchFriend(result?.data?.data);

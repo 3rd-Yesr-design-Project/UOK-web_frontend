@@ -4,13 +4,10 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
   Container,
-  Card,
   CardActionArea,
   CardContent,
 } from '@material-ui/core';
@@ -20,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ResultLogo from '../../assets/result.jpg';
 import userServices from '../../services/UserServices';
 import { resultLoginUser } from '../../Action/userActions';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import HomeLayout from '../../componet/layout/HomeLayout';
 import ForgetPasswordModal from '../../componet/common/ForgetPasswordModal';
 
@@ -36,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -121,9 +118,6 @@ const ResultLogin = ({ resultLoginUser }) => {
               </div>
 
               <CardContent className='text-center'>
-                {/* <Typography gutterBottom variant='h5' component='h2'>
-                  University Of Kelaniya
-                </Typography> */}
                 <Typography variant='body2' color='textSecondary' component='p'>
                   Please login to see your Result
                 </Typography>
@@ -153,9 +147,7 @@ const ResultLogin = ({ resultLoginUser }) => {
                     id='email'
                     label='Email Address'
                     name='email'
-                    // value={state.email}
                     onChange={handleChange}
-                    //autoFocus
                   />
                   {emailErr !== '' ? (
                     <span style={{ color: 'red' }}>{emailErr}</span>
@@ -166,7 +158,6 @@ const ResultLogin = ({ resultLoginUser }) => {
                     required
                     fullWidth
                     name='password'
-                    // value={state.password}
                     label='Password'
                     type='password'
                     id='password'
