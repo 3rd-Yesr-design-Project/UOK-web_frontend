@@ -24,6 +24,7 @@ import userServices from './services/UserServices';
 import { ToastContainer } from 'react-toastify';
 import ShowPhotos from './componet/socialMedia/profile/photos/ShowPhotos';
 import { getLoginUser } from './Action/userActions';
+import ProtectRoute from './Hoc/AuthApplication/index';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'react-toastify/dist/ReactToastify.css';
@@ -84,7 +85,7 @@ const App = ({ getLoginUser }) => {
           <Route exact path='/login' component={LoginComponent} />
           <Route exact path='/' component={Home} />
           <Route exact path='/results/login' component={ResultLogin} />
-          <Route exact path='/results/view' component={Result} />
+          <Route exact path='/results/view' component={ProtectRoute(Result)} />
           {/* <Route exact path='/login' component={Login} /> */}
           <Route exact path='/social/login' component={SocialLogin} />
           <Route exact path='/social/home' component={SocialHome} />

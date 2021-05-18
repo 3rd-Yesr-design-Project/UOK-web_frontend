@@ -21,11 +21,3 @@ export const getStudentByStudentIdndAcadomicYear =
       });
     }
   };
-//------------------------------------------------------------------------
-// export const getStudentBySubjectIdndAcadomicYear = (payload) => {
-//   console.log('pppppppppppppppp', payload);
-//   return {
-//     type: GET_SUBJECT_STUDENTS,
-//     payload: payload,
-//   };
-// };

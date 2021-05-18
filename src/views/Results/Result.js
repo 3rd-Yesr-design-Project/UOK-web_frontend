@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Result = ({ user }) => {
-  console.log('xxxxxxxxxx', user?.usertype);
   return (
     <div>
       {user?.user_type == 'student' ? (
@@ -17,10 +16,6 @@ const Result = ({ user }) => {
       ) : (
         <Spinner />
       )}
-
-      {/* <ResultLecturerView /> */}
-
-      {/* <ResultLecturerView/> */}
     </div>
   );
 };

@@ -35,32 +35,7 @@ const LecturerResultTable = ({ students }) => {
     setStudents(students ? students : []);
   }, [students]);
 
-  // const [rows, setRows] = useState([
-  //   createData(1, 'Anjana', `SE/2016/042`, 'A'),
-  //   createData(2, 'Shakthi', `SE/2016/041`, 'A'),
-  // ]);
-  // const [startDate, setStartDate] = useState();
-  // const [acadomicYear, setAcadomicYear] = useState(1);
-  // const [isDate, setIsDate] = useState(false);
-  // const [isAcadomicYear, setIsAcadomicYear] = useState(false);
-
-  // const [subject, setSubject] = useState();
-
-  // const users = useSelector((state) => state.user);
-  // const subjects = useSelector((state) => state.subject);
-  // const students = useSelector((state) => state.student);
-
-  const togellClick = () => {
-    // console.log();
-    // setRows([
-    //   ...rows.map((row) => {
-    //     if (row.id === id) {
-    //       return { ...row, isEdit: !row.isEdit };
-    //     }
-    //     return row;
-    //   }),
-    // ]);
-  };
+  const togellClick = () => {};
 
   const changeGrade = (e, row) => {
     const value = e?.target?.value;

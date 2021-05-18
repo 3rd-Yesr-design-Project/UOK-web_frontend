@@ -5,21 +5,30 @@ import React, { useEffect, useState } from 'react';
 // import Posts from '../views/userprofile/Posts';
 // import ChatBox from '../views/userprofile/ChatBox';
 import SideBar from '../../../componet/socialMedia/home/Sidebar';
+import FriendRequest from '../../../componet/socialMedia/home/FriendRequest';
 import ChatBar from '../../../componet/socialMedia/home/ChatBar';
 import Posts from '../../../componet/socialMedia/home/Posts';
 import ChatBox from '../../../componet/socialMedia/home/ChatBox';
 import SocialLayout from '../../../componet/layout/SocialLayout';
 import HomeLayout from '../../../componet/layout/HomeLayout';
 import userServices from '../../../services/UserServices';
+import FriendService from '../../../services/FriendService';
 import { getAllUsers } from '../../../Action/userActions';
 import { getPosts } from '../../../Action/postAction';
+import { getFriendRequest, getUOKFriends } from '../../../Action/friendAction';
 import { connect } from 'react-redux';
 import postService from '../../../services/PostService';
 
-const SocialHome = ({ getAllUsers, getPosts }) => {
+const SocialHome = ({
+  getAllUsers,
+  getPosts,
+  getFriendRequest,
+  getUOKFriends,
+}) => {
   useEffect(() => {
     fetchFriends();
     fetchPosts();
+    fetchUOKFriends();
   }, []);
 
   const fetchFriends = async () => {
@@ -31,10 +40,21 @@ const SocialHome = ({ getAllUsers, getPosts }) => {
     }
   };
 
+  const fetchUOKFriends = async () => {
+    try {
+      const friends = await FriendService.fetchUOKFriends();
+      console.log('xxxxxxxxxxxxxx', friends);
+      getUOKFriends(friends?.data?.data);
+      // getFriendRequest(friends?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchPosts = async () => {
     try {
       const posts = await postService.fetchPosts();
-      console.log('ppppppppppppp', posts);
+
       getPosts(posts.data.data);
     } catch (error) {
       console.log(error);
@@ -60,6 +80,7 @@ const SocialHome = ({ getAllUsers, getPosts }) => {
           <Posts />
           {/* <ChatBar openChat={openChat} />
           <ChatBox state={state} current={current} closeChat={closeChat} /> */}
+          <FriendRequest />
         </div>
       </SocialLayout>
     </HomeLayout>
@@ -67,4 +88,9 @@ const SocialHome = ({ getAllUsers, getPosts }) => {
   );
 };
 
-export default connect(null, { getAllUsers, getPosts })(SocialHome);
+export default connect(null, {
+  getAllUsers,
+  getPosts,
+  getFriendRequest,
+  getUOKFriends,
+})(SocialHome);

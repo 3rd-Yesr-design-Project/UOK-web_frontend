@@ -12,19 +12,6 @@ import { getProfileByUserId } from '../../../../Action/profileAction';
 import HomeLayout from '../../../layout/HomeLayout';
 
 const About = ({ profile, getProfileByUserId }) => {
-  // useEffect(() => {
-  //   fetchProfileByUserId();
-  // }, []);
-
-  // const fetchProfileByUserId = async () => {
-  //   try {
-  //     const profile = await ProfileService.fetchProfileByUserId();
-  //     getProfileByUserId(profile.data.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // console.log('yyyyyyyyyyyy', profile);
   return (
     <div>
       <HomeLayout>

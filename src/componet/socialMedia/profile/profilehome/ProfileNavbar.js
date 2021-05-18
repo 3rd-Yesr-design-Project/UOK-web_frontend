@@ -5,15 +5,31 @@ import EditProfile from '../EditProfile';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import ProfileService from '../../../../services/ProfileService';
+import FriendService from '../../../../services/FriendService';
 import { getProfileByUserId } from '../../../../Action/profileAction';
+import {
+  addFriend,
+  removeFriendRequest,
+  getFriend,
+} from '../../../../Action/friendAction';
 import { connect } from 'react-redux';
 
-const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
+const ProfileNavbar = ({
+  getProfileByUserId,
+  user,
+  profile,
+  addFriend,
+  friend,
+  getFriend,
+  removeFriendRequest,
+}) => {
   const { userId } = useParams();
   const [show, setShow] = useState(false);
+  const [isAddFriend, setAddIsFriend] = useState(false);
 
   useEffect(() => {
     fetchProfileByUserId();
+    fetchFriend();
   }, []);
 
   const handleClose = () => setShow(false);
@@ -31,12 +47,54 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           email: mail,
           name: userName,
         };
-        console.log('gsidnjwn', data);
+
         getProfileByUserId(data);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const fetchFriend = async () => {
+    try {
+      const friend = await FriendService.fetchFriend(userId);
+      getFriend(friend.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendRequest = async () => {
+    // const isF = !isAddFriend;
+
+    const body = {
+      friendId: userId,
+    };
+    // const data = {
+    //   ...friend,
+    //   status: 'accept',
+    // };
+    const result = await FriendService.addFriend(body);
+    fetchFriend(userId);
+    // if (result?.data?.message === 'Updated') {
+    //   addFriend(data);
+    // }
+    // setAddIsFriend(!isAddFriend);
+  };
+
+  const removeFreindRequest = async () => {
+    // const isF = !isAddFriend;
+    await FriendService.removeFriendRequest(friend?.friend_id);
+    fetchFriend(userId);
+    // if (result?.data?.message === 'Deleted') {
+    //   const body = {
+    //     ...friend,
+    //     status: 'remove',
+    //   };
+    //   removeFriendRequest(body);
+    // }
+
+    // setAddIsFriend(!isAddFriend);
   };
 
   return (
@@ -61,12 +119,12 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
             </span>
           </div> */}
         </div>
-        {user?.id == profile?.id && (
+        {/* {user?.id == profile?.id && (
           <div className='flex items-center space-x-2'>
             <Button variant='primary' onClick={handleShow}>
               EditProfile
-            </Button>
-            {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
+            </Button> */}
+        {/* <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             edit Profile
           </button>
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
@@ -75,6 +133,31 @@ const ProfileNavbar = ({ getProfileByUserId, user, profile }) => {
           <button className='w-12 h-9 bg-fButton rounded flex items-center justify-center focus:outline-none'>
             <More />
           </button> */}
+        {/* </div> */}
+        {/* )} */}
+        {user?.id == profile?.id ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={handleShow}>
+              Edit Profile
+            </Button>
+          </div>
+        ) : friend?.status === 'pending' ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={() => removeFreindRequest()}>
+              Cancel Request
+            </Button>
+          </div>
+        ) : friend?.status === 'accept' ? (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={() => removeFreindRequest()}>
+              UnFriend
+            </Button>
+          </div>
+        ) : (
+          <div className='flex items-center space-x-2'>
+            <Button variant='primary' onClick={() => sendRequest()}>
+              Add Friend
+            </Button>
           </div>
         )}
       </div>
@@ -87,7 +170,13 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     profile: state.profile.userProfile,
+    friend: state.friendReq.friend,
   };
 };
 
-export default connect(mapStateToProps, { getProfileByUserId })(ProfileNavbar);
+export default connect(mapStateToProps, {
+  getProfileByUserId,
+  addFriend,
+  removeFriendRequest,
+  getFriend,
+})(ProfileNavbar);

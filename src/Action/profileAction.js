@@ -26,7 +26,6 @@ export const getProfileByUserId = (payload) => async (dispatch) => {
 
 export const editProfile = (payload) => async (dispatch) => {
   try {
-    console.log('profile action', payload);
     dispatch({
       type: UPDATE_PROFILE,
       payload: payload,

@@ -30,7 +30,6 @@ const UserSearchPopover = ({
   friends,
   searchFilter,
 }) => {
-  console.log('friends', friends);
   const classes = useStyles();
 
   // const [state] = useState([
@@ -65,10 +64,6 @@ const UserSearchPopover = ({
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const onChange = () => {
-    console.log('xxxxxxxxxxxxxx');
-  };
-
   return (
     <div style={{ zIndex: '10000' }}>
       <Popover
@@ -100,22 +95,27 @@ const UserSearchPopover = ({
             <input
               type='text'
               className='navbar__first-searchbar'
-              placeholder='Facebook Search'
+              placeholder='Friend Search'
               onChange={filterFriends}
             />
           </div>
 
           {friends?.map((user) => (
-            <div className={classes.root}>
-              <List component='nav' aria-label='main mailbox folders'>
-                <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar alt='Remy Sharp' src={user?.profile?.profile_url} />
-                  </ListItemAvatar>
-                  <ListItemText primary={user?.name} />
-                </ListItem>
-              </List>
-            </div>
+            <Link to={`/social/profile/home/${user?.id}`}>
+              <div className={classes.root}>
+                <List component='nav' aria-label='main mailbox folders'>
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt='Remy Sharp'
+                        src={user?.profile?.profile_url}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText primary={user?.name} />
+                  </ListItem>
+                </List>
+              </div>
+            </Link>
           ))}
         </div>
       </Popover>

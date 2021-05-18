@@ -40,10 +40,6 @@ const Navbar = ({ user, logOutUser }) => {
   const handleModalClose = () => setShow(false);
   const handleModalShow = () => setShow(true);
 
-  // const onChange = (e) => {
-  //   console.log(e.target.value);
-  // };
-
   const filterFriend = async (input) => {
     try {
       // const result = await socialFrienSearch.socialSearchInfo(input);

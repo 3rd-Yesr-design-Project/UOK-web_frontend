@@ -48,7 +48,6 @@ const LecturerViewUpporRow = ({
   const handleChangeSubject = async (e) => {
     setSubjectId(e.target.value);
     try {
-      console.log(academicYear, subjectId);
       const students = await resultService.getStudentByAcadomicYearAndSubjectId(
         academicYear,
         e.target.value
